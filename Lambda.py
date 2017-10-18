@@ -44,10 +44,10 @@ def post():
 
 from flask import render_template
 
-@app.route('/hello/')
-@app.route('/hello/<name>')
+@app.route('/lambda/')
+@app.route('/lambda/<name>')
 def hello(name=None):
-    return render_template('hello.html', name="a")
+    return render_template('lambda.html', name="a")
 
 
 
