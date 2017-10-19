@@ -3,20 +3,7 @@
 from flask import Flask,jsonify
 import requests
 
-
-
-
-
-
-
 from requests_futures.sessions import FuturesSession
-
-
-
-
-
-
-
 
 def prime_number_lambda(maxi, loops , times, mb , isConcurrent ) :
     headers = {
@@ -24,8 +11,9 @@ def prime_number_lambda(maxi, loops , times, mb , isConcurrent ) :
     }
     re_arr  = []
     session = FuturesSession(max_workers=100)
+    #   https://a4i8lwlp90.execute-api.us-west-2.amazonaws.com/prod/eratosthenes-1024
     rst = 'https://nx106w1z0e.execute-api.us-west-2.amazonaws.com/prod/lambda-'+str(mb)+'?max='+str(maxi)+'&loops='+ str(loops)
-    print('response one node   : {0}'.format(isConcurrent))
+    print('request lambda url  : {0}'.format(rst))
     if  isConcurrent == "off":
         print (" non Concurrent  mode")
         for i in range (times) :
@@ -41,8 +29,6 @@ def prime_number_lambda(maxi, loops , times, mb , isConcurrent ) :
         for i in range (times) :
 
             sgl.append(session.get(rst,headers = headers))
-            #sgl.append(session.get(rst))
-
 
         for  i  in range  (times )  :
             resp  = sgl[i].result ()
@@ -84,14 +70,14 @@ def post():
 from flask import render_template
 
 @app.route('/lambda/')
-@app.route('/lambda/<name>')
-def hello(name=None):
-    return render_template('lambda.html', name="a")
+
+def render_lambda():
+    return render_template('lambda.html')
 
 @app.route('/project2/')
-@app.route('/project2/<name>')
-def project2(name=None):
-    return render_template('project2.html', name="a")
+
+def project2():
+    return render_template('project2.html')
 
 
 

@@ -17,8 +17,28 @@
 ## http://www.chartjs.org/docs/latest/getting-started/usage.html
 ## http://flask.pocoo.org/docs/0.12/quickstart/#rendering-templates
 ## http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AccessingInstancesLinux.html
+## https://github.com/jconning/lambda-cpu-cost
 
 
 
+
+pip install awscli --upgrade --user
+~/.local/bin/aws configure
+~/.local/bin/aws  lambda invoke --function-name="eratosthenes-1024" --payload='{ "queryStringParameters": { "max": 1000000, "loops": 1 } }' ./log.txt
 
 Copyright © Victoria University of Wellington, New Zealand
+
+
+
+curl "https://a4i8lwlp90.execute-api.us-west-2.amazonaws.com/prod/eratosthenes-128?max=1000000&loops=1"
+curl "https://a4i8lwlp90.execute-api.us-west-2.amazonaws.com/prod/eratosthenes-256?max=1000000&loops=1"
+curl "https://a4i8lwlp90.execute-api.us-west-2.amazonaws.com/prod/eratosthenes-512?max=1000000&loops=1"
+curl "https://a4i8lwlp90.execute-api.us-west-2.amazonaws.com/prod/eratosthenes-1024?max=1000000&loops=1"
+
+
+128		0.00000208
+256		0.00000417
+512		0.00000834
+1024	0.00001667
+
+10.0066559315*0.00000208,3.33517885208*0.00000417,1.55926299095*0.00000834,0.717894077301*0.00001667
