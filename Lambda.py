@@ -18,28 +18,29 @@ from requests_futures.sessions import FuturesSession
 
 
 
-def prime_number_lambda(maxi, loops , times, mb , isConcurrent ) :  
+def prime_number_lambda(maxi, loops , times, mb , isConcurrent ) :
     re_arr  = []
-    #load_url("https://a4i8lwlp90.execute-api.us-west-2.amazonaws.com/prod/eratosthenes-"+str(mb)+'?max='+str(maxi)+'&loops='+ str(loops)  ) 
     session = FuturesSession()
     rst = 'https://a4i8lwlp90.execute-api.us-west-2.amazonaws.com/prod/eratosthenes-'+str(mb)+'?max='+str(maxi)+'&loops='+ str(loops)
-    if  isConcurrent is not True :
-        
+    print('response one node   : {0}'.format(isConcurrent))
+    if  isConcurrent == "off":
+        print (" non Concurrent  mode")
         for i in range (times) :
-            rt = requests.get(rst)
-            print (rst)
-            re.append (rt)
-        print (re)
-        return re
-    
-    else :
-        sgl = [] 
-        for i in range (times) :
-    
-            sgl.append(session.get(rst))
-            
+            rt = requests.get(rst).json()
+            print (rt)
+            re_arr.append (rt)
+        print (re_arr)
+        return re_arr
 
-       
+    else :
+        print (" Concurrent  mode")
+        sgl = []
+        for i in range (times) :
+
+            sgl.append(session.get(rst))
+
+
+
         for  i  in range  (times )  :
             resp  = sgl[i].result ()
             print('response one status: {0}'.format(resp.status_code))
@@ -67,7 +68,8 @@ def post():
     loops = request.json['loops']
     times = request.json['times']
     mb =  request.json['mb']
-    objects = prime_number_lambda(maxi, loops,int(times) ,mb ,True )
+    conc =  request.json['conc']
+    objects = prime_number_lambda(maxi, loops,int(times) ,mb ,conc )
     return jsonify( {'json' :objects}), 201
 
 
@@ -87,4 +89,3 @@ def hello(name=None):
 
 if __name__ == '__main__':
     app.run(debug=True,host='0.0.0.0')
-
