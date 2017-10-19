@@ -33,11 +33,15 @@ def prime_number_lambda(maxi, loops , times, mb , isConcurrent ) :
         return re
     
     else :
-    
+        sgl = [] 
         for i in range (times) :
     
-            sg = session.get(rst)
-            resp  = sg.result ()
+            sgl.append(session.get(rst))
+            
+
+       
+        for  i  in range  (times )  :
+            resp  = sgl[i].result ()
             print('response one status: {0}'.format(resp.status_code))
             print(resp.content)
             re_arr.append (resp.content)
