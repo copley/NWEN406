@@ -19,17 +19,17 @@ from requests_futures.sessions import FuturesSession
 
 
 def prime_number_lambda(maxi, loops , times, mb , isConcurrent ) :
-    #headers = {
-    #    'x-api-key': 'rqZXP6VEZk1G7KqpMt2xV9ZENldqZNuH3lF8M0VG',
-    #}
+    headers = {
+        'x-api-key': "rDGgZtlFRY7CaGQy7Qvb21R0VxICImme5FiJVvuc",
+    }
     re_arr  = []
     session = FuturesSession(max_workers=100)
-    rst = 'https://a4i8lwlp90.execute-api.us-west-2.amazonaws.com/prod/eratosthenes-'+str(mb)+'?max='+str(maxi)+'&loops='+ str(loops)
+    rst = 'https://nx106w1z0e.execute-api.us-west-2.amazonaws.com/prod/lambda-'+str(mb)+'?max='+str(maxi)+'&loops='+ str(loops)
     print('response one node   : {0}'.format(isConcurrent))
     if  isConcurrent == "off":
         print (" non Concurrent  mode")
         for i in range (times) :
-            rt = requests.get(rst).json() # headers = headers).json()
+            rt = requests.get(rst, headers = headers).json()
             print (rt)
             re_arr.append (rt)
         print (re_arr)
@@ -40,8 +40,8 @@ def prime_number_lambda(maxi, loops , times, mb , isConcurrent ) :
         sgl = []
         for i in range (times) :
 
-            #sgl.append(session.get(rst,headers = headers))
-            sgl.append(session.get(rst))
+            sgl.append(session.get(rst,headers = headers))
+            #sgl.append(session.get(rst))
 
 
         for  i  in range  (times )  :

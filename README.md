@@ -2,7 +2,7 @@
 
 
 #  AWS  Lamda project
-## demo url :  http://52.10.250.199:5000/lambda/
+## demo url :  http://52.10.250.199:5000/project2/
 ## author :  Adrian Ng  (beaconwarden@gmail.com)
 ## setup env:
 ### 1.  launch Amazon Linux AMI 2017.09.0 (HVM) in EC2
