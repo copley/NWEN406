@@ -88,11 +88,17 @@ var mb   =  e.options[e.selectedIndex].value;
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 201) {
-          var   datas    =  JSON.parse( this.responseText  ).json  ;   
-            insertHTML (datas) ; 
+          var   datas    =  JSON.parse( this.responseText).json  ; 
+         var jsons = [] ;
+  for  (var i = 0 ; i < datas.length ; i++)  {
+             jsons.push (  JSON.parse (datas[i]))  ;
+		
+}            
+  
+            insertHTML (jsons) ; 
                var duration = [] ;           
- for (var i = 0 ; i < datas.length ; i++ ) {
-              duration.push   (  datas[i].durationSeconds);
+ for (var i = 0 ; i < jsons.length ; i++ ) {
+              duration.push   (  jsons[i].durationSeconds);
              
 		}
      

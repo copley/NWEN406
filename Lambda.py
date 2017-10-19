@@ -3,16 +3,46 @@
 from flask import Flask,jsonify
 import requests
 
-def prime_number_lambda(maxi, loops , times, mb  ) :  
-    re  = []
+
+
+
+
+
+
+from requests_futures.sessions import FuturesSession
+
+
+
+
+
+
+
+
+def prime_number_lambda(maxi, loops , times, mb , isConcurrent ) :  
+    re_arr  = []
     #load_url("https://a4i8lwlp90.execute-api.us-west-2.amazonaws.com/prod/eratosthenes-"+str(mb)+'?max='+str(maxi)+'&loops='+ str(loops)  ) 
-    for i in range (times) :
-        rst = 'https://a4i8lwlp90.execute-api.us-west-2.amazonaws.com/prod/eratosthenes-'+str(mb)+'?max='+str(maxi)+'&loops='+ str(loops)
-        rt = requests.get(rst)
-        print (rst)
-        re.append (rt.json())
-    print (re)
-    return re
+    session = FuturesSession()
+    rst = 'https://a4i8lwlp90.execute-api.us-west-2.amazonaws.com/prod/eratosthenes-'+str(mb)+'?max='+str(maxi)+'&loops='+ str(loops)
+    if  isConcurrent is not True :
+        
+        for i in range (times) :
+            rt = requests.get(rst)
+            print (rst)
+            re.append (rt)
+        print (re)
+        return re
+    
+    else :
+    
+        for i in range (times) :
+    
+            sg = session.get(rst)
+            resp  = sg.result ()
+            print('response one status: {0}'.format(resp.status_code))
+            print(resp.content)
+            re_arr.append (resp.content)
+        print (re_arr)
+        return re_arr
 
 
 
@@ -33,7 +63,7 @@ def post():
     loops = request.json['loops']
     times = request.json['times']
     mb =  request.json['mb']
-    objects = prime_number_lambda(maxi, loops,int(times) ,mb )
+    objects = prime_number_lambda(maxi, loops,int(times) ,mb ,True )
     return jsonify( {'json' :objects}), 201
 
 
