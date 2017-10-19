@@ -19,14 +19,17 @@ from requests_futures.sessions import FuturesSession
 
 
 def prime_number_lambda(maxi, loops , times, mb , isConcurrent ) :
+    #headers = {
+    #    'x-api-key': 'rqZXP6VEZk1G7KqpMt2xV9ZENldqZNuH3lF8M0VG',
+    #}
     re_arr  = []
-    session = FuturesSession()
+    session = FuturesSession(max_workers=100)
     rst = 'https://a4i8lwlp90.execute-api.us-west-2.amazonaws.com/prod/eratosthenes-'+str(mb)+'?max='+str(maxi)+'&loops='+ str(loops)
     print('response one node   : {0}'.format(isConcurrent))
     if  isConcurrent == "off":
         print (" non Concurrent  mode")
         for i in range (times) :
-            rt = requests.get(rst).json()
+            rt = requests.get(rst).json() # headers = headers).json()
             print (rt)
             re_arr.append (rt)
         print (re_arr)
@@ -37,8 +40,8 @@ def prime_number_lambda(maxi, loops , times, mb , isConcurrent ) :
         sgl = []
         for i in range (times) :
 
+            #sgl.append(session.get(rst,headers = headers))
             sgl.append(session.get(rst))
-
 
 
         for  i  in range  (times )  :
@@ -84,6 +87,12 @@ from flask import render_template
 @app.route('/lambda/<name>')
 def hello(name=None):
     return render_template('lambda.html', name="a")
+
+@app.route('/project2/')
+@app.route('/project2/<name>')
+def project2(name=None):
+    return render_template('project2.html', name="a")
+
 
 
 

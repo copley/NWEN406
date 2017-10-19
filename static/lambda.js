@@ -87,7 +87,7 @@ var conc   =  e2.options[e2.selectedIndex].value;
  xhttp.open("POST", "/post", true);
   xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
  xhttp.send(JSON.stringify({ maxi:  maxi,  loops: loops , times : times, mb :mb  , conc : conc }));
-
+//xhttp.setRequestHeader("auth-key":"")
 }
 
 function insertHTML  (D){
