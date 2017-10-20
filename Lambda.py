@@ -5,9 +5,9 @@ import requests
 
 from requests_futures.sessions import FuturesSession
 
-def prime_number_lambda(maxi, loops , times, mb , isConcurrent ) :
+def prime_number_lambda(maxi, loops , times, mb , isConcurrent , last4) :
     headers = {
-        'x-api-key': "rDGgZtlFRY7CaGQy7Qvb21R0VxICImme5FiJVvuc",
+        'x-api-key': "rDGgZtlFRY7CaGQy7Qvb21R0VxICImme5FiJ"+last4,   #Vvuc
     }
     re_arr  = []
     session = FuturesSession(max_workers=100)
@@ -20,8 +20,11 @@ def prime_number_lambda(maxi, loops , times, mb , isConcurrent ) :
         for i in range (times) :
             #rt = requests.get(rst).json()
             rt = requests.get(rst, headers = headers).json()
-            print (rt)
-            re_arr.append (rt)
+            if rt.status_code != 200 :
+                return rt.status_code
+            else :
+                print (rt)
+                re_arr.append (rt)
         print (re_arr)
         return re_arr
 
@@ -35,8 +38,13 @@ def prime_number_lambda(maxi, loops , times, mb , isConcurrent ) :
         for  i  in range  (times )  :
             resp  = sgl[i].result ()
             print('response one status: {0}'.format(resp.status_code))
-            print(resp.content)
-            re_arr.append (resp.content)
+            if resp.status_code != 200 :
+                re_arr.append (resp.status_code)
+                return resp.status_code
+            else :
+                print(resp.content)
+                re_arr.append (resp.content)
+
         print (re_arr)
         return re_arr
 
@@ -60,8 +68,13 @@ def post():
     times = request.json['times']
     mb =  request.json['mb']
     conc =  request.json['conc']
-    objects = prime_number_lambda(maxi, loops,int(times) ,mb ,conc )
-    return jsonify( {'json' :objects}), 201
+    last4 =  request.json['l4']
+    objects = prime_number_lambda(maxi, loops,int(times) ,mb ,conc  , last4 )
+
+    if objects.length == 1  :
+        return jsonify( {'json' :objects}), 201
+    else :
+        return jsonify( {'json' :objects}), objects
 
 
 
