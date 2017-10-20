@@ -1,3 +1,66 @@
+var form = document.forms.namedItem("fileinfo");
+form.addEventListener('submit', function(ev) {
+
+  var l4 =document.getElementById("l4").value;
+ var maxi = document.getElementById("maxi").value;
+       var loops =document.getElementById("loop").value;
+      var times =document.getElementById("t").value;
+var e = document.getElementById("mb")
+var mb   =  e.options[e.selectedIndex].value;
+var e2 = document.getElementById("concurrent")
+var conc   =  e2.options[e2.selectedIndex].value;
+
+var e3 = document.getElementById("chartmode")
+var chartmode   =  e3.options[e3.selectedIndex].value;
+
+
+  var oReq = new XMLHttpRequest();
+oReq.open("POST", "/post", true);
+  oReq.onload = function(oEvent) {
+    if (oReq.status == 201) {
+      var   datas    =  JSON.parse( this.responseText).json  ;
+
+       var jsons  = [] ;
+       if( conc =="on")    jsons =  jparsing  (datas) ;
+        else {
+          jsons    =  datas ;
+        }
+        insertHTML (jsons) ;
+           var duration = [] ;
+for (var i = 0 ; i < jsons.length ; i++ ) {
+          duration.push   (  jsons[i].durationSeconds);
+
+}
+
+var labels =  [] ;
+for  (var i= 0 ; i < times ; i++) {
+
+
+   labels.push (i+"th times") ;
+
+}
+
+
+
+
+ dataVisualize (duration,  labels , chartmode );
+    } else {
+     alert("[HTTP "+ this.status + " Forbidden] due to wrong API key and this unauthorized access incident had been reported to AWS IP address backlist server.")
+    }
+  };
+
+  oReq.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+ oReq.send(JSON.stringify({ maxi:  maxi,  loops: loops , times : times, mb :mb  , conc : conc  , l4 : l4}));
+  ev.preventDefault();
+
+
+}, false);
+
+
+
+
+
+
 function ajax() {
     var l4 =document.getElementById("l4").value;
    var maxi = document.getElementById("maxi").value;

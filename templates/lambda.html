@@ -7,36 +7,40 @@
 <p>Create an EC2 instance and implement a dynamic web page allowing you to invoke the prime number lambda.</p>
 
 
+<form enctype="multipart/form-data" method="post" name="fileinfo">
+  <ul>
+    <li> please input last 4 char of API key  : <input type="text" id="l4" value="Vvuc"></li>
+    <li>Max  : <input type="number" id="maxi" value="10"   min="10" max="1000"></li>
+    <li>loops : <input type="number" id="loop" value="1"  min="1" max="5"></li>
+    <li>times : <input type="number" id="t" value="4"  min="1" max="100"></li>
+    <li>Concurrent mode :<select id="concurrent"> <option value="on"> on</option> <option value="off"> off</option>   </select></li>
+    <li>mb :<select id="mb"><option value="128"> 128MB</option><option value="256"> 256MB</option><option value="512"> 512MB</option><option value="1024"> 1024MB</option></select></li>
+    <li>data visualisation mode :
+      <select id="chartmode">
+        <option value="line"> line</option>
+        <option value="bar"> bar</option>
+        <option value="radar"> radar</option>
+        <option value="doughnut"> doughnut</option>
+        <option value="pie"> pie</option>
+        <option value="polarArea"> polarArea</option>
+        <option value="bubble"> bubble</option>
+    </select></li>
+  </ul>
 
-<ul>
-  <li> please input last 4 char of API key  : <input type="text" id="l4" value="Vvuc"></li>
-  <li>Max  : <input type="number" id="maxi" value="10"></li>
-  <li>loops : <input type="number" id="loop" value="1"></li>
-  <li>times : <input type="number" id="t" value="4"></li>
-  <li>Concurrent mode :<select id="concurrent"><option value="off"> off</option><option value="on"> on</option></select></li>
-  <li>mb :<select id="mb"><option value="128"> 128MB</option><option value="256"> 256MB</option><option value="512"> 512MB</option><option value="1024"> 1024MB</option></select></li>
-  <li>data visualisation mode :
-    <select id="chartmode">
-      <option value="line"> line</option>
-      <option value="bar"> bar</option>
-      <option value="radar"> radar</option>
-      <option value="doughnut"> doughnut</option>
-      <option value="pie"> pie</option>
-      <option value="polarArea"> polarArea</option>
-      <option value="bubble"> bubble</option>
-  </select></li>
-</ul>
-
-
-
-
-
+  <input type="submit" value="Invoke prime number lambda!" />
+</form>
 
 
 
 
 
-<button type="button" onclick="ajax()">Invoke prime number lambda</button>
+
+
+
+
+
+
+
 
 
 
