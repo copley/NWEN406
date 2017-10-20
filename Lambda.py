@@ -19,9 +19,12 @@ def prime_number_lambda(maxi, loops , times, mb , isConcurrent , last4) :
         print (" non Concurrent  mode")
         for i in range (times) :
             #rt = requests.get(rst).json()
-            rt = requests.get(rst, headers = headers).json()
-            if rt.status_code != 200 :
-                return rt.status_code
+            resp = requests.get(rst, headers = headers)
+            rt = resp.json()
+            if resp.status_code != 200 :
+                print ("resp.status_code")
+                print (rt)
+                return resp.status_code
             else :
                 print (rt)
                 re_arr.append (rt)
@@ -71,10 +74,10 @@ def post():
     last4 =  request.json['l4']
     objects = prime_number_lambda(maxi, loops,int(times) ,mb ,conc  , last4 )
 
-    if objects.length == 1  :
-        return jsonify( {'json' :objects}), 201
+    if objects == 403  :
+        return jsonify( {'json' :objects}), 403
     else :
-        return jsonify( {'json' :objects}), objects
+        return jsonify( {'json' :objects}), 201
 
 
 

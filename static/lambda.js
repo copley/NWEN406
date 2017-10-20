@@ -15,45 +15,49 @@ var chartmode   =  e3.options[e3.selectedIndex].value;
 
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 201) {
+    if (this.readyState == 4 ) {
+
+             if (this.status == 201 ) {
+               var   datas    =  JSON.parse( this.responseText).json  ;
+
+                var jsons  = [] ;
+                if( conc =="on")    jsons =  jparsing  (datas) ;
+                 else {
+                   jsons    =  datas ;
+                 }
+                 insertHTML (jsons) ;
+                    var duration = [] ;
+      for (var i = 0 ; i < jsons.length ; i++ ) {
+                   duration.push   (  jsons[i].durationSeconds);
+
+        }
+
+        var labels =  [] ;
+      for  (var i= 0 ; i < times ; i++) {
+
+
+            labels.push (i+"th times") ;
+
+     }
 
 
 
-          var   datas    =  JSON.parse( this.responseText).json  ;
 
-           var jsons  = [] ;
-           if( conc =="on")    jsons =  jparsing  (datas) ;
-            else {
-              jsons    =  datas ;
-            }
-            insertHTML (jsons) ;
-               var duration = [] ;
- for (var i = 0 ; i < jsons.length ; i++ ) {
-              duration.push   (  jsons[i].durationSeconds);
+          dataVisualize (duration,  labels , chartmode );
+             }
 
-		}
+             else {
 
-   var labels =  [] ;
- for  (var i= 0 ; i < times ; i++) {
+                 alert("[HTTP "+ this.status + " Forbidden] due to wrong API key and this unauthorized access incident had been reported to AWS IP address backlist server.")
+             }
 
 
-       labels.push (i+"th times") ;
-
-}
-
-
-
-
-     dataVisualize (duration,  labels , chartmode );
 
 
 
     }
 
-    else {
 
-        alert(this.status + ":  unauthorieze aceess had been reported to AWS")
-    }
 
 
 
