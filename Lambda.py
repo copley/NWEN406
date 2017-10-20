@@ -11,12 +11,14 @@ def prime_number_lambda(maxi, loops , times, mb , isConcurrent ) :
     }
     re_arr  = []
     session = FuturesSession(max_workers=100)
-    #   https://a4i8lwlp90.execute-api.us-west-2.amazonaws.com/prod/eratosthenes-1024
+
+    #rst =  'https://a4i8lwlp90.execute-api.us-west-2.amazonaws.com/prod/eratosthenes-'+str(mb)+'?max='+str(maxi)+'&loops='+ str(loops)
     rst = 'https://nx106w1z0e.execute-api.us-west-2.amazonaws.com/prod/lambda-'+str(mb)+'?max='+str(maxi)+'&loops='+ str(loops)
     print('request lambda url  : {0}'.format(rst))
     if  isConcurrent == "off":
         print (" non Concurrent  mode")
         for i in range (times) :
+            #rt = requests.get(rst).json()
             rt = requests.get(rst, headers = headers).json()
             print (rt)
             re_arr.append (rt)
@@ -27,8 +29,8 @@ def prime_number_lambda(maxi, loops , times, mb , isConcurrent ) :
         print (" Concurrent  mode")
         sgl = []
         for i in range (times) :
-
-            sgl.append(session.get(rst,headers = headers))
+            sgl.append(session.get(rst))
+            #sgl.append(session.get(rst,headers = headers))
 
         for  i  in range  (times )  :
             resp  = sgl[i].result ()

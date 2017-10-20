@@ -79,7 +79,17 @@ var chart = new Chart(ctx, {
     // "Lambda memory in MB (X axis) vs duration in seconds (Y axis) ",
 //  label: "Lambda memory in MB (X axis) vs cost in dollars (Y axis) ",
 //  label: "Lambda cost in dollars (X axis) vs duration in seconds (Y axis) ",
-    data: {
+
+data: {
+     labels: times ,
+     datasets: [{
+         label: "Lambda performance",
+         backgroundColor: 'rgb(255, 99, 132)',
+         borderColor: 'rgb(255, 99, 132)',
+         data: data,
+     }]
+ },
+  /*  data: {
 
         labels:  ["128MB", "256MB", "512MB" ,"1024MB"]  ,
         datasets: [{
@@ -98,6 +108,7 @@ var chart = new Chart(ctx, {
 
       ]
     },
+    */
 
     // Configuration options go here
     options: {}
