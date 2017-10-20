@@ -29,8 +29,8 @@ def prime_number_lambda(maxi, loops , times, mb , isConcurrent ) :
         print (" Concurrent  mode")
         sgl = []
         for i in range (times) :
-            sgl.append(session.get(rst))
-            #sgl.append(session.get(rst,headers = headers))
+            ##sgl.append(session.get(rst))
+            sgl.append(session.get(rst,headers = headers))
 
         for  i  in range  (times )  :
             resp  = sgl[i].result ()

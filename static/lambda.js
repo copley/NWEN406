@@ -66,7 +66,7 @@ var chartmode   =  e3.options[e3.selectedIndex].value;
 function dataVisualize(data, times , chartmode ) {
 
 var ctx = document.getElementById('myChart').getContext('2d');
-
+     if (chartmode == "bubble")  data = [{ x: 128  , y :10.0066559315 , r :  2.0813844337519998  },{  x: 256   , y :3.33517885208 , r :  1.3907695813173598  },{ x: 512    , y :1.55926299095 , r:  1.3004253344522999   },{   x:1024  , y : 0.717894077301, r  : 1.196729426860767  }]
 var chart = new Chart(ctx, {
     // The type of chart we want to create
     type: chartmode,
@@ -85,8 +85,10 @@ data: {
      datasets: [{
          label: "Lambda performance",
          backgroundColor: 'rgb(255, 99, 132)',
+          //radius : 100,
          borderColor: 'rgb(255, 99, 132)',
-         data: data,
+         data: data
+
      }]
  },
   /*  data: {
