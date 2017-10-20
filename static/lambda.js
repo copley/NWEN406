@@ -43,9 +43,16 @@ for  (var i= 0 ; i < times ; i++) {
 }
 
 
+var  datasets= [{
+    label: "lambda dynamic performance",
+ //   backgroundColor: 'rgb(255, 99, 132)',
+     //radius : 100,
+    borderColor: 'rgb(255, 99, 132)',
+    data: duration
 
+}]
 
- dataVisualize (duration,  labels , chartmode );
+ dataVisualize (labels ,datasets,  chartmode , "myChart1" );
     } else {
      alert("[HTTP "+ this.status + " Forbidden] due to wrong API key and this unauthorized access incident had been reported to AWS IP address backlist server.")
     }
@@ -123,7 +130,7 @@ var  datasets  =   [{
 ]  ;
 
 
-    dataVisualize ( ["128MB", "256MB", "512MB" ,"1024MB"] ,  datasets, 'line' , "myChart1" );
+    dataVisualize ( ["128MB", "256MB", "512MB" ,"1024MB"] ,  datasets, 'line' , "myChart2" );
 
 
 
@@ -160,7 +167,7 @@ borderColor: 'rgb(37, 1, 24)'
 ]  ;
 
 
-dataVisualize ( ["128MB", "256MB", "512MB" ,"1024MB"] ,  datasets1, 'line' , "myChart2" );
+dataVisualize ( ["128MB", "256MB", "512MB" ,"1024MB"] ,  datasets1, 'line' , "myChart3" );
 
 
 
