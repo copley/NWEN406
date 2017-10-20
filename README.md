@@ -18,6 +18,7 @@
 ## http://flask.pocoo.org/docs/0.12/quickstart/#rendering-templates
 ## http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AccessingInstancesLinux.html
 ## https://github.com/jconning/lambda-cpu-cost
+## https://gist.github.com/Daniel-Hug/7273430
 
 
 

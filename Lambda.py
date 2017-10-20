@@ -57,8 +57,10 @@ app = Flask(__name__)
 
 @app.route('/get',methods= ['GET'])
 def get():
+    off=[ prime_number_lambda(100, 1, 3 ,128 ,"off"  , "Vvuc" ) , prime_number_lambda(100, 1, 3 ,256 ,"off"  , "Vvuc" ) ,prime_number_lambda(100, 1, 3 ,512 ,"off"  , "Vvuc" ),prime_number_lambda(100, 1, 3 ,1024 ,"off"  , "Vvuc" )]
+    on=[ prime_number_lambda(100, 1, 3 ,128 ,"on"  , "Vvuc" ) , prime_number_lambda(100, 1, 3 ,256 ,"on"  , "Vvuc" ) ,prime_number_lambda(100, 1, 3 ,512 ,"on"  , "Vvuc" ),prime_number_lambda(100, 1, 3 ,1024 ,"on"  , "Vvuc" )]
 
-    return   jsonify({'task':''})   #calling_lamdba(100, 1 , 20)
+    return   jsonify({'task':[off, on ]})   #calling_lamdba(100, 1 , 20)
 
 
 
