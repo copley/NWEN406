@@ -5,15 +5,18 @@ import requests
 
 from requests_futures.sessions import FuturesSession
 
-def prime_number_lambda(maxi, loops , times, mb , isConcurrent , last4) :
+def prime_number_lambda(maxi, loops , times, mb , x   , isConcurrent , last4  ) :
     headers = {
         'x-api-key': "rDGgZtlFRY7CaGQy7Qvb21R0VxICImme5FiJ"+last4,   #Vvuc
     }
     re_arr  = []
     session = FuturesSession(max_workers=100)
 
-    #rst =  'https://a4i8lwlp90.execute-api.us-west-2.amazonaws.com/prod/eratosthenes-'+str(mb)+'?max='+str(maxi)+'&loops='+ str(loops)
-    rst = 'https://nx106w1z0e.execute-api.us-west-2.amazonaws.com/prod/lambda-'+str(mb)+'?max='+str(maxi)+'&loops='+ str(loops)
+    if str(x) == "0" :
+        rst =  'https://nx106w1z0e.execute-api.us-west-2.amazonaws.com/prod/'+ str(mb) +'mb'+ '?max='+str(maxi)+'&loops='+ str(loops)
+    else :
+        rst = 'https://nx106w1z0e.execute-api.us-west-2.amazonaws.com/prod/'+ str (x) + 'x'+'?max='+str(maxi)+'&loops='+ str(loops)
+
     print('request lambda url  : {0}'.format(rst))
     if  isConcurrent == "off":
         print (" non Concurrent  mode")
@@ -55,12 +58,27 @@ def prime_number_lambda(maxi, loops , times, mb , isConcurrent , last4) :
 
 app = Flask(__name__)
 
-@app.route('/get',methods= ['GET'])
-def get():
-    off=[ prime_number_lambda(100, 1, 3 ,128 ,"off"  , "Vvuc" ) , prime_number_lambda(100, 1, 3 ,256 ,"off"  , "Vvuc" ) ,prime_number_lambda(100, 1, 3 ,512 ,"off"  , "Vvuc" ),prime_number_lambda(100, 1, 3 ,1024 ,"off"  , "Vvuc" )]
-    on=[ prime_number_lambda(100, 1, 3 ,128 ,"on"  , "Vvuc" ) , prime_number_lambda(100, 1, 3 ,256 ,"on"  , "Vvuc" ) ,prime_number_lambda(100, 1, 3 ,512 ,"on"  , "Vvuc" ),prime_number_lambda(100, 1, 3 ,1024 ,"on"  , "Vvuc" )]
+@app.route('/getMB',methods= ['GET'])
+def getMB():
+    off = []
+    on = []
+    for i in  [128,256,512,1024] :
+        off.append (prime_number_lambda(100, 1, 10 ,i , 0 ,"off"  , "Vvuc" ))
+        on.append (prime_number_lambda(100, 1, 10 ,i , 0 ,"on"  , "Vvuc" ))
 
     return   jsonify({'task':[off, on ]})   #calling_lamdba(100, 1 , 20)
+
+
+@app.route('/getX',methods= ['GET'])
+def getX():
+    off = []
+    on = []
+    for i in  [2,3,4,5]    :
+        off.append (prime_number_lambda(100, 1, 10 ,0 , i ,"off"  , "Vvuc" ))
+        on.append (prime_number_lambda(100, 1, 10 ,0, i,"on"  , "Vvuc" ))
+
+    return   jsonify({'task':[off, on ]})   #calling_lamdba(100, 1 , 20)
+
 
 
 
@@ -72,9 +90,10 @@ def post():
     loops = request.json['loops']
     times = request.json['times']
     mb =  request.json['mb']
+    x =  request.json['x']
     conc =  request.json['conc']
     last4 =  request.json['l4']
-    objects = prime_number_lambda(maxi, loops,int(times) ,mb ,conc  , last4 )
+    objects = prime_number_lambda(maxi, loops,int(times) ,mb , x  , conc  , last4 )  # maxi, loops , times, mb , x , mbORx  , isConcurrent , last4
 
     if objects == 403  :
         return jsonify( {'json' :objects}), 403

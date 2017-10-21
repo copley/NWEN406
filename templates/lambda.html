@@ -33,8 +33,11 @@
 
 
 
-<button type="button" onclick="offon()">Invoke prime number lambda with concurrent and non concurrent </button>
+<button type="button" onclick="offon('mb', ['c2', 'c3'] )">Varying the Lambda memory settings: 128MB, 256MB, 512MB and 1024MB. </button>
 
+
+
+<button type="button" onclick="offon('x' , ['c4', 'c5'])">Varying the time taken to do a computation while holding memory static: 2x, 3x, 4x and 5x.</button>
 
 
 
@@ -48,9 +51,12 @@
 
 
 <div style="padding : 100px ;margin : 100px ;  ">
-<canvas id="myChart1"></canvas>
-<canvas id="myChart2"></canvas>
-<canvas id="myChart3"></canvas>
+<canvas id="c1"></canvas>
+<canvas id="c2"></canvas>
+<canvas id="c3"></canvas>
+<canvas id="c4"></canvas>
+<canvas id="c5"></canvas>
+<canvas id="c6"></canvas>
 </div>
 
 

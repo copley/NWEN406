@@ -87,10 +87,18 @@ function stat (D , s) {
 
 
 
+document.addEventListener('DOMContentLoaded', function() {
+    // setInterval(function(){ offon(); }, 3000);
+});
 
-function offon() {
 
 
+function offon(mbx , chartID) {
+
+   if (mbx == 'mb')
+      Xaxis = ["128MB", "256MB", "512MB" ,"1024MB"]
+   else
+      Xaxis = ["2X", "3X", "4X" ,"5X"]
 
 
   var xhttp = new XMLHttpRequest();
@@ -130,7 +138,7 @@ var  datasets  =   [{
 ]  ;
 
 
-    dataVisualize ( ["128MB", "256MB", "512MB" ,"1024MB"] ,  datasets, 'line' , "myChart2" );
+    dataVisualize ( Xaxis ,  datasets, 'line' , chartID[0]);
 
 
 
@@ -167,7 +175,7 @@ borderColor: 'rgb(37, 1, 24)'
 ]  ;
 
 
-dataVisualize ( ["128MB", "256MB", "512MB" ,"1024MB"] ,  datasets1, 'line' , "myChart3" );
+dataVisualize ( Xaxis ,  datasets1, 'line' , chartID[1] );
 
 
 
@@ -203,8 +211,11 @@ dataVisualize ( ["128MB", "256MB", "512MB" ,"1024MB"] ,  datasets1, 'line' , "my
   };
 
 
-  xhttp.open("GET", "/get", true);
-  xhttp.send ();        //  Request URL:http://52.10.250.199:5000/get
+   if (mbx == "mb")
+        xhttp.open("GET", "/getMB", true);
+   else
+        xhttp.open("GET", "/getX", true);
+   xhttp.send ();        //  Request URL:http://52.10.250.199:5000/get
  //xhttp.open("POST", "/post", true);
 //  xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
  //xhttp.send(JSON.stringify({ maxi:  maxi,  loops: loops , times : times, mb :mb  , conc : conc  , l4 : l4}));

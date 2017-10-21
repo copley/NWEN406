@@ -43,3 +43,6 @@ curl "https://a4i8lwlp90.execute-api.us-west-2.amazonaws.com/prod/eratosthenes-1
 1024	0.00001667
 
 10.0066559315*0.00000208,3.33517885208*0.00000417,1.55926299095*0.00000834,0.717894077301*0.00001667
+
+
+https://nx106w1z0e.execute-api.us-west-2.amazonaws.com/prod/lambda-2x
