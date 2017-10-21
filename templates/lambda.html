@@ -1,7 +1,29 @@
 <!DOCTYPE html>
 <html>
 <body>
+<style>
+li {
+    padding: 10px;
+}
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 5px 2px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
 
+.button2 {background-color: #008CBA;} /* Blue */
+.button3 {background-color: #f44336;} /* Red */
+.button4 {background-color: #e7e7e7; color: black;} /* Gray */
+.button5 {background-color: #555555;} /* Black */
+
+</style>
 <h1>Challenge "A+"</h1>
 
 <p>Create an EC2 instance and implement a dynamic web page allowing you to invoke the prime number lambda.</p>
@@ -9,7 +31,7 @@
 
 <form enctype="multipart/form-data" method="post" name="fileinfo">
   <ul>
-    <li> please input last 4 char of API key  : <input type="text" id="l4" value="Vvuc"></li>
+    <li > please input last 4 chars of AWS API key  : <input style="border : 5px solid #800080" type="text" id="l4" value="Vvuc"></li>
     <li>Max  : <input type="number" id="maxi" value="10"   min="10" max="1000"></li>
     <li>loops : <input type="number" id="loop" value="1"  min="1" max="5"></li>
     <li>times : <input type="number" id="t" value="4"  min="1" max="100"></li>
@@ -27,19 +49,15 @@
     </select></li>
   </ul>
 
-  <input type="submit" value="Invoke prime number lambda!" />
+  <input style="border : 2px solid blue" type="submit" value="update the parameteres and Invoke demo prime number lambda demo " />
 </form>
 
-
-
-
-<button type="button" onclick="offon('mb', ['c2', 'c3'] )">Varying the Lambda memory settings: 128MB, 256MB, 512MB and 1024MB. </button>
-
-
-
-<button type="button" onclick="offon('x' , ['c4', 'c5'])">Varying the time taken to do a computation while holding memory static: 2x, 3x, 4x and 5x.</button>
-
-
+<ol>
+  <li>Satisfactory "C-/C":>>>>>>click<button class="button" type="button" onclick="offon('getSatisfactory', ['c1'] )">find that cost and performance scaled linearly with memory</button></li>
+  <li>Completion "C+/B":>>>>>>click<button class="button" type="button" onclick="offon('getMB', ['c2', 'c3'] )">Varying the Lambda memory settings: 128MB, 256MB, 512MB and 1024MB. </button></li>
+  <li>Completion "B+/A-":>>>>>click<button class="button" type="button" onclick="offon('getXLoops' , ['c4', 'c5' ,'c6' ,'c7'])">Varying the time taken to do a computation while holding memory static: 2x, 3x, 4x and 5x.</button></li>
+  <li>Challenge "A":>>>>>> try to modify the values in the <code style="color: #800080">purple</code> text box and click the <code style="color: blue">blue</code> button to verify the authorisation is implemented</li>
+</ol>
 
 
 
@@ -50,13 +68,20 @@
 
 
 
-<div style="padding : 100px ;margin : 100px ;  ">
+
+
+
+
+
+<div style="margin-left : 100px ; margin-right :100px  ">
+<canvas id="c0"></canvas>
 <canvas id="c1"></canvas>
 <canvas id="c2"></canvas>
 <canvas id="c3"></canvas>
 <canvas id="c4"></canvas>
 <canvas id="c5"></canvas>
 <canvas id="c6"></canvas>
+<canvas id="c7"></canvas>
 </div>
 
 
