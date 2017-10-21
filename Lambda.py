@@ -5,19 +5,13 @@ import requests
 
 from requests_futures.sessions import FuturesSession
 
-
-
-
-
-
-
-
 def prime_number_lambda(maxi, loops , times, mb  , isConcurrent , last4  ) :
     headers = {
         'x-api-key': "rDGgZtlFRY7CaGQy7Qvb21R0VxICImme5FiJ"+last4,   #Vvuc
     }
     re_arr  = []
     session = FuturesSession(max_workers=100)
+    print (session)
 
 
     rst =  'https://nx106w1z0e.execute-api.us-west-2.amazonaws.com/prod/'+ str(mb) +'mb'+ '?max='+str(maxi)+'&loops='+ str(loops)

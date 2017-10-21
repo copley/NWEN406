@@ -286,7 +286,7 @@ function insertHTML(D) {
 }
 
 function arr_stat () {
-  var arr = {
+  var arr = {     // from https://gist.github.com/Daniel-Hug/7273430
       max: function(array) {
           return Math.max.apply(null, array);
       },
