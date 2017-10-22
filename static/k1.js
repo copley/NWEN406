@@ -8,30 +8,12 @@ form.addEventListener('submit', function(ev) {
     var mb = e.options[e.selectedIndex].value;
     var e2 = document.getElementById("concurrent")
     var conc = e2.options[e2.selectedIndex].value;
-    var e3 = document.getElementById("chartmode")
-    var chartmode = e3.options[e3.selectedIndex].value;
     var oReq = new XMLHttpRequest();
     oReq.open("POST", "/post", true);
     oReq.onload = function(oEvent) {
         if (oReq.status == 201) {
             var jsons = JSON.parse(this.responseText).json;
             insertHTML(jsons);
-            stat(jsons)
-            var duration = [];
-            for (var i = 0; i < jsons.length; i++) {
-                duration.push(jsons[i].durationSeconds);
-            }
-            var labels = [];
-            for (var i = 0; i < times; i++) {
-                labels.push(i + "th");
-            }
-            var datasets = [{
-                    label: "live dynamic time series Lamda performance ",
-                    data: duration,
-                    borderColor: 'rgb(25, 100, 166)'
-                }
-            ]
-            dataVisualize(labels, datasets, chartmode, "c0");
         } else {
             alert("[HTTP " + this.status + " Forbidden] due to wrong API key and this unauthorized access incident had been reported to AWS IP address backlist server.")
         }
