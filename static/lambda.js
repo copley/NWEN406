@@ -128,7 +128,8 @@ function offon(getMode, chartIDs) {
                     ];
                     dataVisualize(Xaxis, datasetsc, 'line', chartIDs[1]);
                 } else if(getMode == 'getXLoops'){ // Varying the time taken to do a computation while holding memory static: 2x, 3x, 4x and 5x.
-                    var la = ["128MB", "256MB", "512MB", "1024MB"]
+                    var la = ["128MB", "256MB", "512MB", "1024MB"] ;
+                    var k = 0   ;
                     for (var i = 0; i < 4; i++) {
                         var meams = [],
                             medians = [],
@@ -137,13 +138,16 @@ function offon(getMode, chartIDs) {
                             cmedians = [],
                             csts = [];
                         for (var j = 0; j < 4; j++) {
-                            meams.push(stat(datas[0][j], 0));
-                            medians.push(stat(datas[0][j], 1));
-                            sts.push(stat(datas[0][j], 2));
-                            cmeams.push(stat(datas[1][j], 0));
-                            cmedians.push(stat(datas[1][j], 1));
-                            csts.push(stat(datas[1][j], 2));
+                            meams.push(stat(datas[0][k], 0));
+                            medians.push(stat(datas[0][k], 1));
+                            sts.push(stat(datas[0][k], 2));
+                            cmeams.push(stat(datas[1][k], 0));
+                            cmedians.push(stat(datas[1][k], 1));
+                            csts.push(stat(datas[1][k], 2));
+                            ++k;
                         }
+
+                        console.log (k);
                         var dt = [{
                                 label: "meams-" + la[i],
                                 data: meams,
@@ -221,6 +225,19 @@ function offon(getMode, chartIDs) {
 
 
 function dataVisualize(labels, datasets, chartmode, chartID) {
+    if (chartID =='c2' || chartID =='c3')    var cdom = ['c0','c1','c4','c5','c6', 'c7'] ;
+    else if (chartID =='c4' || chartID =='c5'|| chartID =='c6' || chartID =='c7')    var cdom = ['c0','c1','c2','c3'] ;
+    else  var cdom = ['c0','c1','c2','c3','c4','c5','c6', 'c7'] ;
+
+    for  (var i = 0 ; i < cdom.length ; i++){
+          if (document.getElementById(cdom[i]) !=null )
+          {
+              document.getElementById(cdom[i]).remove();
+          }
+    }
+    var c = document.createElement('canvas')
+    c.setAttribute("id", chartID);
+    document.getElementById("cv").appendChild(c);
     var ctx = document.getElementById(chartID).getContext('2d');
     if (chartmode == "bubble") data = [{
         x: 128,

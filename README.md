@@ -31,18 +31,4 @@ Copyright © Victoria University of Wellington, New Zealand
 
 
 
-curl "https://a4i8lwlp90.execute-api.us-west-2.amazonaws.com/prod/eratosthenes-128?max=1000000&loops=1"
-curl "https://a4i8lwlp90.execute-api.us-west-2.amazonaws.com/prod/eratosthenes-256?max=1000000&loops=1"
-curl "https://a4i8lwlp90.execute-api.us-west-2.amazonaws.com/prod/eratosthenes-512?max=1000000&loops=1"
-curl "https://a4i8lwlp90.execute-api.us-west-2.amazonaws.com/prod/eratosthenes-1024?max=1000000&loops=1"
-
-
-128		0.00000208
-256		0.00000417
-512		0.00000834
-1024	0.00001667
-
-10.0066559315*0.00000208,3.33517885208*0.00000417,1.55926299095*0.00000834,0.717894077301*0.00001667
-
-
-https://nx106w1z0e.execute-api.us-west-2.amazonaws.com/prod/lambda-2x
+#nohup python Lambda.py >> xmb.log &
