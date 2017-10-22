@@ -1,0 +1,8 @@
+{
+    "functions": {
+        "128": "https://a4i8lwlp90.execute-api.us-west-2.amazonaws.com/prod/eratosthenes-128",
+        "256": "https://a4i8lwlp90.execute-api.us-west-2.amazonaws.com/prod/eratosthenes-256",
+        "512": "https://a4i8lwlp90.execute-api.us-west-2.amazonaws.com/prod/eratosthenes-512",
+        "1024": "https://a4i8lwlp90.execute-api.us-west-2.amazonaws.com/prod/eratosthenes-1024"
+    }
+}
