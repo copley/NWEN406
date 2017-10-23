@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
+<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='c3.min.css') }}">
 <body>
+
 <style>
 li {
     padding: 10px;
@@ -28,7 +30,7 @@ li {
 
 <p>Create an EC2 instance and implement a dynamic web page allowing you to invoke the prime number lambda.</p>
 
-
+<div id="chart"></div>
 <form enctype="multipart/form-data" method="post" name="fileinfo">
   <ul>
     <li > please input last 4 chars of AWS API key  : <input style="border : 5px solid #800080" type="text" id="l4" value="Vvuc"></li>
@@ -85,7 +87,9 @@ li {
 
 
 
+<script type="text/javascript" src="{{ url_for('static', filename='d3.min.js') }}"></script>
 
+<script type="text/javascript" src="{{ url_for('static', filename='c3.min.js') }}"></script>
 
 
 
