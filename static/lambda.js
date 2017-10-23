@@ -1,12 +1,4 @@
-var chart = c3.generate({
-    bindto: '#chart',
-    data: {
-      columns: [
-        ['data1', 30, 200, 100, 400, 150, 250],
-        ['data2', 50, 20, 10, 40, 15, 25]
-      ]
-    }
-});
+
 
 var form = document.forms.namedItem("fileinfo");
 form.addEventListener('submit', function(ev) {
@@ -40,7 +32,7 @@ form.addEventListener('submit', function(ev) {
                     data: duration,
                     borderColor: 'rgb(25, 100, 166)'
                 }
-            ]
+            ];
             dataVisualize(labels, datasets, chartmode, "c0");
         } else {
             alert("[HTTP " + this.status + " Forbidden] due to wrong API key and this unauthorized access incident had been reported to AWS IP address backlist server.")
@@ -209,6 +201,22 @@ function offon(getMode, chartIDs) {
                                 borderColor: 'rgb(37, 209, 24)'
                             }
                         ]
+var cols =[ 'Lambda memory in MB (X axis) vs duration in seconds (Y axis)'] ;
+var cols2 = ['Lambda memory in MB (X axis) vs cost in dollars per 100000 requests(Y axis)' ] ; 
+for (var i=0 ; i< duration.length ; i++ ){
+	cols.push (duration[i]) ;
+	cols2.push (costs[i])   ; 
+
+}
+			var chart = c3.generate({
+    bindto: '#chart',
+    data: {
+      columns: [
+           cols  // ['Lambda memory in MB (X axis) vs duration in seconds (Y axis)', 30, 200, 100, 400, 150, 250],
+         , cols2    //     ['Lambda memory in MB (X axis) vs cost in dollars per 100000 requests(Y axis)', 50, 20, 10, 40, 15, 25]
+      ]
+    }
+	});
                         dataVisualize(Xaxis, datasets, 'line', "c1");
                 }
             } else {
