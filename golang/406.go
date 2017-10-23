@@ -293,7 +293,7 @@ func displayResults(executions chan execution) {
 		memories = append(memories, mem)
 	}
 	sort.Ints(memories)
-
+	people  = []Person(nil)
 	// Display results
 	fmt.Printf("Number of lambda executions returning errors: %d\n", lambdaErrors)
 	fmt.Println("Stats for each Lambda function by Lambda memory allocation:")
@@ -318,7 +318,19 @@ func displayResults(executions chan execution) {
 
 
 
+func SendJ(w http.ResponseWriter, r *http.Request) {
+    http.ServeFile(w, r, "echarts.min.js")
+}
 
+func SendJqueryJs(w http.ResponseWriter, r *http.Request) {
+    data, err := ioutil.ReadFile("echarts.min.js")
+    if err != nil {
+        http.Error(w, "Couldn't read file", http.StatusInternalServerError)
+        return
+    }
+    w.Header().Set("Content-Type", "application/javascript; charset=utf-8")
+    w.Write(data)
+}
 
 
 func main() {
@@ -329,7 +341,7 @@ func main() {
 
         router.HandleFunc("/people", GetPeople).Methods("GET")
         router.HandleFunc("/edit/", editHandler)
-
+	 router.HandleFunc("/echarts.min.js", SendJqueryJs)
 
         log.Fatal(http.ListenAndServe(":8000", router))
 
