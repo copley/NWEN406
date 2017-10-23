@@ -1,8 +1,10 @@
 {
     "functions": {
-        "128": "https://a4i8lwlp90.execute-api.us-west-2.amazonaws.com/prod/eratosthenes-128",
-        "256": "https://a4i8lwlp90.execute-api.us-west-2.amazonaws.com/prod/eratosthenes-256",
-        "512": "https://a4i8lwlp90.execute-api.us-west-2.amazonaws.com/prod/eratosthenes-512",
-        "1024": "https://a4i8lwlp90.execute-api.us-west-2.amazonaws.com/prod/eratosthenes-1024"
+        "128": "https://nx106w1z0e.execute-api.us-west-2.amazonaws.com/prod/128mb",
+        "256": "https://nx106w1z0e.execute-api.us-west-2.amazonaws.com/prod/256mb",
+        "512": "https://nx106w1z0e.execute-api.us-west-2.amazonaws.com/prod/512mb",
+        "1024": "https://nx106w1z0e.execute-api.us-west-2.amazonaws.com/prod/1024mb"
     }
 }
+
+

@@ -32,3 +32,6 @@ Copyright © Victoria University of Wellington, New Zealand
 
 
 #nohup python Lambda.py >> xmb.log &
+rm -r mydir
+
+https://groups.google.com/forum/#!topic/golang-nuts/qTk0QG00lTI

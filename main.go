@@ -18,11 +18,11 @@ var lambdaErrors int
 
 // Command line parameters
 var (
-	maxPrime int
-	numExecutions int
-	numLoops int
+	maxPrime       int
+	numExecutions  int
+	numLoops       int
 	maxConcurrency int
-	configFile string
+	configFile     string
 )
 
 func init() {
@@ -80,7 +80,20 @@ func triggerLambda(url string, mem int, max int, loops int) (execution, error) {
 	var e execution
 	e.memory = mem
 
-	resp, err := http.Get(fmt.Sprintf("%s?max=%d&loops=%d", url, max, loops))
+	client := &http.Client{
+	//	CheckRedirect: redirectPolicyFunc,
+	}
+
+	//	resp, err := client.Get(fmt.Sprintf("%s?max=%d&loops=%d", url, max, loops))
+	// ...
+	req, err := http.NewRequest("GET", fmt.Sprintf("%s?max=%d&loops=%d", url, max, loops), nil)
+	//	fmt.Printf(fmt.Sprintf("%s?max=%d&loops=%d", url, max, loops))
+	// ...
+	req.Header.Add("x-api-key", "rDGgZtlFRY7CaGQy7Qvb21R0VxICImme5FiJVvuc") // 'x-api-key': "rDGgZtlFRY7CaGQy7Qvb21R0VxICImme5FiJ"+last4,   #Vvuc
+	resp, err := client.Do(req)
+	// ...
+
+	//	resp, err := http.Get(fmt.Sprintf("%s?max=%d&loops=%d", url, max, loops))
 	if err != nil {
 		return e, err
 	}
