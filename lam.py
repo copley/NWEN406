@@ -21,7 +21,7 @@ def prime_number_lambda(maxi, loops , times, mb  , isConcurrent , last4  ) :
     rst =  'https://nx106w1z0e.execute-api.us-west-2.amazonaws.com/prod/'+ str(mb) +'mb'+ '?max='+str(maxi)+'&loops='+ str(loops)
     
 
-    print('sending the lambda url  : {0}'.format(rst), file = log)
+    print(' calling the aws  lambda api endpint  : {0}'.format(rst), file = log)
     if  isConcurrent == "off":
         #print (" nonConcurrentmode")
         for i in range (times) :

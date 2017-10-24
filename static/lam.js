@@ -11,7 +11,7 @@ function loadDoc() {
   
 
   
-    var  subm  = document.getElementById("textareaID").value
+    var  subm  = document.getElementById("ta").value
   
      xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 
