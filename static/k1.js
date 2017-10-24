@@ -9,11 +9,47 @@ form.addEventListener('submit', function(ev) {
     var e2 = document.getElementById("concurrent")
     var conc = e2.options[e2.selectedIndex].value;
     var oReq = new XMLHttpRequest();
-    oReq.open("POST", "/post", true);
+    oReq.open("POST", "/k1post", true);
     oReq.onload = function(oEvent) {
         if (oReq.status == 201) {
             var jsons = JSON.parse(this.responseText).json;
-            insertHTML(jsons);
+      
+            var duration = [];
+            for (var i = 0; i < jsons.length; i++) {
+                duration.push(jsons[i].durationSeconds);
+            }
+            var labels = [];
+            for (var i = 0; i < times; i++) {
+                labels.push(i + "th");
+            }
+            var datasets = [{
+                    label: "live dynamic time series Lamda performance ",
+                    data: duration,
+                    borderColor: 'rgb(25, 100, 166)'
+                }
+            ];
+            
+            var cols =[ 'Lambda live performanc'] ;
+
+for (var i=0 ; i< duration.length ; i++ ){
+	cols.push (duration[i]) ;
+
+
+}
+		
+            
+            	var chart = c3.generate({
+                    bindto: '#chart',
+                    data: {
+                      columns: [
+                           cols  
+                      
+                      ]
+                    }
+                	});
+                            
+            
+            
         } else {
             alert("[HTTP " + this.status + " Forbidden] due to wrong API key and this unauthorized access incident had been reported to AWS IP address backlist server.")
         }
@@ -33,18 +69,4 @@ form.addEventListener('submit', function(ev) {
 }, false);
 
 
-function insertHTML(D) {
-    for (var i = 0; i < D.length; i++) {
-        (function(ind) {
-            setTimeout(function() {
-                var li;
-                li = " durationSeconds :" + D[ind].durationSeconds + " ;  loops : " + D[ind].loops + "; max : " + D[ind].max;
-                var node = document.createElement("LI");
-                var textnode = document.createTextNode(li);
-                node.appendChild(textnode);
-                document.getElementById("demo").appendChild(node);
-            }, 1000 * (ind + 1));
-        })(i);
-    }
 
-}
