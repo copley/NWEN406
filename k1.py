@@ -55,8 +55,8 @@ def call_aws_lambda(maxi, loops , times, mb  , concurrent_MODE , apikey  ) :
 
     logf = open("xmb.log", "w")
 
-    request_string  =  'https://mx8xkhlbp7.execute-api.us-east-1.amazonaws.com/prod/key-'+ str(mb) +'mb'+ '?max='+str(maxi)+'&loops='+ str(loops)
-
+    request_string  =  'https://mx8xkhlbp7.execute-api.us-east-1.amazonaws.com/prod/key-'+ str(mb)+ '?max='+str(maxi)+'&loops='+ str(loops)
+    
     print(' lambda address  : {0}'.format(request_string), file = logf)
     if  concurrent_MODE == "on":
         Concurrent_call (times ,request_string  , apikey   ,   arrr  , fu_session ,logf )  
