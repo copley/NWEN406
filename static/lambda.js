@@ -271,10 +271,10 @@ for (var i=0 ; i< cols.length ; i++ ){
 
 } 
     
-
+ var charts =[] ;
 
      for (var i = 0 ;  i < cid.length  ; i++  )  {
-                    		var chart = c3.generate({
+                    		 charts[i] = c3.generate({
             bindto: '#'+ cid[i],
             data: {
               columns: cols

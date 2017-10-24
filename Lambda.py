@@ -66,8 +66,8 @@ def getMB():  #Varying the Lambda memory settings: 128MB, 256MB, 512MB and 1024M
     off = []
     on = []
     for i in  [128,256,512,1024] :
-        off.append (prime_number_lambda(10000, 1, 100 ,i   ,"off"  , "Vvuc" ))
-        on.append (prime_number_lambda(10000, 1, 100 ,i ,"on"  , "Vvuc" ))
+        off.append (prime_number_lambda(100, 1, 100 ,i   ,"off"  , "Vvuc" ))
+        on.append (prime_number_lambda(100, 1, 100 ,i ,"on"  , "Vvuc" ))
 
     return   jsonify({'task':[off, on ]})   #calling_lamdba(100, 1 , 20)
 
@@ -78,13 +78,13 @@ def getXLoops():   #Varying the time taken to do a computation while holding mem
     on = []
     for j in [128,256,512,1024] :
         for i in  [2,3,4,5]    :
-            off.append (prime_number_lambda(10000, i, 100 ,j   ,"off"  , "Vvuc" ))  #(maxi, loops , times, mb   , isConcurrent , last4  )
+            off.append (prime_number_lambda(100, i, 100 ,j   ,"off"  , "Vvuc" ))  #(maxi, loops , times, mb   , isConcurrent , last4  )
             #on.append (prime_number_lambda(100, i, 10 ,j ,"on"  , "Vvuc" ))
 
     for j in [128,256,512,1024] :
         for i in  [2,3,4,5]    :
             #off.append (prime_number_lambda(100, i, 10 ,j   ,"off"  , "Vvuc" ))  #(maxi, loops , times, mb   , isConcurrent , last4  )
-            on.append (prime_number_lambda(10000, i,100 ,j ,"on"  , "Vvuc" ))
+            on.append (prime_number_lambda(100, i,100 ,j ,"on"  , "Vvuc" ))
 
     return   jsonify({'task':[off, on ]})   #calling_lamdba(100, 1 , 20)
 
