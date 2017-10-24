@@ -12,7 +12,7 @@ def non_concurent_call (times, rs ,apikey , arrr  ,l  ):
     
     for i in range (times) :
     
-        responses = requests.get(rs, headers = {'x-api-key': "rDGgZtlFRY7CaGQy7Qvb21R0VxICImme5FiJ"+ apikey})
+        responses = requests.get(rs, headers = {'x-api-key': "8yWy3YfRRs1n2U08IVSPv5ntrouJ7cd61gJKaJ"+ apikey})
         rt = responses.json()
         if responses.status_code != 200 :
          
@@ -56,7 +56,7 @@ def call_aws_lambda(maxi, loops , times, mb  , concurrent_MODE , apikey  ) :
     logf = open("xmb.log", "w")
 
     request_string  =  'https://mx8xkhlbp7.execute-api.us-east-1.amazonaws.com/prod/key-'+ str(mb)+ '?max='+str(maxi)+'&loops='+ str(loops)
-    
+    print(' lambda address  : {0}'.format(request_string))
     print(' lambda address  : {0}'.format(request_string), file = logf)
     if  concurrent_MODE == "on":
         Concurrent_call (times ,request_string  , apikey   ,   arrr  , fu_session ,logf )  
