@@ -12,7 +12,7 @@ form.addEventListener('submit', function(ev) {
     oReq.open("POST", "/k1post", true);
     oReq.onload = function(oEvent) {
         if (oReq.status == 201) {
-            var jsons = JSON.parse(this.responseText).json;
+            var jsons = JSON.parse(this.responseText).response;
       
             var duration = [];
             for (var i = 0; i < jsons.length; i++) {
