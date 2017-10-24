@@ -8,7 +8,7 @@ from requests_futures.sessions import FuturesSession
 log = open("xmb.log", "w")
 def prime_number_lambda(maxi, loops , times, mb  , isConcurrent , last4  ) :
     headers = {
-        'x-api-key': "rDGgZtlFRY7CaGQy7Qvb21R0VxICImme5FiJ"+last4,   #Vvuc
+        'x-api-key': "8yWy3YfRRs1n2U08IVSPv5ntrouJ7cd61gJKaJ"+last4,   #Vvuc
     }
     re_arr  = []
     session = FuturesSession(max_workers=100)
@@ -17,8 +17,8 @@ def prime_number_lambda(maxi, loops , times, mb  , isConcurrent , last4  ) :
   #  log = open("xmb.log", "w")
 
 
-    rst =  'https://nx106w1z0e.execute-api.us-west-2.amazonaws.com/prod/'+ str(mb) +'mb'+ '?max='+str(maxi)+'&loops='+ str(loops)
-
+    rst =  'https://mx8xkhlbp7.execute-api.us-east-1.amazonaws.com/prod/key-'+ str(mb) + '?max='+str(maxi)+'&loops='+ str(loops)
+    
 
     print('request lambda url  : {0}'.format(rst), file = log)
     if  isConcurrent == "off":
