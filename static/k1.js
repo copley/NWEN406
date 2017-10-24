@@ -29,19 +29,23 @@ form.addEventListener('submit', function(ev) {
                 }
             ];
             
-            var cols =[ 'Lambda live performanc'] ;
+            var cols =[ 'Lambda live performance'] ;
+   var du = ['duration'] ,costs = ['cost'] ;
+                        var price = [0.00000208,0.00000417 , 0.00000834 ,  0.00001667 ] ;
+			var  p   =0       ;if (mb=="128") { p = price[0]} ;  if (mb=="256") { p = price[1]}  ;   if (mb=="512") { p = price[2]}   ;   if (mb=="1024") { p = price [3]} ;
+                        for (var i = 0; i < duration.length; i++) {
+                            du.push(duration[i]);
+                            
+costs.push(duration[i]* p* 100000)
+                        }
+    
 
-for (var i=0 ; i< duration.length ; i++ ){
-	cols.push (duration[i]*1000000) ;
-
-
-}
 		
             
             	var chart = c3.generate({
                     bindto: '#chart',
                     data: {
-                      columns:[cols , ["mb", 128,256,512,1024]]
+                      columns:[du, costs]
                       
                      
                     }
