@@ -19,11 +19,12 @@ def prime_number_lambda(maxi, loops , times, mb  , isConcurrent , last4  ) :
 
 
     rst =  'https://nx106w1z0e.execute-api.us-west-2.amazonaws.com/prod/'+ str(mb) +'mb'+ '?max='+str(maxi)+'&loops='+ str(loops)
-    
-
+    print (rst)
+    print (headers) 
+    print (isConcurrent)
     print(' calling the aws  lambda api endpint  : {0}'.format(rst), file = log)
     if  isConcurrent == "off":
-        #print (" nonConcurrentmode")
+        print (" nonConcurrentmode")
         for i in range (times) :
             #rt = requests.get(rst).json()
             resp = requests.get(rst, headers = headers)
@@ -35,11 +36,11 @@ def prime_number_lambda(maxi, loops , times, mb  , isConcurrent , last4  ) :
             else :
                 #print (rt)
                 re_arr.append (rt)
-        print (re_arr, file = log)
+        print (re_arr)
         return re_arr
 
     else :
-        #print (" Concurrentmode")
+        print (" Concurrentmode")
         sgl = []
         for i in range (times) :
             ##sgl.append(session.get(rst))
@@ -55,7 +56,7 @@ def prime_number_lambda(maxi, loops , times, mb  , isConcurrent , last4  ) :
                 #print(resp.content)
                 re_arr.append (resp.json())
 
-        print (re_arr, file = log)
+        print (re_arr)
         return re_arr
 
 
@@ -70,18 +71,20 @@ app = Flask(__name__)
 from flask import request
 @app.route('/postlamb', methods=['POST'])
 def post():
+    print ('postingg here')
     maxi =request.json['maxi']
     loops = request.json['loops']
     times = request.json['times']
     mb =  request.json['mb']
     conc =  request.json['conc']
-    last4 =  request.json['l4']
+    last4 =  request.json['last4']
+    print (last4)
     objects = prime_number_lambda(maxi, loops,int(times) ,mb , conc  , last4 )  # maxi, loops , times, mb , x , mbORx  , isConcurrent , last4
 
     if objects == 403  :
         return jsonify( {'json' :objects}), 403
     else :
-        return jsonify( {'json' :objects}), 201
+        return jsonify( {'json' :objects}), 200
 
 
 from flask import render_template
@@ -89,7 +92,7 @@ from flask import render_template
 @app.route('/lamb/')
 
 def render_lambda():
-    return render_template('lamb.html')
+    return render_template('lam.html')
 
 
 
