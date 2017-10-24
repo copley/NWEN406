@@ -219,8 +219,8 @@ function offon(getMode, chartIDs) {
                                 borderColor: 'rgb(37, 209, 24)'
                             }
                         ]
-var cols =[ 'Lambda memory in MB (X axis) vs duration in seconds (Y axis)'] ;
-var cols2 = ['Lambda memory in MB (X axis) vs cost in dollars per 100000 requests(Y axis)' ] ; 
+var cols =[ ' stat mb memory in (X) vs duration in seconds (Y )'] ;
+var cols2 = [ 'stat mb memory in  (X) vs fee  in dollars per 100000 calls(Y )' ] ; 
 for (var i=0 ; i< duration.length ; i++ ){
 	cols.push (duration[i]) ;
 	cols2.push (costs[i])   ; 
