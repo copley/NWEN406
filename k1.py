@@ -8,36 +8,6 @@ from requests_futures.sessions import FuturesSession
 
 
 
-lambdawebapp = Flask(__name__)
-
-from flask import request
-@lambdawebapp.route('/k1post', methods=['POST'])
-def k1post():
-  
-    returnobj = call_aws_lambda(request.json['maxi'], request.json['loops']   ,int( request.json['times']) ,request.json['mb']  , request.json['conc']  , request.json['l4'] ) 
-
-    if returnobj == 403  :
-        return jsonify( {'response' :returnobj}), 403
-    else :
-        return jsonify( {'response' :returnobj}), 201
-
-
-from flask import render_template
-
-@lambdawebapp.route('/k1/')
-
-def k1():
-    return render_template('k1.html')
-
-
-
-if __name__ == '__main__':
-    lambdawebapp.run(debug=True,host='0.0.0.0')
-
-
-
-
-
 def non_concurent_call (times, rs ,apikey , arrr  ,l  ):
     
     for i in range (times) :
@@ -94,6 +64,39 @@ def call_aws_lambda(maxi, loops , times, mb  , concurrent_MODE , apikey  ) :
         non_concurent_call (times , request_string , apikey ,  arrr ,logf ) 
 
     return  arrr
+
+
+
+lambdawebapp = Flask(__name__)
+
+from flask import request
+@lambdawebapp.route('/k1post', methods=['POST'])
+def k1post():
+  
+    returnobj = call_aws_lambda(request.json['maxi'], request.json['loops']   ,int( request.json['times']) ,request.json['mb']  , request.json['conc']  , request.json['l4'] ) 
+
+    if returnobj == 403  :
+        return jsonify( {'response' :returnobj}), 403
+    else :
+        return jsonify( {'response' :returnobj}), 201
+
+
+from flask import render_template
+
+@lambdawebapp.route('/k1/')
+
+def k1():
+    return render_template('k1.html')
+
+
+
+if __name__ == '__main__':
+    lambdawebapp.run(debug=True,host='0.0.0.0')
+
+
+
+
+
     
     
 
