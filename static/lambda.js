@@ -271,7 +271,7 @@ for (var i=0 ; i< cols.length ; i++ ){
 
 } 
     
- var charts =[] ;
+ var charts =[null, null, null ,null] ;
 
      for (var i = 0 ;  i < cid.length  ; i++  )  {
                     		 charts[i] = c3.generate({
@@ -303,7 +303,7 @@ function dataVisualize(labels, datasets, chartmode, chartID) {
     for  (var i = 0 ; i < cdom.length ; i++){
           if (document.getElementById(cdom[i]) !=null )
           {
-              document.getElementById(cdom[i]).remove();
+              //document.getElementById(cdom[i]).remove();
           }
     }
     var c = document.createElement('canvas')
