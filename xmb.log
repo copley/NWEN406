@@ -1,1 +1,2 @@
- lambda address  : https://mx8xkhlbp7.execute-api.us-east-1.amazonaws.com/prod/key-1024?max=10&loops=1
+ lambda address  : https://mx8xkhlbp7.execute-api.us-east-1.amazonaws.com/prod/key-128?max=10&loops=1
+[{u'durationSeconds': 0.0155069828033, u'max': 10, u'loops': 1}, {u'durationSeconds': 6.48498535156e-05, u'max': 10, u'loops': 1}, {u'durationSeconds': 0.000226974487305, u'max': 10, u'loops': 1}, {u'durationSeconds': 6.60419464111e-05, u'max': 10, u'loops': 1}]

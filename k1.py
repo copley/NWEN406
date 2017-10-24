@@ -34,7 +34,7 @@ def Concurrent_call  (times, rs ,apikey  , arrr ,fs,  l) :
 
     for  i  in range  (times )  :
         responses  = return_a[i].result()
-     
+        print (responses.status_code)
         if responses.status_code != 200 :
         
             return responses.status_code
@@ -74,8 +74,8 @@ from flask import request
 def k1post():
   
     returnobj = call_aws_lambda(request.json['maxi'], request.json['loops']   ,int( request.json['times']) ,request.json['mb']  , request.json['conc']  , request.json['l4'] ) 
-
-    if returnobj == 403  :
+    print (returnobj)
+    if returnobj == []  :
         return jsonify( {'response' :returnobj}), 403
     else :
         return jsonify( {'response' :returnobj}), 201
