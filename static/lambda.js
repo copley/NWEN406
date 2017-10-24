@@ -276,14 +276,18 @@ for (var i=0 ; i< cols.length ; i++ ){
        cols[i].unshift(lablse[i]);
 charts.push(null) ;
 } 
-    
 
+var cls  = [xxx] ; 
+for (var i=0 ; i< cols.length ; i++ ){
+       
+cls.push( cols[i]) ;
+} 
 
  
                     		 charts[i] = c3.generate({
             bindto: '#'+ cid,
             data: {
-             x: 'x',  columns:[  xxx , cols]
+             x: 'x',  columns: cls // [  xxx , cols]
             },
     axis: {
         x: {
