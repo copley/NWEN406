@@ -5,6 +5,7 @@ from flask import Flask,jsonify
 import requests
 
 from requests_futures.sessions import FuturesSession
+
 log = open("xmb.log", "w")
 def prime_number_lambda(maxi, loops , times, mb  , isConcurrent , last4  ) :
     headers = {
@@ -22,7 +23,7 @@ def prime_number_lambda(maxi, loops , times, mb  , isConcurrent , last4  ) :
 
     print('request lambda url  : {0}'.format(rst), file = log)
     if  isConcurrent == "off":
-        print (" non Concurrent  mode")
+        #print (" nonConcurrentmode")
         for i in range (times) :
             #rt = requests.get(rst).json()
             resp = requests.get(rst, headers = headers)
@@ -38,7 +39,7 @@ def prime_number_lambda(maxi, loops , times, mb  , isConcurrent , last4  ) :
         return re_arr
 
     else :
-        print (" Concurrent  mode")
+        #print (" Concurrentmode")
         sgl = []
         for i in range (times) :
             ##sgl.append(session.get(rst))
@@ -66,10 +67,13 @@ def getMB():  #Varying the Lambda memory settings: 128MB, 256MB, 512MB and 1024M
     print ("getMX")
     off = []
     on = []
+    print (" nonConcurrentmode")
     for i in  [128,256,512,1024] :
-        off.append (prime_number_lambda(100, 1, 10 ,i   ,"off"  , "Vvuc" ))
-        on.append (prime_number_lambda(100, 1, 10 ,i ,"on"  , "Vvuc" ))
-
+        off.append (prime_number_lambda(10000, 1, 100 ,i   ,"off"  , "Vvuc" ))
+        # on.append (prime_number_lambda(100, 1, 10 ,i ,"on"  , "Vvuc" ))
+    print (" Concurrentmode")
+    for i in  [128,256,512,1024] :
+        on.append (prime_number_lambda(10000, 1, 100 ,i ,"on"  , "Vvuc" ))
     return   jsonify({'task':[off, on ]})   #calling_lamdba(100, 1 , 20)
 
 
@@ -78,15 +82,16 @@ def getXLoops():   #Varying the time taken to do a computation while holding mem
     print ("xloops")
     off = []
     on = []
+    print (" nonConcurrentmode")
     for j in [128,256,512,1024] :
         for i in  [2,3,4,5]    :
-            off.append (prime_number_lambda(100, i, 10 ,j   ,"off"  , "Vvuc" ))  #(maxi, loops , times, mb   , isConcurrent , last4  )
+            off.append (prime_number_lambda(10000, i, 100 ,j   ,"off"  , "Vvuc" ))  #(maxi, loops , times, mb   , isConcurrent , last4  )
             #on.append (prime_number_lambda(100, i, 10 ,j ,"on"  , "Vvuc" ))
-
+    print (" Concurrentmode")
     for j in [128,256,512,1024] :
         for i in  [2,3,4,5]    :
             #off.append (prime_number_lambda(100, i, 10 ,j   ,"off"  , "Vvuc" ))  #(maxi, loops , times, mb   , isConcurrent , last4  )
-            on.append (prime_number_lambda(100, i,10 ,j ,"on"  , "Vvuc" ))
+            on.append (prime_number_lambda(10000, i,100 ,j ,"on"  , "Vvuc" ))
 
     return   jsonify({'task':[off, on ]})   #calling_lamdba(100, 1 , 20)
 
