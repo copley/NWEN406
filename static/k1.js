@@ -42,7 +42,7 @@ for (var i=0 ; i< duration.length ; i++ ){
                     bindto: '#chart',
                     data: {
                       columns: [
-                           cols  
+                           cols  ,cols
                       
                       ]
                     }

@@ -30,7 +30,7 @@ def Concurrent_call  (times, rs ,apikey  , arrr ,fs,  l) :
     return_a = []
     for i in range (times) :
       
-        return_a.append(fs.get(rs,headers = {'x-api-key': "rDGgZtlFRY7CaGQy7Qvb21R0VxICImme5FiJ"+ apikey}))
+        return_a.append(fs.get(rs,headers = {'x-api-key': "8yWy3YfRRs1n2U08IVSPv5ntrouJ7cd61gJKaJ"+ apikey}))
 
     for  i  in range  (times )  :
         responses  = return_a[i].result()
@@ -55,7 +55,7 @@ def call_aws_lambda(maxi, loops , times, mb  , concurrent_MODE , apikey  ) :
 
     logf = open("xmb.log", "w")
 
-    request_string  =  'https://nx106w1z0e.execute-api.us-west-2.amazonaws.com/prod/'+ str(mb) +'mb'+ '?max='+str(maxi)+'&loops='+ str(loops)
+    request_string  =  'https://mx8xkhlbp7.execute-api.us-east-1.amazonaws.com/prod/key-'+ str(mb) +'mb'+ '?max='+str(maxi)+'&loops='+ str(loops)
 
     print(' lambda address  : {0}'.format(request_string), file = logf)
     if  concurrent_MODE == "on":
