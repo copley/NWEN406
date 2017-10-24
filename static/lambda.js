@@ -343,16 +343,9 @@ function dataVisualize(labels, datasets, chartmode, chartID) {
         r: 1.196729426860767
     }]
     var chart = new Chart(ctx, {
-        // The type of chart we want to create
+  
         type: chartmode,
-        // The data for our dataset
-        //  cost  :  [10.0066559315*0.00000208,3.33517885208*0.00000417,1.55926299095*0.00000834,0.717894077301*0.00001667 ]   [0.000020813844337519998,0.000013907695813173598,0.000013004253344522999,0.00001196729426860767]
-        // duration  :  [10.0066559315,3.33517885208,1.55926299095,0.717894077301 ]
-        //   MB    :  [128, 256, 512 ,1024]
-
-        // "Lambda memory in MB (X axis) vs duration in seconds (Y axis) ",
-        //  label: "Lambda memory in MB (X axis) vs cost in dollars (Y axis) ",
-        //  label: "Lambda cost in dollars (X axis) vs duration in seconds (Y axis) ",
+     
         data: {
             labels: labels,
             datasets: datasets
