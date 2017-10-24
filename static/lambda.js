@@ -86,7 +86,7 @@ function offon(getMode, chartIDs) {
             if (this.status == 200) {
                 var datas = JSON.parse(this.responseText).task;
                 if (getMode == 'getMB') { //Varying the Lambda memory settings: 128MB, 256MB, 512MB and 1024MB.
-                    var meams=[] , medians=[], sts=[] , cmeams=[] , cmedians=[], csts=[] ;
+                    var meams=[] , medians=[], sts=[] , cmeams=[] , cmedians=[], csts=[] ; var charts =[] ;
                     for (var i=0 ; i < 4 ; i++) {
                         meams.push(stat(datas[0][i], 0));
                         medians.push (stat(datas[0][i], 1));
@@ -112,7 +112,7 @@ function offon(getMode, chartIDs) {
                         }
                     ];
                     dataVisualize(Xaxis, datasets, 'line', chartIDs[0]);
-                    cthreejs  (  [meams   , medians  , sts ]  ,    ["mean stat for non concurrent" , "median stat for non concurrent" , "sd stat for non concurrent"  ]   ,   ["chart2"]  )  ;  
+                    cthreejs  (  [meams   , medians  , sts ]  ,    ["mean stat for non concurrent" , "median stat for non concurrent" , "sd stat for non concurrent"  ]   ,   ["chart2"] ,  charts , ['x', '128mb', '256mb' , '512mb' , '1024mb'] )  ;  
                     
                 
                     var datasetsc = [{
@@ -132,7 +132,7 @@ function offon(getMode, chartIDs) {
                         }
                     ];
                     dataVisualize(Xaxis, datasetsc, 'line', chartIDs[1]);
-                    cthreejs  (  [cmeams   , cmedians  , csts ]  ,    ["mean stat for  concurrent" , "median stat for  concurrent" , "sd stat for  concurrent"  ]   ,   ["chart3"]  )  ;  
+                    cthreejs  (  [cmeams   , cmedians  , csts ]  ,    ["mean stat for  concurrent" , "median stat for  concurrent" , "sd stat for  concurrent"  ]   ,   ["chart3"] ,  charts , ['x', '128mb', '256mb' , '512mb' , '1024mb']   )  ;  
                     
                     
                     
@@ -199,7 +199,7 @@ function offon(getMode, chartIDs) {
                         dataVisualize(Xaxis, dt, 'line', chartIDs[i]);
                     cthreejs  (  [ meams , medians ,sts ,  cmeams   , cmedians  , csts ]  ,  
                     ["mean stat for no concurrent"  + la[i] , "median stat for no concurrent" + la[i] , "sd stat for no concurrent"   + la[i]  ,
-                    "mean stat for  concurrent"  + la[i] , "median stat for  concurrent" + la[i] , "sd stat for  concurrent"   + la[i]]   , cids[i]   , charts   )  ;  
+                    "mean stat for  concurrent"  + la[i] , "median stat for  concurrent" + la[i] , "sd stat for  concurrent"   + la[i]]   , cids[i]   , charts  ,   ['x', '2x', '3x' , '4x' , '5x']  )  ;  
                     }
                 }else {
                         var duration = [] ,costs = [] ;
@@ -228,11 +228,16 @@ for (var i=0 ; i< duration.length ; i++ ){
 }
 			var chart = c3.generate({
     bindto: '#chart1',
-    data: {
-      columns: [
+    data: {   x:'x' ,
+      columns: [   ['x', '128mb', '256mb' , '512mb' , '1024mb'] ,
            cols  // ['Lambda memory in MB (X axis) vs duration in seconds (Y axis)', 30, 200, 100, 400, 150, 250],
          , cols2    //     ['Lambda memory in MB (X axis) vs cost in dollars per 100000 requests(Y axis)', 50, 20, 10, 40, 15, 25]
       ]
+    },
+    axis: {
+        x: {
+            type: 'categorized'
+        }
     }
 	});
                         dataVisualize(Xaxis, datasets, 'line', "c1");
@@ -265,7 +270,7 @@ for (var i=0 ; i< duration.length ; i++ ){
 
 
 
-function cthreejs (cols ,  lablse ,   cid  , charts ){
+function cthreejs (cols ,  lablse ,   cid  , charts ,xxx ){
     
 for (var i=0 ; i< cols.length ; i++ ){
        cols[i].unshift(lablse[i]);
@@ -278,8 +283,13 @@ charts.push(null) ;
                     		 charts[i] = c3.generate({
             bindto: '#'+ cid,
             data: {
-              columns: cols
-            }
+             x: 'x',  columns:[  xxx , cols]
+            },
+    axis: {
+        x: {
+            type: 'categorized'
+        }
+    }
         	});
          
      

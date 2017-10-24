@@ -5,7 +5,7 @@ from flask import Flask,jsonify
 import requests
 
 from requests_futures.sessions import FuturesSession
-
+log = open("xmb.log", "w")
 def prime_number_lambda(maxi, loops , times, mb  , isConcurrent , last4  ) :
     headers = {
         'x-api-key': "rDGgZtlFRY7CaGQy7Qvb21R0VxICImme5FiJ"+last4,   #Vvuc
@@ -14,7 +14,7 @@ def prime_number_lambda(maxi, loops , times, mb  , isConcurrent , last4  ) :
     session = FuturesSession(max_workers=100)
 
 
-    log = open("xmb.log", "w")
+  #  log = open("xmb.log", "w")
 
 
     rst =  'https://nx106w1z0e.execute-api.us-west-2.amazonaws.com/prod/'+ str(mb) +'mb'+ '?max='+str(maxi)+'&loops='+ str(loops)
@@ -63,6 +63,7 @@ app = Flask(__name__)
 
 @app.route('/getMB',methods= ['GET'])
 def getMB():  #Varying the Lambda memory settings: 128MB, 256MB, 512MB and 1024MB.
+    print ("getMX")
     off = []
     on = []
     for i in  [128,256,512,1024] :
@@ -74,6 +75,7 @@ def getMB():  #Varying the Lambda memory settings: 128MB, 256MB, 512MB and 1024M
 
 @app.route('/getXLoops',methods= ['GET'])
 def getXLoops():   #Varying the time taken to do a computation while holding memory static: 2x, 3x, 4x and 5x.
+    print ("xloops")
     off = []
     on = []
     for j in [128,256,512,1024] :
@@ -91,6 +93,7 @@ def getXLoops():   #Varying the time taken to do a computation while holding mem
 
 @app.route('/getSatisfactory',methods= ['GET'])
 def getSatisfactory():  # cost and performance scaled linearly with memory
+    print ("getSatifactory log") 
     off = []
     for i in  [128,256,512,1024] :
         off.append (prime_number_lambda(1000000, 1, 1 , i  ,"off"  , "Vvuc" ))
