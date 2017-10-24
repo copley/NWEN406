@@ -1,2 +1,1 @@
-request lambda url  : https://nx106w1z0e.execute-api.us-west-2.amazonaws.com/prod/1024mb?max=1000000&loops=1
-[{u'durationSeconds': 1.14326405525, u'max': 1000000, u'loops': 1, u'MB': 1024}]
+ lambda address  : https://mx8xkhlbp7.execute-api.us-east-1.amazonaws.com/prod/key-1024?max=10&loops=1

@@ -32,7 +32,7 @@ form.addEventListener('submit', function(ev) {
             var cols =[ 'Lambda live performanc'] ;
 
 for (var i=0 ; i< duration.length ; i++ ){
-	cols.push (duration[i]) ;
+	cols.push (duration[i]*1000000) ;
 
 
 }
@@ -41,10 +41,9 @@ for (var i=0 ; i< duration.length ; i++ ){
             	var chart = c3.generate({
                     bindto: '#chart',
                     data: {
-                      columns: [
-                           cols  ,cols
+                      columns:[cols , ["mb", 128,256,512,1024]]
                       
-                      ]
+                     
                     }
                 	});
                             
