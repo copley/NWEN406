@@ -129,6 +129,17 @@ function offon(getMode, chartIDs) {
                         }
                     ];
                     dataVisualize(Xaxis, datasetsc, 'line', chartIDs[1]);
+                    cthreejs  (  [cmeams   , cmedians  , csts ]  ,    ["mean stat for non concurrent" , "median stat for non concurrent" , "sd stat for non concurrent"  ]   ,   ["chart1"]  ) 
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
                 } else if(getMode == 'getXLoops'){ // Varying the time taken to do a computation while holding memory static: 2x, 3x, 4x and 5x.
                     var la = ["128MB", "256MB", "512MB", "1024MB"] ;
                     var k = 0   ;
@@ -240,6 +251,42 @@ for (var i=0 ; i< duration.length ; i++ ){
     xhttp.send();
 
 }
+
+
+
+
+
+
+
+function cthreejs (cols ,  lablse ,   cid ){
+    
+for (var i=0 ; i< cols.length ; i++ ){
+       cols[i].unshift(lablse[i]);
+
+} 
+    
+
+
+     for (var i = 0 ;  i < cid.length  ; i++  )  {
+                    		var chart = c3.generate({
+            bindto: '#'+ cid[i],
+            data: {
+              columns: cols
+            }
+        	});
+         
+     }
+
+	
+    
+    
+}
+
+
+
+
+
+
 
 
 function dataVisualize(labels, datasets, chartmode, chartID) {
