@@ -112,6 +112,9 @@ function offon(getMode, chartIDs) {
                         }
                     ];
                     dataVisualize(Xaxis, datasets, 'line', chartIDs[0]);
+                    cthreejs  (  [meams   , medians  , sts ]  ,    ["mean stat for non concurrent" , "median stat for non concurrent" , "sd stat for non concurrent"  ]   ,   ["chart2"]  )  ;  
+                    
+                
                     var datasetsc = [{
                             label: "meams-concurr",
                             data: cmeams,
@@ -129,7 +132,7 @@ function offon(getMode, chartIDs) {
                         }
                     ];
                     dataVisualize(Xaxis, datasetsc, 'line', chartIDs[1]);
-                    cthreejs  (  [cmeams   , cmedians  , csts ]  ,    ["mean stat for non concurrent" , "median stat for non concurrent" , "sd stat for non concurrent"  ]   ,   ["chart1"]  ) 
+                    cthreejs  (  [cmeams   , cmedians  , csts ]  ,    ["mean stat for  concurrent" , "median stat for  concurrent" , "sd stat for  concurrent"  ]   ,   ["chart3"]  )  ;  
                     
                     
                     
@@ -193,6 +196,7 @@ function offon(getMode, chartIDs) {
                             }
                         ]
                         dataVisualize(Xaxis, dt, 'line', chartIDs[i]);
+                    cthreejs  (  [ meams , medians ,sts ,  cmeams   , cmedians  , csts ]  ,    ["mean stat for no concurrent"  + la[i] , "median stat for no concurrent" + la[i] , "sd stat for no concurrent"   + la[i]]   , "mean stat for  concurrent"  + la[i] , "median stat for  concurrent" + la[i] , "sd stat for  concurrent"   + la[i]]   ,  [ "chart4","chart5","chart6" ,"chart7"]  )  ;  
                     }
                 }else {
                         var duration = [] ,costs = [] ;
@@ -220,7 +224,7 @@ for (var i=0 ; i< duration.length ; i++ ){
 
 }
 			var chart = c3.generate({
-    bindto: '#chart',
+    bindto: '#chart1',
     data: {
       columns: [
            cols  // ['Lambda memory in MB (X axis) vs duration in seconds (Y axis)', 30, 200, 100, 400, 150, 250],
@@ -231,7 +235,7 @@ for (var i=0 ; i< duration.length ; i++ ){
                         dataVisualize(Xaxis, datasets, 'line', "c1");
                 }
             } else {
-                alert("[HTTP " + this.status + " Forbidden] due to wrong API key and this unauthorized access incident had been reported to AWS IP address backlist server.")
+                alert("wrong API key ! please contact system admin via beaconwarden@gmail.com ")
             }
         }
     };
