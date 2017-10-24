@@ -265,19 +265,19 @@ for (var i=0 ; i< duration.length ; i++ ){
 
 
 function cthreejs (cols ,  lablse ,   cid ){
-    
+     var charts =[] ;
 for (var i=0 ; i< cols.length ; i++ ){
        cols[i].unshift(lablse[i]);
-
+charts.push(null) ;
 } 
     
- var charts =[null, null, null ,null] ;
+
 
      for (var i = 0 ;  i < cid.length  ; i++  )  {
                     		 charts[i] = c3.generate({
             bindto: '#'+ cid[i],
             data: {
-              columns: cols
+              columns: cols[i]
             }
         	});
          
