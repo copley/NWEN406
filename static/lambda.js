@@ -196,7 +196,9 @@ function offon(getMode, chartIDs) {
                             }
                         ]
                         dataVisualize(Xaxis, dt, 'line', chartIDs[i]);
-                    cthreejs  (  [ meams , medians ,sts ,  cmeams   , cmedians  , csts ]  ,    ["mean stat for no concurrent"  + la[i] , "median stat for no concurrent" + la[i] , "sd stat for no concurrent"   + la[i]]   , "mean stat for  concurrent"  + la[i] , "median stat for  concurrent" + la[i] , "sd stat for  concurrent"   + la[i]]   ,  [ "chart4","chart5","chart6" ,"chart7"]  )  ;  
+                    cthreejs  (  [ meams , medians ,sts ,  cmeams   , cmedians  , csts ]  ,  
+                    ["mean stat for no concurrent"  + la[i] , "median stat for no concurrent" + la[i] , "sd stat for no concurrent"   + la[i]  ,
+                    "mean stat for  concurrent"  + la[i] , "median stat for  concurrent" + la[i] , "sd stat for  concurrent"   + la[i]]   ,  [ "chart4","chart5","chart6" ,"chart7"]  )  ;  
                     }
                 }else {
                         var duration = [] ,costs = [] ;
