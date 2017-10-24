@@ -146,6 +146,7 @@ function offon(getMode, chartIDs) {
                 } else if(getMode == 'getXLoops'){ // Varying the time taken to do a computation while holding memory static: 2x, 3x, 4x and 5x.
                     var la = ["128MB", "256MB", "512MB", "1024MB"] ;
                     var k = 0   ;
+                    var cids  =   [ "chart4","chart5","chart6" ,"chart7"]   ;  var charts =[] ;
                     for (var i = 0; i < 4; i++) {
                         var meams = [],
                             medians = [],
@@ -198,7 +199,7 @@ function offon(getMode, chartIDs) {
                         dataVisualize(Xaxis, dt, 'line', chartIDs[i]);
                     cthreejs  (  [ meams , medians ,sts ,  cmeams   , cmedians  , csts ]  ,  
                     ["mean stat for no concurrent"  + la[i] , "median stat for no concurrent" + la[i] , "sd stat for no concurrent"   + la[i]  ,
-                    "mean stat for  concurrent"  + la[i] , "median stat for  concurrent" + la[i] , "sd stat for  concurrent"   + la[i]]   ,  [ "chart4","chart5","chart6" ,"chart7"]  )  ;  
+                    "mean stat for  concurrent"  + la[i] , "median stat for  concurrent" + la[i] , "sd stat for  concurrent"   + la[i]]   , cids[i]   , charts   )  ;  
                     }
                 }else {
                         var duration = [] ,costs = [] ;
@@ -264,8 +265,8 @@ for (var i=0 ; i< duration.length ; i++ ){
 
 
 
-function cthreejs (cols ,  lablse ,   cid ){
-     var charts =[] ;
+function cthreejs (cols ,  lablse ,   cid  , charts ){
+    
 for (var i=0 ; i< cols.length ; i++ ){
        cols[i].unshift(lablse[i]);
 charts.push(null) ;
@@ -273,15 +274,15 @@ charts.push(null) ;
     
 
 
-     for (var i = 0 ;  i < cid.length  ; i++  )  {
+ 
                     		 charts[i] = c3.generate({
-            bindto: '#'+ cid[i],
+            bindto: '#'+ cid,
             data: {
-              columns: cols[i]
+              columns: cols
             }
         	});
          
-     }
+     
 
 	
     
