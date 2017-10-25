@@ -18,16 +18,8 @@ form.addEventListener('submit', function(ev) {
             for (var i = 0; i < jsons.length; i++) {
                 duration.push(jsons[i].durationSeconds);
             }
-            var labels = [];
-            for (var i = 0; i < times; i++) {
-                labels.push(i + "th");
-            }
-            var datasets = [{
-                    label: "live dynamic time series Lamda performance ",
-                    data: duration,
-                    borderColor: 'rgb(25, 100, 166)'
-                }
-            ];
+       
+         
             
             var cols =[ 'Lambda live performance'] ;
    var du = ['duration'] ,costs = ['cost'] ;
