@@ -36,3 +36,20 @@ Copyright © Victoria University of Wellington, New Zealand
 rm -r mydir
 
 https://groups.google.com/forum/#!topic/golang-nuts/qTk0QG00lTI
+
+
+
+
+-git checkout -b adrian
+ -git push --set-upstream origin adrian
+ +##### git checkout -b bb
+ +##### git push --set-upstream origin bb
+ +
+ +##### git add .
+ +##### git commit -m 'msg'
+ +##### git push
+ +##### git checkout master
+ +##### git merge adrian
+ +##### git push
+ 
+ git clone -b my-branch https://git@github.com/username/myproject.git
