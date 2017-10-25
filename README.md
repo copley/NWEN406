@@ -11,8 +11,10 @@
 ### 4.  sudo pip install flask
 ### 5.  sudo pip install requests-futures
 ### 6.  sudo yum install git 
-## Run the Web APP :   python Lambda.py
-
+### 6.  sudo yum install golang
+### 7.  go get -u github.com/gorilla/mux  
+## Run the Web APP :   python Lambda.py    http://52.39.107.48:5000/lambda/
+## Run the Web APP :   go run 406.go    http://52.39.107.48:8000/edit/
 ## requiremnt :  
 ## reference : https://blog.miguelgrinberg.com/post/designing-a-restful-api-with-python-and-flask
 ## http://www.chartjs.org/docs/latest/getting-started/usage.html
