@@ -203,7 +203,7 @@ function offon(getMode, chartIDs) {
                     }
                 }else {
                         var duration = [] ,costs = [] ;
-                        var price = [0.00000208,0.00000417 , 0.00000834 ,  0.00001667 ] ;
+                        var price = [0.00000208,0.00001667 , 0.00000417 ,  0.00000843 ] ;
                         for (var i = 0; i < datas[0].length; i++) {
                             duration.push(datas[0][i][0].durationSeconds);
                             costs.push(datas[0][i][0].durationSeconds* price[i]* 100000)
