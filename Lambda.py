@@ -100,8 +100,8 @@ def getXLoops():   #Varying the time taken to do a computation while holding mem
 def getSatisfactory():  # cost and performance scaled linearly with memory
     print ("getSatifactory log", file = log) 
     off = []
-    for i in  [128,256,512,1024] :
-        off.append (prime_number_lambda(1000000, 1, 1 , i  ,"off"  , "1t" ))
+    for i in  [1024 ,  256 , 512, 128] :
+        off.append (prime_number_lambda(10, 1, 1 , i  ,"off"  , "1t" ))
 
     return   jsonify({'task':[off]})   #calling_lamdba(100, 1 , 20)
 

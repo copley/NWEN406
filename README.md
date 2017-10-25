@@ -7,9 +7,10 @@
 ## setup env:
 ### 1.  launch Amazon Linux AMI 2017.09.0 (HVM) in EC2
 ### 2.  chmod 400 pem.pem
-### 3.  ssh -i nwen406.pem ec2-user@ec2-52-10-250-199.us-west-2.compute.amazonaws.com
+### 3.  ssh -i nwen406.pem ec2-user@ec2-52-39-107-48.us-west-2.compute.amazonaws.com
 ### 4.  sudo pip install flask
-### 5. pip install requests-futures
+### 5.  sudo pip install requests-futures
+### 6.  sudo yum install git 
 ## Run the Web APP :   python Lambda.py
 
 ## requiremnt :  
