@@ -7,7 +7,7 @@
 ## setup env:
 ### 1.  launch Amazon Linux AMI 2017.09.0 (HVM) in EC2
 ### 2.  chmod 400 pem.pem
-### 3.  ssh -i nwen406.pem ec2-user@ec2-52-39-107-48.us-west-2.compute.amazonaws.com
+### 3.  ssh -i nwen406.pem ec2-user@ec2-35-163-140-165.us-west-2.compute.amazonaws.com
 ### 4.  sudo pip install flask
 ### 5.  sudo pip install requests-futures
 ### 6.  sudo yum install git 
@@ -54,4 +54,4 @@ https://groups.google.com/forum/#!topic/golang-nuts/qTk0QG00lTI
  +##### git merge adrian
  +##### git push
  
- git clone -b my-branch https://git@github.com/username/myproject.git
+ git clone -b  https://github.com/AdrianNg/NWEN406.git
