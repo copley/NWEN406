@@ -56,7 +56,7 @@ function stat(D, ps ,  s) {
     var durationSeconds_arr = [];
     var arr = arr_stat () ;
     for (var i = 0; i < D.length; i++) {
-        durationSeconds_arr.push(D[i].durationSeconds*ps);
+        durationSeconds_arr.push(D[i].durationSeconds*ps*1000000);
     }
     var a = [arr.mean(durationSeconds_arr), arr.median(durationSeconds_arr), arr.standardDeviation(durationSeconds_arr)];
     return a[s];
