@@ -31,12 +31,41 @@ li {
 <p>  Python flask Web APP calling the AWS prime number lambda live demo .</p>
 
 
+<div id="chart1"></div>
+<div id="chart2"></div>
+<div id="chart3"></div>
+<div id="chart4"></div>
+<div id="chart5"></div>
+<div id="chart6"></div>
+<div id="chart7"></div>
+<form enctype="multipart/form-data" method="post" name="fileinfo">
+  <ul>
+    <li > please input last 4 chars of AWS API key  : <input style="border : 5px solid #800080" type="text" id="l4" value="Vvuc"></li>
+    <li>Max  : <input type="number" id="maxi" value="10"   min="10" max="1000"></li>
+    <li>loops : <input type="number" id="loop" value="1"  min="1" max="5"></li>
+    <li>times : <input type="number" id="t" value="4"  min="1" max="100"></li>
+    <li>Concurrent mode :<select id="concurrent"> <option value="on"> on</option> <option value="off"> off</option>   </select></li>
+    <li>mb :<select id="mb"><option value="128"> 128MB</option><option value="256"> 256MB</option><option value="512"> 512MB</option><option value="1024"> 1024MB</option></select></li>
+    <li>data visualisation mode :
+      <select id="chartmode">
+        <option value="line"> line</option>
+        <option value="bar"> bar</option>
+        <option value="radar"> radar</option>
+        <option value="doughnut"> doughnut</option>
+        <option value="pie"> pie</option>
+        <option value="polarArea"> polarArea</option>
+        <option value="bubble"> bubble</option>
+    </select></li>
+  </ul>
 
-
+  <input style="border : 2px solid blue" type="submit" value="update the parameteres and Invoke demo prime number lambda demo " />
+</form>
 
 <ol>
   <li>Satisfactory "C-/C":>>>>>>click<button class="button" type="button" onclick="offon('getSatisfactory', ['c1'] )">find that cost and performance scaled linearly with memory</button></li>
-
+  <li>Completion "C+/B":>>>>>>click<button class="button" type="button" onclick="offon('getMB', ['c2', 'c3'] )">Varying the Lambda memory settings: 128MB, 256MB, 512MB and 1024MB. </button></li>
+  <li>Completion "B+/A-":>>>>>click<button class="button" type="button" onclick="offon('getXLoops' , ['c4', 'c5' ,'c6' ,'c7'])">Varying the time taken to do a computation while holding memory static: 2x, 3x, 4x and 5x.</button></li>
+  <li>Challenge "A":>>>>>> try to modify the values in the <code style="color: #800080">purple</code> text box and click the <code style="color: blue">blue</code> button to verify the authorisation is implemented</li>
 </ol>
 
 

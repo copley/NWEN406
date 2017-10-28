@@ -85,54 +85,62 @@ function offon(getMode, chartIDs) {
         if (this.readyState == 4) {
             if (this.status == 200) {
                 var datas = JSON.parse(this.responseText).task;
+                  var price = [0.000000208   , 0.000000417   , 0.000000834 , 0.000001667] ;
                 if (getMode == 'getMB') { //Varying the Lambda memory settings: 128MB, 256MB, 512MB and 1024MB.
+                  var duration = [] ,costs = [] ;
+                      
+                      //  for (var i = 0; i < datas[0].length; i++) {
+                           // duration.push(datas[0][i][0].durationSeconds);
+                          //  costs.push(datas[0][i][0].durationSeconds* price[i]* 100000)
+                        //}
+                
                     var meams=[] , medians=[], sts=[] , cmeams=[] , cmedians=[], csts=[] ; var charts =[] ;
                     for (var i=0 ; i < 4 ; i++) {
-                        meams.push(stat(datas[0][i], 0));
-                        medians.push (stat(datas[0][i], 1));
-                        sts.push (stat(datas[0][i], 2));
-                        cmeams.push(stat(datas[1][i], 0));
-                        cmedians.push (stat(datas[1][i], 1));
-                        csts.push (stat(datas[1][i], 2));
+                        meams.push(stat(datas[0][i]*price[i], 0));
+                        medians.push (stat(datas[0][i]*price[i], 1));
+                        sts.push (stat(datas[0][i]*price[i], 2));
+                        cmeams.push(stat(datas[1][i]*price[i], 0));
+                        cmedians.push (stat(datas[1][i]*price[i], 1));
+                        csts.push (stat(datas[1][i]*price[i], 2));
                     }
                     var datasets = [{
-                            label: "meams-",
+                            label: "cost meams-",
                             data: meams,
                             borderColor: 'rgb(25, 100, 166)'
                         },
                         {
-                            label: "medians-",
+                            label: "cost medians-",
                             data: medians,
                             borderColor: 'rgb(37, 209, 24)'
                         },
                         {
-                            label: "standard Deviation-",
+                            label: "cost standard Deviation-",
                             data: sts,
                             borderColor: 'rgb(37, 1, 24)'
                         }
                     ];
                     dataVisualize(Xaxis, datasets, 'line', chartIDs[0]);
-                    cthreejs  (  [meams   , medians  , sts ]  ,    ["mean stat for non concurrent" , "median stat for non concurrent" , "sd stat for non concurrent"  ]   ,   ["chart2"] ,  charts , ['x', '128mb', '256mb' , '512mb' , '1024mb'] )  ;  
+                    cthreejs  (  [meams   , medians  , sts ]  ,    ["cost mean stat for non concurrent" , " cost median stat for non concurrent" , "cost sd stat for non concurrent"  ]   ,   ["chart2"] ,  charts , ['x', '128mb', '256mb' , '512mb' , '1024mb'] )  ;  
                     
                 
                     var datasetsc = [{
-                            label: "meams-concurr",
+                            label: "cost meams-concurr",
                             data: cmeams,
                             borderColor: 'rgb(25, 100, 166)'
                         },
                         {
-                            label: "medians-concurr",
+                            label: "cost medians-concurr",
                             data: cmedians,
                             borderColor: 'rgb(37, 209, 24)'
                         },
                         {
-                            label: "standard Deviation-concurr",
+                            label: "cost standard Deviation-concurr",
                             data: csts,
                             borderColor: 'rgb(37, 1, 24)'
                         }
                     ];
                     dataVisualize(Xaxis, datasetsc, 'line', chartIDs[1]);
-                    cthreejs  (  [cmeams   , cmedians  , csts ]  ,    ["mean stat for  concurrent" , "median stat for  concurrent" , "sd stat for  concurrent"  ]   ,   ["chart3"] ,  charts , ['x', '128mb', '256mb' , '512mb' , '1024mb']   )  ;  
+                    cthreejs  (  [cmeams   , cmedians  , csts ]  ,    ["cost mean stat for  concurrent" , "cost median stat for  concurrent" , "cost sd stat for  concurrent"  ]   ,   ["chart3"] ,  charts , ['x', '128mb', '256mb' , '512mb' , '1024mb']   )  ;  
                     
                     
                     
@@ -155,55 +163,55 @@ function offon(getMode, chartIDs) {
                             cmedians = [],
                             csts = [];
                         for (var j = 0; j < 4; j++) {
-                            meams.push(stat(datas[0][k], 0));
-                            medians.push(stat(datas[0][k], 1));
-                            sts.push(stat(datas[0][k], 2));
-                            cmeams.push(stat(datas[1][k], 0));
-                            cmedians.push(stat(datas[1][k], 1));
-                            csts.push(stat(datas[1][k], 2));
+                            meams.push(stat(datas[0][k]*price[i], 0));
+                            medians.push(stat(datas[0][k]*price[i], 1));
+                            sts.push(stat(datas[0][k]*price[i], 2));
+                            cmeams.push(stat(datas[1][k]*price[i], 0));
+                            cmedians.push(stat(datas[1][k]*price[i], 1));
+                            csts.push(stat(datas[1][k]*price[i], 2));
                             ++k;
                         }
 
                         console.log (k);
                         var dt = [{
-                                label: "meams-" + la[i],
+                                label: "cost meams-" + la[i],
                                 data: meams,
                                 borderColor: 'rgb(25, 100, 166)'
                             },
                             {
-                                label: "medians-" + la[i],
+                                label: "cost medians-" + la[i],
                                 data: medians,
                                 borderColor: 'rgb(37, 209, 24)'
                             },
                             {
-                                label: "standard Deviation-" + la[i],
+                                label: "cost standard Deviation-" + la[i],
                                 data: sts,
                                 borderColor: 'rgb(37, 1, 24)'
                             },
                             {
-                                label: "concu-meams-" + la[i],
+                                label: "cost concu-meams-" + la[i],
                                 data: cmeams,
                                 borderColor: 'rgb(255, 80, 80)'
                             },
                             {
-                                label: "concu-medians-" + la[i],
+                                label: "cost concu-medians-" + la[i],
                                 data: cmedians,
                                 borderColor: 'rgb(255, 255, 102)'
                             },
                             {
-                                label: "concu-standard Deviation-" + la[i],
+                                label: "cost concu-standard Deviation-" + la[i],
                                 data: csts,
                                 borderColor: 'rgb(230, 230, 230)'
                             }
                         ]
                         dataVisualize(Xaxis, dt, 'line', chartIDs[i]);
                     cthreejs  (  [ meams , medians ,sts ,  cmeams   , cmedians  , csts ]  ,  
-                    ["mean stat for no concurrent"  + la[i] , "median stat for no concurrent" + la[i] , "sd stat for no concurrent"   + la[i]  ,
-                    "mean stat for  concurrent"  + la[i] , "median stat for  concurrent" + la[i] , "sd stat for  concurrent"   + la[i]]   , cids[i]   , charts  ,   ['x', '2x', '3x' , '4x' , '5x']  )  ;  
+                    ["cost mean stat for no concurrent"  + la[i] , "cost median stat for no concurrent" + la[i] , "cost sd stat for no concurrent"   + la[i]  ,
+                    "cost mean stat for  concurrent"  + la[i] , "cost median stat for  concurrent" + la[i] , "cost sd stat for  concurrent"   + la[i]]   , cids[i]   , charts  ,   ['x', '2x', '3x' , '4x' , '5x']  )  ;  
                     }
                 }else {
                         var duration = [] ,costs = [] ;
-                        var price = [0.00000208,0.00001667 , 0.00000417 ,  0.00000843 ] ;
+                        var price = [0.000000208   , 0.000000417   , 0.000000834 , 0.000001667] ;
                         for (var i = 0; i < datas[0].length; i++) {
                             duration.push(datas[0][i][0].durationSeconds);
                             costs.push(datas[0][i][0].durationSeconds* price[i]* 100000)
