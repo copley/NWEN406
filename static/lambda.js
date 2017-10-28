@@ -52,11 +52,11 @@ form.addEventListener('submit', function(ev) {
     ev.preventDefault();
 }, false);
 
-function stat(D, s) {
+function stat(D, ps ,  s) {
     var durationSeconds_arr = [];
     var arr = arr_stat () ;
     for (var i = 0; i < D.length; i++) {
-        durationSeconds_arr.push(D[i].durationSeconds);
+        durationSeconds_arr.push(D[i].durationSeconds*ps);
     }
     var a = [arr.mean(durationSeconds_arr), arr.median(durationSeconds_arr), arr.standardDeviation(durationSeconds_arr)];
     return a[s];
@@ -96,12 +96,12 @@ function offon(getMode, chartIDs) {
                 
                     var meams=[] , medians=[], sts=[] , cmeams=[] , cmedians=[], csts=[] ; var charts =[] ;
                     for (var i=0 ; i < 4 ; i++) {
-                        meams.push(stat(datas[0][i]*price[i], 0));
-                        medians.push (stat(datas[0][i]*price[i], 1));
-                        sts.push (stat(datas[0][i]*price[i], 2));
-                        cmeams.push(stat(datas[1][i]*price[i], 0));
-                        cmedians.push (stat(datas[1][i]*price[i], 1));
-                        csts.push (stat(datas[1][i]*price[i], 2));
+                        meams.push(stat(datas[0][i], price[i], 0));
+                        medians.push (stat(datas[0][i], price[i], 1));
+                        sts.push (stat(datas[0][i], price[i], 2));
+                        cmeams.push(stat(datas[1][i], price[i], 0));
+                        cmedians.push (stat(datas[1][i], price[i], 1));
+                        csts.push (stat(datas[1][i], price[i], 2));
                     }
                     var datasets = [{
                             label: "cost meams-",
@@ -163,12 +163,12 @@ function offon(getMode, chartIDs) {
                             cmedians = [],
                             csts = [];
                         for (var j = 0; j < 4; j++) {
-                            meams.push(stat(datas[0][k]*price[i], 0));
-                            medians.push(stat(datas[0][k]*price[i], 1));
-                            sts.push(stat(datas[0][k]*price[i], 2));
-                            cmeams.push(stat(datas[1][k]*price[i], 0));
-                            cmedians.push(stat(datas[1][k]*price[i], 1));
-                            csts.push(stat(datas[1][k]*price[i], 2));
+                            meams.push(stat(datas[0][k],price[i], 0));
+                            medians.push(stat(datas[0][k],price[i], 1));
+                            sts.push(stat(datas[0][k],price[i], 2));
+                            cmeams.push(stat(datas[1][k], price[i], 0));
+                            cmedians.push(stat(datas[1][k], price[i], 1));
+                            csts.push(stat(datas[1][k], price[i], 2));
                             ++k;
                         }
 
