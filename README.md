@@ -56,15 +56,38 @@ https://groups.google.com/forum/#!topic/golang-nuts/qTk0QG00lTI
  
  git clone -b a  https://github.com/AdrianNg/NWEN406.git
  
+# Docker on EC2 AMI :
  
+## sudo yum update -y
+## sudo yum install -y docker
+## sudo service docker start
+## sudo usermod -a -G docker ec2-user
+## reboot instance 
+## docker run --rm -p 5000:5000 beaconwarden/ecs1:latest
+## docker build -t ecs1 .
+## docker images --filter reference=ecs1
+## docker run -p 5000:5000 ecs1
+## docker tag bb38976d03cf beaconwarden/ecs1:latest
+## docker commit containerID  beaconwarden/ecs1:latest
+## docker push beaconwarden/ecs1 
+## docker ps 
+## docker images 
+ 
+ 
+ https://ropenscilabs.github.io/r-docker-tutorial/04-Dockerhub.html
  sudo ssh -i nwenkey.pem ec2-user@ec2-34-236-109-188.compute-1.amazonaws.com
+ 
+ 
+ 
+ 
+ 
  
  
  http://docs.aws.amazon.com/cli/latest/userguide/installing.html
  .
  
  http://docs.aws.amazon.com/AmazonECS/latest/developerguide/docker-basics.html#use-ecr
- 
+ http://docs.aws.amazon.com/AmazonECS/latest/developerguide/docker-basics.html
  
  To install the AWS CLI and Docker and for more information on the steps below, visit the ECR documentation page.
 1) Retrieve the docker login command that you can use to authenticate your Docker client to your registry: 
