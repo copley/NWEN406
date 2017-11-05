@@ -127,7 +127,7 @@ def post():
 
 from flask import render_template
 
-@app.route('/lambda/')
+@app.route('/l/')
 
 def render_lambda():
     return render_template('lambda.html')
