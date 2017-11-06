@@ -1,5 +1,9 @@
 FROM alpine:3.5
 
+ARG DOCKER_GID=993
+
+RUN groupadd -g ${DOCKER_GID} docker 
+
 
 RUN apk add --no-cache bash git nginx uwsgi uwsgi-python py2-pip \
 	&& pip2 install --upgrade pip \
