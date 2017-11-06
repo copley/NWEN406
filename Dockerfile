@@ -4,6 +4,8 @@ ARG DOCKER_GID=993
 
 RUN groupadd -g ${DOCKER_GID} docker 
 
+RUN useradd -m -d /home/jenkins -s /bin/sh jenkins \
+  && usermod -aG docker jenkins
 
 RUN apk add --no-cache bash git nginx uwsgi uwsgi-python py2-pip \
 	&& pip2 install --upgrade pip \
