@@ -15,7 +15,7 @@ def prime_number_lambda(maxi, loops , times, mb  , isConcurrent , last4  ) :
     session = FuturesSession(max_workers=100)
 
 
-  #  log = open("xmb.log", "w")
+  #   # log = open("xmb.log", "w")
 
 
     rst =  'https://mx8xkhlbp7.execute-api.us-east-1.amazonaws.com/prod/key-'+ str(mb) + '?max='+str(maxi)+'&loops='+ str(loops)
