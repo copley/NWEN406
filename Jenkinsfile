@@ -1,5 +1,5 @@
 pipeline {
-    agent { docker  {image 'beaconwarden/ecs1:latest'} }
+    agent { docker  {image 'beaconwarden/ecs12:latest'} }
     stages {
         stage('build') {
             steps {
