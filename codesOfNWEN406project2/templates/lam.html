@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='c3.min.css') }}">
+<body>
+
+<style>
+li {
+    padding: 10px;
+}
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 5px 2px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.button2 {background-color: #008CBA;} /* Blue */
+.button3 {background-color: #f44336;} /* Red */
+.button4 {background-color: #e7e7e7; color: black;} /* Gray */
+.button5 {background-color: #555555;} /* Black */
+
+</style>
+<h1> please inform me when you finish testing via beaconwarden@gmail.com so that i can turn the EC2 off to save money </h1>
+
+<p>  Python flask Web APP calling the AWS prime number lambda live demo .</p>
+
+
+
+
+
+
+ <textarea style ="width: 1000px" id="ta" name="textarea" placeholder="Enter the text...">{"maxi" :1000, "loops" : 1,  "times" : 10  , "mb" :128 , "conc" :"on"  , "last4" : "Vvuc" }</textarea>
+
+
+
+
+<button type="button" onclick="loadDoc()">Request data</button>
+
+
+<div id="cv" style="margin-left : 500px ; margin-right :500px  ">
+
+</div>
+
+
+
+<ul id="demo"></ul>
+<script type="text/javascript" src="{{ url_for('static', filename='Chart.bundle.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='Chart.min.js') }}"></script>
+
+
+
+
+
+
+
+<script type="text/javascript" src="{{ url_for('static', filename='lam.js') }}"></script>
+
+
+
+</body>
+</html>

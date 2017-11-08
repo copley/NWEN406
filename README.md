@@ -66,7 +66,7 @@ https://groups.google.com/forum/#!topic/golang-nuts/qTk0QG00lTI
 ## docker run --rm -p 5000:5000 beaconwarden/ecs1:latest
 ## docker build -t ecs1 .
 ## docker images --filter reference=ecs1
-## docker run -p 5000:5000 ecs1
+## docker run -p 5000:5000 beaconwarden/ecs1
 ## docker tag bb38976d03cf beaconwarden/ecs1:latest
 ## docker commit containerID  beaconwarden/ecs1:latest
 ## docker push beaconwarden/ecs1 
@@ -78,9 +78,23 @@ https://groups.google.com/forum/#!topic/golang-nuts/qTk0QG00lTI
  sudo ssh -i nwenkey.pem ec2-user@ec2-34-236-109-188.compute-1.amazonaws.com
  
  
+## installl java 8
+ sudo wget --no-cookies --no-check-certificate --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie"  "http://download.oracle.com/otn-pub/java/jdk/8u151-b12/e758a0de34e24606bca991d704f6dcbf/jre-8u151-linux-x64.tar.gz" 
+ http://www.techoism.com/install-java-8-on-centosrhel-65/
+replace jdk with jre
+sudo alternatives --install /usr/bin/jar jar /opt/jre1.8.0_151/bin/jar 2
+sudo alternatives --install /usr/bin/javac javac /opt/jre1.8.0_151/bin/javac 2
+sudo alternatives --install /usr/bin/javaws javaws /opt/jre1.8.0_151/bin/javaws 2
+sudo alternatives --set jar /opt/jre1.8.0_151/bin/jar
+sudo alternatives --set javac /opt/jre1.8.0_151/bin/javac
  
- 
- 
+
+## installin jenkins 
+ http://linuxtechlab.com/install-jenkins-on-centos-rhel-7/
+sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat-stable/jenkins.repo
+sudo rpm --import http://pkg.jenkins-ci.org/redhat-stable/jenkins-ci.org.key 
+ sudo yum install jenkins
+ sudo service jenkins start
  
  
  http://docs.aws.amazon.com/cli/latest/userguide/installing.html
