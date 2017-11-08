@@ -15,7 +15,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                echo 'Deploying'
+                sudo docker run -p 5000:5000 beaconwarden/ecs1
             }
         }
         
