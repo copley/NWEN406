@@ -7,7 +7,7 @@ RUN groupadd -g ${DOCKER_GID} docker
 RUN useradd -m -d /home/jenkins -s /bin/sh jenkins \
   && usermod -aG docker jenkins
 
-RUN apk add --no-cache bash git  uwsgi uwsgi-python py2-pip \
+RUN apk add --no-cache bash git nginx uwsgi uwsgi-python py2-pip \
 	&& pip2 install --upgrade pip \
 	&& pip2 install flask \
 	&& pip2 install requests-futures
