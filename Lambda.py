@@ -2,6 +2,7 @@
 #!flask/bin/python
 from __future__ import print_function
 from flask import Flask,jsonify
+from flask_cors import CORS, cross_origin
 import requests
 import os
 #os.getenv('PORT','5000')
@@ -66,7 +67,7 @@ def prime_number_lambda(maxi, loops , times, mb  , isConcurrent , last4  ) :
 
 
 app = Flask(__name__)
-
+CORS(app)
 @app.route('/getMB',methods= ['GET'])
 def getMB():  #Varying the Lambda memory settings: 128MB, 256MB, 512MB and 1024MB.
     print ("getMX")
