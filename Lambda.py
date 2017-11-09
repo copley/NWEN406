@@ -2,10 +2,11 @@
 #!flask/bin/python
 from __future__ import print_function
 from flask import Flask,jsonify
+from flask_cors import CORS, cross_origin
 import requests
 import os
-os.getenv('PORT','5000')
-os.getenv('IP','0.0.0.0')
+#os.getenv('PORT','5000')
+#os.getenv('IP','0.0.0.0')
 
 from requests_futures.sessions import FuturesSession
 
@@ -21,7 +22,7 @@ def prime_number_lambda(maxi, loops , times, mb  , isConcurrent , last4  ) :
   #   # log = open("xmb.log", "w")
 
 
-    rst =  'http://nx106w1z0e.execute-api.us-west-2.amazonaws.com/prod/'+ str(mb) + '?max='+str(maxi)+'&loops='+ str(loops)
+    rst =  'https://nx106w1z0e.execute-api.us-west-2.amazonaws.com/prod/'+ str(mb) +'mb' + '?max='+str(maxi)+'&loops='+ str(loops)
     
     
     print('sending the lambda url  : {0}'.format(rst))
@@ -66,7 +67,7 @@ def prime_number_lambda(maxi, loops , times, mb  , isConcurrent , last4  ) :
 
 
 app = Flask(__name__)
-
+CORS(app)
 @app.route('/getMB',methods= ['GET'])
 def getMB():  #Varying the Lambda memory settings: 128MB, 256MB, 512MB and 1024MB.
     print ("getMX")
@@ -148,5 +149,5 @@ def project2():
 
 
 if __name__ == '__main__':
-    #app.run(debug=True,host='0.0.0.0')
-    app.run(host=os.getenv('IP', '0.0.0.0'),port=int(os.getenv('PORT', 8080)))
+    app.run(debug=True,host='0.0.0.0')
+    # app.run(host=os.getenv('IP', '0.0.0.0'),port=int(os.getenv('PORT', 8080)))
