@@ -7,12 +7,14 @@ sudo ng serve -p 8080 -H 0.0.0.0 --public-host ng5-adrianng.c9users.io
 ## setup env:
 ### 1.  launch Amazon Linux AMI 2017.09.0 (HVM) in EC2
 ### 2.  chmod 400 pem.pem
-### 3.  ssh -i nwen406.pem ec2-user@ec2-35-163-140-165.us-west-2.compute.amazonaws.com
+### 3.  sudo ssh -i nwen406.pem ec2-user@ec2-35-163-140-165.us-west-2.compute.amazonaws.com
 ### 4.  sudo pip install flask
-### 5.  sudo pip install requests-futures
+### 5.  sudo pip install requests-futures   pip install -U flask-cors
 ### 6.  sudo yum install git 
 ### 6.  sudo yum install golang
 ### 7.  go get -u github.com/gorilla/mux  
+
+### https://pypi.python.org/pypi/Flask-Cors
 ## Run the Web APP :   python Lambda.py    http://52.39.107.48:5000/lambda/
 ## Run the Web APP :   go run 406.go    http://52.39.107.48:8000/edit/
 ## requiremnt :  
