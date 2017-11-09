@@ -18,7 +18,7 @@ def prime_number_lambda(maxi, loops , times, mb  , isConcurrent , last4  ) :
   #  log = open("xmb.log", "w")
 
 
-    rst =  'https://nx106w1z0e.execute-api.us-west-2.amazonaws.com/prod/'+ str(mb) +'mb'+ '?max='+str(maxi)+'&loops='+ str(loops)
+    rst =  'https://nx106w1z0e.execute-api.us-west-2.amazonaws.com/prod/'+ str(mb) + '?max='+str(maxi)+'&loops='+ str(loops)
     print (rst)
     print (headers) 
     print (isConcurrent)

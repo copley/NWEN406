@@ -3,13 +3,16 @@
 from __future__ import print_function
 from flask import Flask,jsonify
 import requests
+import os
+os.getenv('PORT','5000')
+os.getenv('IP','0.0.0.0')
 
 from requests_futures.sessions import FuturesSession
 
 log = open("xmb.log", "w")
 def prime_number_lambda(maxi, loops , times, mb  , isConcurrent , last4  ) :
     headers = {
-        'x-api-key': "8yWy3YfRRs1n2U08IVSPv5ntrouJ7cd61gJKaJ"+last4,   #Vvuc
+        'x-api-key': "rDGgZtlFRY7CaGQy7Qvb21R0VxICImme5FiJ"+last4,   #Vvuc
     }
     re_arr  = []
     session = FuturesSession(max_workers=100)
@@ -18,18 +21,19 @@ def prime_number_lambda(maxi, loops , times, mb  , isConcurrent , last4  ) :
   #   # log = open("xmb.log", "w")
 
 
-    rst =  'https://mx8xkhlbp7.execute-api.us-east-1.amazonaws.com/prod/key-'+ str(mb) + '?max='+str(maxi)+'&loops='+ str(loops)
+    rst =  'http://nx106w1z0e.execute-api.us-west-2.amazonaws.com/prod/'+ str(mb) + '?max='+str(maxi)+'&loops='+ str(loops)
     
-
-    print('sending the lambda url  : {0}'.format(rst), file = log)
+    
+    print('sending the lambda url  : {0}'.format(rst))
     if  isConcurrent == "off":
         #print (" nonConcurrentmode")
         for i in range (times) :
             #rt = requests.get(rst).json()
-            resp = requests.get(rst, headers = headers)
+            resp = requests.get(rst, headers = headers, verify=False)
             rt = resp.json()
+    
             if resp.status_code != 200 :
-                #print ("resp.status_code")
+                print ("resp.status_code")
                 #print (rt)
                 return resp.status_code
             else :
@@ -39,14 +43,15 @@ def prime_number_lambda(maxi, loops , times, mb  , isConcurrent , last4  ) :
         return re_arr
 
     else :
-        #print (" Concurrentmode")
+        print (" Concurrentmode")
         sgl = []
         for i in range (times) :
             ##sgl.append(session.get(rst))
-            sgl.append(session.get(rst,headers = headers))
-
+            sgl.append(session.get(rst,headers = headers  ,verify=False))
+            
         for  i  in range  (times )  :
             resp  = sgl[i].result()
+            print (resp.status_code)
             #print('response one status: {0}'.format(resp.status_code))
             if resp.status_code != 200 :
                 #re_arr.append (resp.status_code)
@@ -69,11 +74,11 @@ def getMB():  #Varying the Lambda memory settings: 128MB, 256MB, 512MB and 1024M
     on = []
     print (" nonCon", file = log)
     for i in  [128,256,512,1024] :
-        off.append (prime_number_lambda(10000, 1, 100 ,i   ,"off"  , "1t" ))
+        off.append (prime_number_lambda(100, 1, 10 ,i   ,"off"  , "Vvuc" ))
         # on.append (prime_number_lambda(100, 1, 10 ,i ,"on"  , "Vvuc" ))
     print (" Concu", file = log)
     for i in  [128,256,512,1024] :
-        on.append (prime_number_lambda(10000, 1, 100 ,i ,"on"  , "1t" ))
+        on.append (prime_number_lambda(100, 1, 10 ,i ,"on"  , "Vvuc" ))
     return   jsonify({'task':[off, on ]})   #calling_lamdba(100, 1 , 20)
 
 
@@ -85,13 +90,13 @@ def getXLoops():   #Varying the time taken to do a computation while holding mem
     print (" nonCon" , file = log)
     for j in [128,256,512,1024] :
         for i in  [2,3,4,5]    :
-            off.append (prime_number_lambda(10000, i, 100 ,j   ,"off"  , "1t" ))  #(maxi, loops , times, mb   , isConcurrent , last4  )
+            off.append (prime_number_lambda(100, i, 10 ,j   ,"off"  , "Vvuc" ))  #(maxi, loops , times, mb   , isConcurrent , last4  )
             #on.append (prime_number_lambda(100, i, 10 ,j ,"on"  , "Vvuc" ))
     print (" Concur", file = log)
     for j in [128,256,512,1024] :
         for i in  [2,3,4,5]    :
             #off.append (prime_number_lambda(100, i, 10 ,j   ,"off"  , "Vvuc" ))  #(maxi, loops , times, mb   , isConcurrent , last4  )
-            on.append (prime_number_lambda(10000, i,100 ,j ,"on"  , "1t" ))
+            on.append (prime_number_lambda(100, i,10 ,j ,"on"  , "Vvuc" ))
 
     return   jsonify({'task':[off, on ]})   #calling_lamdba(100, 1 , 20)
 
@@ -101,7 +106,7 @@ def getSatisfactory():  # cost and performance scaled linearly with memory
     print ("getSatifactory log", file = log) 
     off = []
     for i in  [1024 ,  256 , 512, 128] :
-        off.append (prime_number_lambda(10, 1, 1 , i  ,"off"  , "1t" ))
+        off.append (prime_number_lambda(10, 1, 1 , i  ,"off"  , "Vvuc" ))
 
     return   jsonify({'task':[off]})   #calling_lamdba(100, 1 , 20)
 
@@ -111,6 +116,7 @@ def getSatisfactory():  # cost and performance scaled linearly with memory
 from flask import request
 @app.route('/post', methods=['POST'])
 def post():
+    
     maxi =request.json['maxi']
     loops = request.json['loops']
     times = request.json['times']
@@ -140,5 +146,7 @@ def project2():
 
 
 
+
 if __name__ == '__main__':
-    app.run(debug=True,host='0.0.0.0')
+    #app.run(debug=True,host='0.0.0.0')
+    app.run(host=os.getenv('IP', '0.0.0.0'),port=int(os.getenv('PORT', 8080)))
