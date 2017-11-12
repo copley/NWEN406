@@ -6,7 +6,7 @@ export const Defobj: ReqObj = {
    loops:'1' ,
    times: '10' ,
    conc: 'on' ,
-   mb : '128'
+   mb : '1024'
 };
 
 

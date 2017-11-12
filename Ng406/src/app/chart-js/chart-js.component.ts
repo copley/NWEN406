@@ -1,82 +1,190 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { ReqObj } from './ReqObj';
-import { Defobj } from './defobj';
-import { RESTService } from '../REST.service';
+import {
+    Component,
+    OnInit,
+    ViewEncapsulation
+} from '@angular/core';
+import {
+    HttpClient
+} from '@angular/common/http';
+import {
+    ReqObj
+} from './ReqObj';
+import {
+    Defobj
+} from './defobj';
+import {
+    RESTService
+} from '../REST.service';
 
-import { ResObj } from './ResObj';
-interface ResponseObj { 
-  task : [] 
-  json : [] 
+import {
+    ResObj
+} from './ResObj';
+interface ResponseObj {
+    task: []
+    json: []
 }
 @Component({
-  selector: 'app-chart-js',
-  templateUrl: './chart-js.component.html',
-  styleUrls: ['./chart-js.component.css'],
-  encapsulation: ViewEncapsulation.None
+    selector: 'app-chart-js',
+    templateUrl: './chart-js.component.html',
+    styleUrls: ['./chart-js.component.css'],
+    encapsulation: ViewEncapsulation.None
 })
 
 
 
 export class ChartJsComponent implements OnInit {
-  
-  jsons = [] ;
-  cdata = [] ;
-  clables = [] ;
-  ReqO=  Defobj;
-  constructor(private http: HttpClient   ,     private restService: RESTService){
-  };
-    private reurl =   'http://35.163.140.165:5000/post'; 
 
-  ngOnInit(): void {
-        for (let i = 0; i <  parseInt(this.ReqO.times) ; i++)   {
-              this.cdata.push(0) ;
-               this.clables.push(0) ;
-        }
-  };
-  
+    public jsons = [];
+    public cdata = [];
+    public clables = [];
+    public costs = [];
+    public ReqO = Defobj;
+    public lineChartData: Array < any > = [];
+    public lineChartLabels: Array < any > = [];
+    public lineChartOptions = {
+        responsive: true
+    };
+    public lineChartColors: Array < any >= [];
 
- 
-    // lineChart
-  public lineChartData:Array<any> = [
-    {data:  this.cdata, label: 'Series A'}
-   // {data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B'},
-  //  {data: [18, 48, 77, 9, 100, 27, 40], label: 'Series C'}
-  ];
-  public lineChartLabels:Array<any> = this.clables ;
-  public lineChartOptions:any = {
-    responsive: true
-  };
-  public lineChartColors:Array<any> = [
-    { // grey
-      backgroundColor: 'rgba(148,159,177,0.2)',
-      borderColor: 'rgba(148,159,177,1)',
-      pointBackgroundColor: 'rgba(148,159,177,1)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
-    },
-    { // dark grey
-      backgroundColor: 'rgba(77,83,96,0.2)',
-      borderColor: 'rgba(77,83,96,1)',
-      pointBackgroundColor: 'rgba(77,83,96,1)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(77,83,96,1)'
-    },
-    { // grey
-      backgroundColor: 'rgba(148,159,177,0.2)',
-      borderColor: 'rgba(148,159,177,1)',
-      pointBackgroundColor: 'rgba(148,159,177,1)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+    public lineChartLegend: boolean = true;
+    public lineChartType: string = 'line';
+
+
+    constructor(private http: HttpClient, private restService: RESTService) {};
+    private reurl = 'http://35.163.140.165:5000/post';
+
+    ngOnInit(): void {
+
+        for (let i = 0; i < parseInt(this.ReqO.times); i++) {
+            this.cdata.push(0);
+            this.clables.push(0);
+            this.costs.push(0);
+        };
+
+        this.chartjs();
+    };
+
+
+
+    public chartjs(): void {
+
+        // lineChart
+        this.lineChartData = [{
+                data: this.cdata,
+                label: 'duration time  '
+            },
+            {
+                data: this.costs,
+                label: 'cost line per  0.00000001 $'
+            }
+            //  {data: [18, 48, 77, 9, 100, 27, 40], label: 'Series C'}
+        ];
+        this.lineChartLabels = this.clables;
+
+        this.lineChartColors = [{ // grey
+                backgroundColor: 'rgba(48,159,177,0.2)',
+                borderColor: 'rgba(48,159,177,1)',
+                pointBackgroundColor: 'rgba(48,159,177,1)',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: 'rgba(48,159,177,0.8)'
+            },
+            { // dark grey
+                backgroundColor: 'rgba(77,83,96,0.2)',
+                borderColor: 'rgba(77,83,96,1)',
+                pointBackgroundColor: 'rgba(77,83,96,1)',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: 'rgba(77,83,96,1)'
+            },
+            { // grey
+                backgroundColor: 'rgba(148,159,177,0.2)',
+                borderColor: 'rgba(148,159,177,1)',
+                pointBackgroundColor: 'rgba(148,159,177,1)',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+            }
+        ];
+
+
     }
-  ];
-  public lineChartLegend:boolean = true;
-  public lineChartType:string = 'line';
- 
- 
+
+
+
+
+    public getprice(mb, t): number {
+
+        let prices = [0.000000208, 0.000000417, 0.000000834, 0.000001667];
+        let price = 0;
+        switch (mb) {
+            case 128:
+                price = prices[0];
+                break;
+            case 256:
+                price = prices[1];
+                break;
+            case 512:
+                price = prices[2];
+                break;
+            case 1024:
+                price = prices[3];
+                break;
+        }
+
+        return price * t * 10000000;
+
+    }
+
+    public initaxis(): void {
+        this.cdata = [];
+        this.clables = [];
+        this.costs = [];
+        for (let i = 0; i < parseInt(this.ReqO.times); i++) {
+            this.cdata.push(0);
+            this.clables.push(0);
+            this.costs.push(0);
+        }
+
+    }
+
+
+
+    public post(): void {   this.chartjs();
+        this.http.post < ResponseObj > (this.reurl,
+            this.ReqO
+        ).subscribe(
+            res => {
+                debugger;
+              
+                this.jsons = res.json;
+                let _lineChartData: Array < any > = new Array(parseInt(this.ReqO.times));
+             //   this.clables = [] ;  this.cdata  = [] ; this.costs = [] ;
+                for (let j = 0; j < 2; j++) {
+                    _lineChartData[j] = {
+                        data: new Array(parseInt(this.ReqO.times)),
+                        label: this.lineChartData[j].label
+                    };
+                    for (let i = 0; i < parseInt(this.ReqO.times); i++) {
+
+                        _lineChartData[j].data[i] = this.jsons[i].durationSeconds;
+                        if (j == 1) _lineChartData[j].data[i] = this.getprice(this.jsons[i].MB, this.jsons[i].durationSeconds);
+                        this.clables[i] = i + '.';
+
+                    }
+                }
+                this.lineChartData = _lineChartData;
+
+                //   this.lineChartLabels
+                console.log(res);
+            },
+            err => {
+                alert("wrong apt key or other invalid input.......  ");
+            }
+        );;
+        // this.initaxis() ;
+    }
+    /**
   public post2() :void { 
           this.restService.restPost(this.ReqO).subscribe(
         res => {
@@ -93,38 +201,17 @@ export class ChartJsComponent implements OnInit {
           console.log(res);
         },
         err => {
-          alert("apt key is wrong  ");
+          alert("wrong apt key or other invalid input F ");
         }
       );;
     
   } 
   
   
+
   
   
-    public post() :void { 
-         this.http.post<ResponseObj>(this.reurl, 
-        this.ReqO
-    ).subscribe(
-        res => {
-             this.jsons = res.json ;     let _lineChartData:Array<any> = new Array(parseInt(this.ReqO.times));
-                  _lineChartData[0] = {data: new Array(parseInt(this.ReqO.times)), label: this.lineChartData[0].label};
-            for (let i = 0; i < parseInt(this.ReqO.times); i++) {
-              
-             _lineChartData[0].data[i] = this.jsons[i].durationSeconds  ;
-             this.clables[i] = i  ; 
-              
-            }
-                       this.lineChartData = _lineChartData;
-                     //   this.lineChartLabels
-          console.log(res);
-        },
-        err => {
-          alert("apt key is wrong  ");
-        }
-      );;
-    
-  } 
+ 
   
   
   
@@ -141,7 +228,7 @@ export class ChartJsComponent implements OnInit {
               }
             }
                console.log (_lineChartData)
-            this.lineChartData = _lineChartData;
+           // this.lineChartData = _lineChartData;
          
             
             
@@ -149,13 +236,15 @@ export class ChartJsComponent implements OnInit {
     });
  
   }
- 
-  // events
-  public chartClicked(e:any):void {
-    console.log(e);
-  }
- 
-  public chartHovered(e:any):void {
-    console.log(e);
-  }
+  
+  **/
+
+    // events
+    public chartClicked(e: any): void {
+        console.log(e);
+    }
+
+    public chartHovered(e: any): void {
+        console.log(e);
+    }
 }

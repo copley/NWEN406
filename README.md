@@ -13,7 +13,7 @@ sudo ng serve -p 8080 -H 0.0.0.0 --public-host ng5-adrianng.c9users.io
 ### 6.  sudo yum install git 
 ### 6.  sudo yum install golang
 ### 7.  go get -u github.com/gorilla/mux  
-
+### 8. #nohup python Lambda.py >> xmb.log &  get log file 
 ### https://pypi.python.org/pypi/Flask-Cors
 ## Run the Web APP :   python Lambda.py    http://52.39.107.48:5000/lambda/
 ## Run the Web APP :   go run 406.go    http://52.39.107.48:8000/edit/
@@ -36,13 +36,13 @@ Copyright © Victoria University of Wellington, New Zealand
 
 
 
-#nohup python Lambda.py >> xmb.log &
-rm -r mydir
+
+
 
 https://groups.google.com/forum/#!topic/golang-nuts/qTk0QG00lTI
 
 
-
+# git branching 
 
 -git checkout -b adrian
  -git push --set-upstream origin adrian
@@ -59,28 +59,27 @@ https://groups.google.com/forum/#!topic/golang-nuts/qTk0QG00lTI
  git clone -b a  https://github.com/AdrianNg/NWEN406.git
  
 # Docker on EC2 AMI :
- 
-## sudo yum update -y
-## sudo yum install -y docker
-## sudo service docker start
-## sudo usermod -a -G docker ec2-user
-## reboot instance 
-## docker run --rm -p 5000:5000 beaconwarden/ecs1:latest
-## docker build -t ecs1 .
-## docker images --filter reference=ecs1
-## docker run -p 5000:5000 beaconwarden/ecs1
-## docker tag bb38976d03cf beaconwarden/ecs1:latest
-## docker commit containerID  beaconwarden/ecs1:latest
-## docker push beaconwarden/ecs1 
-## docker ps 
-## docker images 
+sudo yum update -y  
+sudo yum install -y docker  
+sudo service docker start  
+sudo usermod -a -G docker ec2-user  
+reboot instance   
+docker run --rm -p 5000:5000 beaconwarden/ecs1:latest    
+docker build -t ecs1 .  
+docker images --filter reference=ecs1    
+docker run -p 5000:5000 beaconwarden/ecs1    
+docker tag bb38976d03cf beaconwarden/ecs1:latest    
+docker commit containerID  beaconwarden/ecs1:latest  
+docker push beaconwarden/ecs1   
+docker ps   
+docker images   
  
  
  https://ropenscilabs.github.io/r-docker-tutorial/04-Dockerhub.html
  sudo ssh -i nwenkey.pem ec2-user@ec2-34-236-109-188.compute-1.amazonaws.com
  
  
-## installl java 8
+# installl java 8
  sudo wget --no-cookies --no-check-certificate --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie"  "http://download.oracle.com/otn-pub/java/jdk/8u151-b12/e758a0de34e24606bca991d704f6dcbf/jre-8u151-linux-x64.tar.gz" 
  http://www.techoism.com/install-java-8-on-centosrhel-65/
 replace jdk with jre
@@ -91,7 +90,7 @@ sudo alternatives --set jar /opt/jre1.8.0_151/bin/jar
 sudo alternatives --set javac /opt/jre1.8.0_151/bin/javac
  
 
-## installin jenkins 
+# installin jenkins 
  http://linuxtechlab.com/install-jenkins-on-centos-rhel-7/
 sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat-stable/jenkins.repo
 sudo rpm --import http://pkg.jenkins-ci.org/redhat-stable/jenkins-ci.org.key 

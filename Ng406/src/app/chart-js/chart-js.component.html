@@ -1,17 +1,60 @@
  
- <div style = "width: 500px"><ul>
-    <li> please input last 4 chars of AWS API key  : <input [(ngModel)]="ReqO.l4" style="border : 5px solid #800080" type="text" id="l4" value="Vvuc"></li>
-    <li>Max  : <input [(ngModel)]="ReqO.maxi" type="text" id="maxi" value="10"   min="10" max="1000"></li>
-    <li>loops : <input [(ngModel)]="ReqO.loops"  type="text" id="loop" value="1"  min="1" max="5"></li>
-    <li>times : <input [(ngModel)]="ReqO.times" type="text" id="t" value="4"  min="1" max="100"></li>
-    <li>Concurrent mode :<input [(ngModel)]="ReqO.conc" type="text"  max="100"></li>
-    <li>mb  : <input [(ngModel)]="ReqO.mb" type="text" id="t" value="4"  min="1" max="100"> </li>
-   
-  </ul></div>
  
-<button    (click)="post()" >request lambda data</button>
-<div class="row">
-  <div class="col-md-6 canvasc  light">
+ 
+ 
+ <div style = "width: 500px ; margin-top : -130px " >
+
+   
+
+  
+  
+  
+<div class="input-group">
+  <span class="input-group-addon" id="basic-addon1">  please input last 4 chars of AWS API key  :</span>
+  <input class="form-control" [(ngModel)]="ReqO.l4" style="border : 5px solid #800080" type="text" id="l4" value="Vvuc">
+</div>
+<br>
+<div class="input-group">
+  <span class="input-group-addon" id="basic-addon2">Max  : </span>
+  <input class="form-control" [(ngModel)]="ReqO.maxi" type="text" id="maxi" value="10"   min="10" max="1000">
+</div>
+<br>
+<div class="input-group">
+  <span class="input-group-addon" id="basic-addon2">loops : </span>
+  <input class="form-control" [(ngModel)]="ReqO.loops"  type="text" id="loop" value="1"  min="1" max="5">
+</div>
+<br>
+<div class="input-group">
+  <span class="input-group-addon" id="basic-addon2">times :</span>
+  <input class="form-control" [(ngModel)]="ReqO.times" type="text" id="t" value="4"  min="1" max="100">
+</div>
+<br>
+<div class="input-group">
+  <span class="input-group-addon" id="basic-addon2">Concurrent mode   : </span>
+  <input class="form-control" [(ngModel)]="ReqO.conc" type="text"  max="100">
+</div>
+<br>
+<div class="input-group">
+  <span class="input-group-addon" id="basic-addon2">mb  : </span>
+  <input class="form-control" [(ngModel)]="ReqO.mb" type="text" id="t" value="4"  min="1" max="100">
+</div>
+<br>
+
+</div>  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+ 
+<button  class="btn btn-primary"  (click)="post()" >request lambda data</button>
+
+  <div class=" canvasc  light">
     <div style="display: block;">
     <canvas  baseChart  
                 [datasets]="lineChartData"
@@ -24,7 +67,7 @@
                 (chartClick)="chartClicked($event)"></canvas>
     </div>
   </div>
-  <div class="col-md-6" style="margin-bottom: 10px ; width : 20%">
+  <div style="margin-bottom: 10px ; width : 20%">
     <table class="table table-responsive table-condensed">
       <tr>
         <th *ngFor="let label of lineChartLabels">{{label}}</th>
@@ -35,4 +78,3 @@
     </table>
     
   </div>
-</div>

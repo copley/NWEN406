@@ -1,5 +1,5 @@
 # Ng406
-
+sudo ng serve -p 8080 -H 0.0.0.0 --public-host ng5-adrianng.c9users.io
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.5.0.
 
 ## Development server
@@ -32,4 +32,20 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 npm install ng2-charts --save
 npm install chart.js --save
+
+
+
+
+# steps 
+npm install -g @angular/cli
+
+ng new angular-tour-of-heroes
+
+cd angular-tour-of-heroes
+ng serve --open
+
+sudo chmod -R 777 angular-tour-of-heroes/
+
+
+sudo ng serve -p 8080 -H 0.0.0.0 --public-host ng5-adrianng.c9users.io  // live reload r
 

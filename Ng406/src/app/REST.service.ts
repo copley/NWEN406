@@ -27,7 +27,7 @@ export class RESTService  {
     
  
 
-  /** GET performance from the server */
+  /** GET performance from the server 
   restPost (req : ReqObj): Observable<ResponseObj> { 
   
    return  this.http.post<ResponseObj>(this.reurl, 
@@ -55,7 +55,7 @@ export class RESTService  {
       // Let the app keep running by returning an empty result.
       return of(result as T);
     };
-  }
+  }*/
 
 
 }
