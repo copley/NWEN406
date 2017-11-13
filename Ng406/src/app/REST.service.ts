@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { catchError, map, tap } from 'rxjs/operators';
-import { ResObj } from './chart-js/ResObj';
+
 
 
 import { ReqObj } from './chart-js/ReqObj';
@@ -12,9 +12,25 @@ const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
+
+
+
+
+
+
+interface RequestJson {
+  MB: number;
+  durationSeconds: number;
+  loops: number;
+  max : number;
+}
+
+
+
+
 interface ResponseObj { 
-  task : [] 
-  json : [] 
+  task : RequestJson[]
+  json : RequestJson[]
 }
 
 @Injectable()
@@ -27,7 +43,7 @@ export class RESTService  {
     
  
 
-  /** GET performance from the server 
+//  ** GET performance from the server 
   restPost (req : ReqObj): Observable<ResponseObj> { 
   
    return  this.http.post<ResponseObj>(this.reurl, 
@@ -55,7 +71,7 @@ export class RESTService  {
       // Let the app keep running by returning an empty result.
       return of(result as T);
     };
-  }*/
+  }
 
 
 }

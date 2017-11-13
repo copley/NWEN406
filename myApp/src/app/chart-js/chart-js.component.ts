@@ -14,24 +14,13 @@ import {
 } from './defobj';
 
 
-
-
-
-interface RequestJson {
-  MB: number;
-  durationSeconds: number;
-  loops: number;
-  max : number;
+import {
+    ResObj
+} from './ResObj';
+interface ResponseObj {
+    task: []
+    json: []
 }
-
-
-
-
-interface ResponseObj { 
-  task : RequestJson[]
-  json : RequestJson[]
-}
-
 @Component({
     selector: 'app-chart-js',
     templateUrl: './chart-js.component.html',
@@ -86,7 +75,7 @@ export class ChartJsComponent implements OnInit {
                 data: this.costs,
                 label: 'cost line per  0.00000001 $'
             }
-        
+            //  {data: [18, 48, 77, 9, 100, 27, 40], label: 'Series C'}
         ];
         this.lineChartLabels = this.clables;
 
@@ -106,7 +95,7 @@ export class ChartJsComponent implements OnInit {
                 pointHoverBackgroundColor: '#fff',
                 pointHoverBorderColor: 'rgba(77,83,96,1)'
             },
-            { // gf
+            { // grey
                 backgroundColor: 'rgba(148,159,177,0.2)',
                 borderColor: 'rgba(148,159,177,1)',
                 pointBackgroundColor: 'rgba(148,159,177,1)',
@@ -170,7 +159,7 @@ export class ChartJsComponent implements OnInit {
                 let t= parseInt(this.ReqO.times) ; 
                 let _lineChartData: Array < any > = new Array(t);
              //   this.clables = [] ;  this.cdata  = [] ; this.costs = [] ;
-                let  diff = this.clables.length -t ; 
+                let  diff = this.clables.length - t ; 
                 this.clables.splice( t, diff)  ;
                 for (let j = 0; j < 2; j++) {
                     _lineChartData[j] = {
