@@ -36,7 +36,7 @@ interface ResponseObj {
 @Injectable()
 export class RESTService  {
 
-  private reurl =   'http://35.163.140.165:5000/post';  // URL to web api
+  private reurl =   'http://35.163.140.165:5000/post';  //   URL to web api
    results: string[];
   constructor(
     private http: HttpClient) { }
