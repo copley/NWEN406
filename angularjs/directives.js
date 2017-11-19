@@ -1,14 +1,8 @@
 // DIRECTIVES
-lambda.directive("weatherReport", function() {
+lambda.directive("inputFields", function() {
    return {
        restrict: 'E',
-       templateUrl: 'directives/weatherReport.html',
-       replace: true,
-       scope: {
-           weatherDay: "=",
-           convertToStandard: "&",
-           convertToDate: "&",
-           dateFormat: "@"
-       }
+       templateUrl: 'directives/inputFields.htm',
+       replace: true
    }
 });

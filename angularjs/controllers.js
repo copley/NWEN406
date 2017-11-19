@@ -1,107 +1,46 @@
-// CONTROLLERS
-
-
-
-
-
-
-
-
 'use strict';
 
-/**
- * @ngdoc function
- * @name httpApp.controller:TasksCtrl
- * @description
- * # TasksCtrl
- * Controller of the httpApp
- */
-lambda
-  .controller('CreatetaskCtrl', function ($scope, task, $modalInstance) {
-      $scope.init = function () {
-          $scope.task = {
-              Id: '',
-              FileName: ''
-          }
-      }
+lambda.controller('chartjsController', function ($scope, RESTapi) {
 
-      $scope.submit = function () {
-          task.createTask($scope.task)
-          .then(function () {
-              $modalInstance.close();
-          }, function () {
-              $scope.task = {
-                  Id: 'Failed',
-                  FileName: 'Failed'
-              }
-          })
-      }
-      
-  
-      
-      
-      
-      
-      
-      
-      
 
-      $scope.init();
-  })
+    $scope.requestObj = {l4 : 'Vvuc' , maxi : '100' , loops : '1' , times : '10' , conc : 'on' ,  mb : '1024'} ; 
 
-  .controller('homeController', function ($scope, task) {
+    $scope.init = function () {
+        $scope.post(); 
+    }
     
-      $scope.requestObj = {l4 : 'Vvuc' , maxi : '100' , loops : '1' , times : '10' , conc : 'on' ,  mb : '1024'} ; 
+    $scope.post = function () {    
+        RESTapi.POST( $scope.requestObj, 'http://35.163.140.165:5000/post')
+        .then(function (res) {
+          // succes
+          $scope.chartjs (res.json) ; 
+        }, function (err) {
+          // error
+        })
+    }
 
-      $scope.init = function () {
-
-          $scope.post(); 
-      }
-
-
-
-      $scope.post = function () {    //debugger ; 
-          task.getAllTasks( $scope.requestObj)
-          .then(function (res) {
-              // success
-              $scope.taskList = res;
-              console.log(   $scope.taskList);
-              $scope.chartjs ($scope.taskList.json)
-          }, function (err) {
-              // error
-          })
-      }
-
-
-      
-
-
-
-
-          $scope.chartjs = function (data){
-              var  t= [] ,    bgc = []  , lbal = [] ;  
-              for (var i=0 ; i<data.length ; i++) {
-                 t.push (data[i].durationSeconds) ; 
-                 lbal.push (i) ; 
-                 var l = i.toString().length ;
-                 if (l==1) bgc.push ('#'+i+'00') ; 
-                  if (l==2) bgc.push ('#'+i+'0') ; 
-                   if (l==3) bgc.push ('#'+i) ;
-                    if (l>3) bgc.push ('#000') ; 
-              }
+    $scope.chartjs = function (data){
+        var  t= [] ,    bgc = []  , lbal = [] ;  
+        for (var i=0 ; i<data.length ; i++) {
+            t.push (data[i].durationSeconds) ; 
+            lbal.push (i) ; 
+            var l = i.toString().length ;
+            if (l==1) bgc.push ('#'+i+'00') ; 
+            if (l==2) bgc.push ('#'+i+'0') ; 
+            if (l==3) bgc.push ('#'+i) ;
+            if (l>3) bgc.push ('#000') ; 
+        }
             
-    
-                   if  (document.getElementById("myChart")!=null)  
-                   {
-                     document.getElementById("myChart").remove() ;
-                 
-                   }
-                    var c = document.createElement('canvas') ;
-                      c.setAttribute("id", 'myChart');
-                      document.getElementById("cv").appendChild(c);
-                   
-              var ctx = document.getElementById("myChart").getContext('2d');
-          var myChart = new Chart(ctx, {
+        
+        if  (document.getElementById("myChart")!=null)  
+        {
+         document.getElementById("myChart").remove() ;
+        }
+        var c = document.createElement('canvas') ;
+        c.setAttribute("id", 'myChart');
+        document.getElementById("cv").appendChild(c);
+        var ctx = document.getElementById("myChart").getContext('2d');
+        var myChart = new Chart(ctx, {
               type: 'bar',
               data: {
                   labels: lbal,
@@ -123,78 +62,50 @@ lambda
                   }
               }
           });
-                  
-     
-      }
+             
+    }
 
 
-      $scope.getOne = function (id) {
-          task.getOneTask(id)
-          .then(function (res2) {
-              // success
-              console.log("ap2 succedg");
-              $scope.OneTask = res2;
-          }, function (err) {
-              // error
-          })
-      }
+    $scope.init();
+})
+
+.controller('rawsqlController', function ($scope, RESTapi) {
+
+    $scope.defaultSQL  = 'select * from students'
+    $scope.requestObj = {sqlStatement : $scope.defaultSQL} ; 
+
+    $scope.$watch('defaultSQL', function () {
+        $scope.requestObj.sqlStatement = $scope.defaultSQL;
+    })
+    $scope.init = function () {
+        $scope.post(); 
+    }
+    
 
 
-
-      $scope.putOne = function (tid, tname) {
-          $scope.thisID = tid;
-          $scope.thisName = tname;
-
-        //  $scope.add
-
-
-          task.putOneTask(tid, tname)
-          .then(function (res) {
-              // success
-              console.log("put success");
-              $scope.getAll();
-           
-          }, function (err) {
-              // error 
-              console.log("put API request failed");
-          })
-      }
+    
+    $scope.post = function () {    
+        RESTapi.POST( $scope.requestObj, 'http://35.163.140.165:1114/sql')
+        .then(function (res) {  debugger ;
+          // succes  
+            //$scope.$apply(function () {
+                $scope.sqlResponse = res;
+           // });
+        }, function (err) {
+          // error
+        })
+    }
 
 
 
-      $scope.create = function () {
-
-         
-
-          var modalInstance = $modal.open({
-              templateUrl: '/Views/create.html',
-              controller: 'CreatetaskCtrl'
-          });
-
-          modalInstance.result.then(function () {
-              // success
-              $scope.getAll();
-          }, function () {
-              // error
-              $scope.getAll();
-          })
-      }
+})
+.controller('homeController', function ($scope, RESTapi) {
 
 
 
-      $scope.deleteTask = function (id) {
-          task.deleteTask(id)
-          .then(function (res) {
-              // success
-              $scope.getAll();
-          }, function () {
-              // error
-              $scope.getAll();
-          })
-      }
 
-  $scope.init();
-  });
+})
+;
 
 
 
