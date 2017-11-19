@@ -1,6 +1,17 @@
 FROM alpine:3.5
 
 
+
+
+
+
+LABEL "com.example.vendor"="ACME Incorporated"
+LABEL com.example.label-with-value="foo"
+LABEL version="1.0"
+LABEL description="This text illustrates \
+that label-values can span multiple lines."
+
+
 RUN apk add --no-cache bash git nginx uwsgi uwsgi-python py2-pip \
 	&& pip2 install --upgrade pip \
 	&& pip2 install flask \

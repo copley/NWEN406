@@ -71,7 +71,7 @@ app = Flask(__name__)
 from flask import request
 @app.route('/postlamb', methods=['POST'])
 def post():
-    print ('postingg here')
+    print ('postingg inmages e')
     maxi =request.json['maxi']
     loops = request.json['loops']
     times = request.json['times']
