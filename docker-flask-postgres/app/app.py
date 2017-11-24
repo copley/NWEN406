@@ -71,40 +71,40 @@ def home():
     return render_template('show_all.html', students=students.query.all())
     
     
+    
 @app.route ('/sql',methods=['POST'])
 def delete ():
-    print ("sqlreqwust",file=sys.stderr)
+
     sqlstring =  request.json['sqlStatement']
-    print (sqlstring,file=sys.stderr)#sql = text('select * from students')
+    #print (sqlstring,file=sys.stderr)#sql = text('select * from students')
     sql = text (sqlstring )
     result = db.engine.execute(sql)
     table = []
-    print('This query  output:', file=sys.stderr) #   print ('result : ')
+    #print('This query  output:', file=sys.stderr) #   print ('result : ')
     print (result)
     for row in result:
         table_row = {} 
         for column in row :
             table_row['c1']=column
         table.append(table_row)
-    print (table,file=sys.stderr)
+    #print (table,file=sys.stderr)
     return jsonify( table)
     
 @app.route ('/get',methods=['GET'])
 def get ():
-    print ("sqlreqwust",file=sys.stderr)
-    sqlstring =  request.json['sqlStatement']
+
     sql = text('select * from students')
     #sql = text (sqlstring )
     result = db.engine.execute(sql)
     table = []
-    print('This query  output:', file=sys.stderr) #   print ('result : ')
+    #print('This query  output:', file=sys.stderr) #   print ('result : ')
     print (result)
     for row in result:
         table_row = {} 
         for column in row :
             table_row['c1']=column
         table.append(table_row)
-    print (table,file=sys.stderr)
+    #print (table,file=sys.stderr)
     return jsonify( table)
     
     
