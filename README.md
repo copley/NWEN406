@@ -1,5 +1,6 @@
 sudo ng serve -p 8080 -H 0.0.0.0 --public-host ng5-adrianng.c9users.io
-
+http://35.163.140.165:1114/
+http://ng5-adrianng.c9users.io/NWEN406/angularjs/index.html#/rawsql
 
 #  AWS  Lamda project
 ## demo url :  http://52.10.250.199:5000/project2/
@@ -35,7 +36,11 @@ pip install awscli --upgrade --user
 Copyright © Victoria University of Wellington, New Zealand
 
 
+$ git config credential.helper store
+$ git push https://github.com/repo.git
 
+Username for 'https://github.com': <USERNAME>
+Password for 'https://USERNAME@github.com': <PASSWORD>
 
 
 

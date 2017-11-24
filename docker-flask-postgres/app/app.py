@@ -69,6 +69,8 @@ def home():
             flash('Record was succesfully added')
             return redirect(url_for('home'))
     return render_template('show_all.html', students=students.query.all())
+    
+    
 @app.route ('/sql',methods=['POST'])
 def delete ():
     print ("sqlreqwust",file=sys.stderr)
@@ -86,8 +88,26 @@ def delete ():
         table.append(table_row)
     print (table,file=sys.stderr)
     return jsonify( table)
-    # return render_template('show_all.html', students=names)
-    # return redirect(url_for('home'))
+    
+@app.route ('/get',methods=['GET'])
+def get ():
+    print ("sqlreqwust",file=sys.stderr)
+    sqlstring =  request.json['sqlStatement']
+    sql = text('select * from students')
+    #sql = text (sqlstring )
+    result = db.engine.execute(sql)
+    table = []
+    print('This query  output:', file=sys.stderr) #   print ('result : ')
+    print (result)
+    for row in result:
+        table_row = {} 
+        for column in row :
+            table_row['c1']=column
+        table.append(table_row)
+    print (table,file=sys.stderr)
+    return jsonify( table)
+    
+    
 if __name__ == '__main__':
     dbstatus = False
     while dbstatus == False:
