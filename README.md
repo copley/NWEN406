@@ -1,3 +1,10 @@
+## jenker  docker  :
+
+## sudo chown -R 1000:1000 ./jenkins-data
+ sudo docker run -p 8888:8080 -v $PWD/jenkins-data:/var/jenkins_home -v $PWD/NWEN406:/NWEN406 jenkinsci/blueocean:latest        
+
+
+
 
 
 
@@ -64,9 +71,9 @@ https://groups.google.com/forum/#!topic/golang-nuts/qTk0QG00lTI
 ## sudo usermod -a -G docker ec2-user
 ## reboot instance 
 ## docker run --rm -p 5000:5000 beaconwarden/ecs1:latest
-## docker build -t ecs1 .
+## docker build -t beaconwarden/ecs1:latest .
 ## docker images --filter reference=ecs1
-## docker run -p 5000:5000 beaconwarden/ecs1
+## docker run -p 5000:5000 beaconwarden/ecs1:latest
 ## docker tag bb38976d03cf beaconwarden/ecs1:latest
 ## docker commit containerID  beaconwarden/ecs1:latest
 ## docker push beaconwarden/ecs1 
