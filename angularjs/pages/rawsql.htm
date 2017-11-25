@@ -25,8 +25,10 @@
 		
 <textarea  ng-model="defaultSQL" id="code">  SQL </textarea >
 		   {{defaultSQL}}
-		   <button  class="btn btn-primary"  ng-click="post()" >issue SQL cmd </button>
-    {{sqlResponse}}
+		    <button  class="btn btn-primary"  ng-click="post('py')" >issue sql cmd to </button> http://35.163.140.165:1114/  </br>
+		   <button  class="btn btn-primary"  ng-click="post('net')" >issue post cmd to </button> http://35.163.140.165:8000/api/todo</br>
+		   		   <button  class="btn btn-primary"  ng-click="get()" >issue get cmd </button>
+   </br> {{sqlResponse}}
 	<script type="text/javascript">
 window.onload = function() {
 

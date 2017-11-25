@@ -45,7 +45,7 @@ export class ChartJsComponent implements OnInit {
 
     public jsons = [];
     public cdata = [];
-    public clables = [];  //f
+    public clables = [];  //ff
     public costs = [];
     public ReqO = Defobj;
     public lineChartData: Array < any > = [];
