@@ -1,18 +1,6 @@
-<<<<<<< HEAD
-## jenker  docker  :
-
-## sudo chown -R 1000:1000 ./jenkins-data
- sudo docker run -p 8888:8080 -v $PWD/jenkins-data:/var/jenkins_home -v $PWD/NWEN406:/NWEN406 jenkinsci/blueocean:latest        
-
-
-
-
-
-=======
 sudo ng serve -p 8080 -H 0.0.0.0 --public-host ng5-adrianng.c9users.io
 http://35.163.140.165:1114/
 http://ng5-adrianng.c9users.io/NWEN406/angularjs/index.html#/rawsql
->>>>>>> 5cfc7ed786733a5ff474a8b740457af7c85411b2
 
 
 
@@ -78,23 +66,6 @@ git push https://github.com/repo.git
 git clone -b a  https://github.com/AdrianNg/NWEN406.git  
  
 # Docker on EC2 AMI :
-<<<<<<< HEAD
- 
-## sudo yum update -y
-## sudo yum install -y docker
-## sudo service docker start
-## sudo usermod -a -G docker ec2-user
-## reboot instance 
-## docker run --rm -p 5000:5000 beaconwarden/ecs1:latest
-## docker build -t beaconwarden/ecs1:latest .
-## docker images --filter reference=ecs1
-## docker run -p 5000:5000 beaconwarden/ecs1:latest
-## docker tag bb38976d03cf beaconwarden/ecs1:latest
-## docker commit containerID  beaconwarden/ecs1:latest
-## docker push beaconwarden/ecs1 
-## docker ps 
-## docker images 
-=======
 sudo yum update -y  
 sudo yum install -y docker  
 sudo service docker start  
@@ -109,19 +80,16 @@ docker commit containerID  beaconwarden/ecs1:latest
 docker push beaconwarden/ecs1   
 docker ps   
 docker images   
-<<<<<<< HEAD
 ## C9 container
 https://hub.docker.com/r/kdelfour/cloud9-docker/      
 docker pull kdelfour/cloud9-docker      
 docker run -it -d -p 80:80 -v /home/ec2-user/:/workspace/ kdelfour/cloud9-docker     
 https://ropenscilabs.github.io/r-docker-tutorial/04-Dockerhub.html  
-=======
->>>>>>> 5cfc7ed786733a5ff474a8b740457af7c85411b2
+
  
  
  https://ropenscilabs.github.io/r-docker-tutorial/04-Dockerhub.html
  sudo ssh -i nwenkey.pem ec2-user@ec2-34-236-109-188.compute-1.amazonaws.com
->>>>>>> ef634010057bce49f29b532c4963747efbb2318f
  
  
 # installl java 8
