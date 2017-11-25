@@ -2,6 +2,9 @@ sudo ng serve -p 8080 -H 0.0.0.0 --public-host ng5-adrianng.c9users.io
 http://35.163.140.165:1114/
 http://ng5-adrianng.c9users.io/NWEN406/angularjs/index.html#/rawsql
 
+
+
+
 #  AWS  Lamda project
 ## demo url :  http://52.10.250.199:5000/project2/
 ## author :  Adrian Ng  (beaconwarden@gmail.com)
@@ -78,10 +81,11 @@ docker commit containerID  beaconwarden/ecs1:latest
 docker push beaconwarden/ecs1   
 docker ps   
 docker images   
- 
- 
- https://ropenscilabs.github.io/r-docker-tutorial/04-Dockerhub.html
- sudo ssh -i nwenkey.pem ec2-user@ec2-34-236-109-188.compute-1.amazonaws.com
+## C9 container
+https://hub.docker.com/r/kdelfour/cloud9-docker/      
+docker pull kdelfour/cloud9-docker      
+docker run -it -d -p 80:80 -v /home/ec2-user/:/workspace/ kdelfour/cloud9-docker     
+https://ropenscilabs.github.io/r-docker-tutorial/04-Dockerhub.html  
  
  
 # installl java 8

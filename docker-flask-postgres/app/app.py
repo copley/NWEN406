@@ -76,18 +76,24 @@ def home():
 def delete ():
 
     sqlstring =  request.json['sqlStatement']
-    #print (sqlstring,file=sys.stderr)#sql = text('select * from students')
+    print (sqlstring,file=sys.stderr)#sql = text('select * from students')
     sql = text (sqlstring )
     result = db.engine.execute(sql)
     table = []
     #print('This query  output:', file=sys.stderr) #   print ('result : ')
-    print (result)
+    print (result, file=sys.stderr)
+    i=0
     for row in result:
         table_row = {} 
+        i= i+1 
+        r = [] 
         for column in row :
-            table_row['c1']=column
-        table.append(table_row)
-    #print (table,file=sys.stderr)
+            print ("column", file=sys.stderr)
+            print (column, file=sys.stderr)
+            r.append (column)
+        table_row[str(i)] = r 
+        table.append(r)
+    print (table,file=sys.stderr)
     return jsonify( table)
     
 @app.route ('/get',methods=['GET'])
