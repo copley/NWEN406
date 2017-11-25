@@ -114,35 +114,14 @@ def getSatisfactory():  # cost and performance scaled linearly with memory
 
 
 
-from flask import request
-@app.route('/post', methods=['POST'])
-def post():
-    
-    maxi =request.json['maxi']
-    loops = request.json['loops']
-    times = request.json['times']
-    mb =  request.json['mb']
-    conc =  request.json['conc']
-    last4 =  request.json['l4']
-    objects = prime_number_lambda(maxi, loops,int(times) ,mb , conc  , last4 )  # maxi, loops , times, mb , x , mbORx  , isConcurrent , last4
-
-    if objects == 403  :
-        return jsonify( {'json' :objects}), 403
-    else :
-        return jsonify( {'json' :objects}), 201
 
 
-from flask import render_template
 
-@app.route('/l/')
 
-def render_lambda():
-    return render_template('lambda.html')
 
-@app.route('/project2/')
 
-def project2():
-    return render_template('project2.html')
+
+
 
 
 
