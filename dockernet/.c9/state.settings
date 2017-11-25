@@ -1,0 +1,281 @@
+{
+    "console": {
+        "@expanded": true,
+        "@height": 193,
+        "@maximized": "false",
+        "json()": {
+            "meta": {
+                "accessList": [
+                    "tab2",
+                    "tab1"
+                ]
+            },
+            "name": "pane1",
+            "nodes": [
+                {
+                    "type": "tab",
+                    "name": "tab1",
+                    "path": "",
+                    "className": [
+                        "tab1"
+                    ],
+                    "document": {
+                        "changed": false,
+                        "meta": {
+                            "timestamp": 1511504379910
+                        },
+                        "filter": true,
+                        "title": "bash - \"52e65501dc58\"",
+                        "tooltip": "bash - \"52e65501dc58\"",
+                        "terminal": {
+                            "id": "devel_969",
+                            "cwd": "",
+                            "width": 1648,
+                            "height": 167
+                        }
+                    },
+                    "editorType": "terminal",
+                    "active": true
+                },
+                {
+                    "type": "tab",
+                    "name": "tab2",
+                    "path": "",
+                    "className": [],
+                    "document": {
+                        "title": "Immediate",
+                        "meta": {},
+                        "filter": true,
+                        "changed": false
+                    },
+                    "editorType": "immediate",
+                    "active": false
+                }
+            ],
+            "skin": "editor_tab",
+            "skinset": "default",
+            "type": "pane"
+        }
+    },
+    "experiments": {
+        "@@enabled": true,
+        "@autosave": 0,
+        "@flat-dark": 0,
+        "@git": 1,
+        "@plugin-manager": 1,
+        "@plugins": 0,
+        "@sdk": 0,
+        "@test": 0
+    },
+    "ext": {
+        "counters": {
+            "@ace": 1,
+            "@acestatus": 1,
+            "@divider": 5,
+            "@document": 7,
+            "@form": 5,
+            "@menu": 5,
+            "@menuitem": 13,
+            "@pane": 2,
+            "@session": 6,
+            "@tab": 7,
+            "@undoManager": 7,
+            "@welcome": 1
+        }
+    },
+    "findinfiles": {
+        "@console": "true",
+        "@matchcase": "false",
+        "@regex": "false",
+        "@scope": "selection",
+        "@wholeword": "false"
+    },
+    "menus": {
+        "@minimized": "false"
+    },
+    "nak": {
+        "@installed": true
+    },
+    "panecycle": {
+        "json()": [
+            "tab3",
+            "tab1"
+        ]
+    },
+    "panels": {
+        "@active-left": "tree",
+        "commands.panel": {
+            "@enabled": "true",
+            "@name": "commands.panel"
+        },
+        "debugger": {
+            "@enabled": "true",
+            "@name": "debugger"
+        },
+        "navigate": {
+            "@enabled": "true",
+            "@name": "navigate"
+        },
+        "outline": {
+            "@enabled": "true",
+            "@name": "outline"
+        },
+        "scm": {
+            "@enabled": "true",
+            "@name": "scm"
+        },
+        "tree": {
+            "@enabled": "true",
+            "@name": "tree"
+        }
+    },
+    "projecttree": {
+        "@scrollpos": -10,
+        "@showfs": true,
+        "expanded": {
+            "json()": [
+                "/",
+                "/aspnetapp/Models",
+                "/aspnetapp/Controllers",
+                "/aspnetapp",
+                "/aspnetapp/wwwroot",
+                "/aspnetapp/Views"
+            ]
+        }
+    },
+    "recentfiles": {
+        "json()": []
+    },
+    "tabs": {
+        "json()": {
+            "focus": "/aspnetapp/Controllers/TodoController.cs",
+            "meta": {
+                "accessList": [
+                    "tab3",
+                    "tab0",
+                    "tab4",
+                    "tab5",
+                    "tab6"
+                ]
+            },
+            "name": "pane0",
+            "nodes": [
+                {
+                    "type": "tab",
+                    "name": "tab3",
+                    "path": "/aspnetapp/Controllers/TodoController.cs",
+                    "className": [
+                        "tab3",
+                        "changed",
+                        "focus"
+                    ],
+                    "document": {
+                        "changed": true,
+                        "meta": {
+                            "timestamp": 1511566702471
+                        },
+                        "filter": true,
+                        "title": "TodoController.cs",
+                        "tooltip": "/aspnetapp/Controllers/TodoController.cs",
+                        "ace": {}
+                    },
+                    "editorType": "ace",
+                    "active": true
+                },
+                {
+                    "type": "tab",
+                    "name": "tab0",
+                    "path": "/aspnetapp/Models/RequestObj.cs",
+                    "className": [
+                        "tab0"
+                    ],
+                    "document": {
+                        "changed": false,
+                        "meta": {
+                            "timestamp": 1511496922980
+                        },
+                        "filter": true,
+                        "title": "RequestObj.cs",
+                        "tooltip": "/aspnetapp/Models/RequestObj.cs",
+                        "ace": {}
+                    },
+                    "editorType": "ace",
+                    "active": false
+                },
+                {
+                    "type": "tab",
+                    "name": "tab5",
+                    "path": "/aspnetapp/README.md",
+                    "className": [
+                        "tab5"
+                    ],
+                    "document": {
+                        "changed": false,
+                        "meta": {
+                            "timestamp": 1511507531486
+                        },
+                        "filter": true,
+                        "title": "README.md",
+                        "tooltip": "/aspnetapp/README.md",
+                        "ace": {}
+                    },
+                    "editorType": "ace",
+                    "active": false
+                },
+                {
+                    "type": "tab",
+                    "name": "tab4",
+                    "path": "/aspnetapp/Models/ResponseObj.cs",
+                    "className": [
+                        "tab4"
+                    ],
+                    "document": {
+                        "changed": false,
+                        "meta": {
+                            "timestamp": 1511565321404
+                        },
+                        "filter": true,
+                        "title": "ResponseObj.cs",
+                        "tooltip": "/aspnetapp/Models/ResponseObj.cs",
+                        "ace": {}
+                    },
+                    "editorType": "ace",
+                    "active": false
+                },
+                {
+                    "type": "tab",
+                    "name": "tab6",
+                    "path": "",
+                    "className": [
+                        "tab6"
+                    ],
+                    "document": {
+                        "changed": false,
+                        "meta": {
+                            "timestamp": 1511566746522
+                        },
+                        "filter": true,
+                        "title": "bash - \"root@52e65501dc58: /workspace\"",
+                        "tooltip": "bash - \"root@52e65501dc58: /workspace\"",
+                        "terminal": {
+                            "id": "devel_434",
+                            "cwd": "/",
+                            "width": 0,
+                            "height": 0
+                        }
+                    },
+                    "editorType": "terminal",
+                    "active": false
+                }
+            ],
+            "skin": "editor_tab",
+            "skinset": "default",
+            "type": "pane"
+        }
+    },
+    "tree_selection": {
+        "json()": [
+            "/aspnetapp/Models/RequestObj.cs"
+        ]
+    }
+}
