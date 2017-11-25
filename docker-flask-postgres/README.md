@@ -28,3 +28,10 @@ fig down   #Stop and remove everything
 The site will be available to you at `localhost:43434`.
 
 Questions, contact me at my gmail (user: mehemken) or at the LearnTeachCode.slack channel (user: @mehemken).
+
+
+#!/bin/bash
+# Delete all containers
+docker rm $(docker ps -a -q)
+# Delete all images
+docker rmi $(docker images -q)
