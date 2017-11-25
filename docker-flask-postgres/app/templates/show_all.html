@@ -1,0 +1,44 @@
+<html>
+    <head>
+	<title>Flask PostgreSQL</title>
+    </head>
+    <body>
+	<h3>
+	    <a href="{{ url_for('home') }}">Example</a>
+	</h3>
+
+
+	<form action="{{ request.path }}" method="post">
+	    From :<br>
+	    <input type="text" name="name"><br>
+	    To:<br>
+	    <input type="text" name="city"><br>
+	    Msg:<br>
+	    <input type="text" name="addr"><br>
+	    <input type="submit" value="Submit">
+	</form>
+
+
+	<table>
+	    <thead>
+		<tr>
+		    <th>From:</th>
+		    <th>To:</th>
+		    <th>Message:`</th>
+		</tr>
+	    </thead>
+
+	    <tbody>
+	    {% for student in students %}
+		<tr>
+		    <td>{{ student.name }}</td>
+		    <td>{{ student.city }}</td>
+		    <td>{{ student.addr }}</td>
+		</tr>
+	    {% endfor %}
+	    </tbody>
+	</table>
+
+
+    </body>
+</html>
