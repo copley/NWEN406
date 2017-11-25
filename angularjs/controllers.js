@@ -84,8 +84,22 @@ lambda.controller('chartjsController', function ($scope, RESTapi) {
 
 
     
-    $scope.post = function () {    
-        RESTapi.POST( $scope.requestObj, 'http://35.163.140.165:1114/sql')
+    $scope.post = function (be) { 
+        var url = ""; 
+        be=='py'? url =  'http://35.163.140.165:1114/sql' :   url =  'http://35.163.140.165:8000/api/todo/PostToFlask';
+        RESTapi.POST( $scope.requestObj, url )
+        .then(function (res) {  debugger ;
+          // succes  
+            //$scope.$apply(function () {
+                $scope.sqlResponse = res;
+           // });
+        }, function (err) {
+          // error
+        })
+    }
+    
+    $scope.get = function () {    // http://35.163.140.165:1114/sql 
+        RESTapi.GET('http://35.163.140.165:8000/api/todo')
         .then(function (res) {  debugger ;
           // succes  
             //$scope.$apply(function () {
