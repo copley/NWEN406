@@ -18,7 +18,7 @@ const httpOptions = {
 
 
 
-interface RequestJson {
+interface ResponseObj {
   MB: number;
   durationSeconds: number;
   loops: number;
@@ -27,16 +27,10 @@ interface RequestJson {
 
 
 
-
-interface ResponseObj { 
-  task : RequestJson[]
-  json : RequestJson[]
-}
-
 @Injectable()
 export class RESTService  {
 
-  private reurl =   'http://35.163.140.165:5000/post';  //   URL to web api
+  private reurl =   'http://35.163.140.165:1114/post';  //   URL to web api
    results: string[];
   constructor(
     private http: HttpClient) { }
@@ -44,12 +38,12 @@ export class RESTService  {
  
 
 //  ** GET performance from the server 
-  restPost (req : ReqObj): Observable<ResponseObj> { 
+  restPost (req : ReqObj): Observable<ResponseObj[]> { 
   
-   return  this.http.post<ResponseObj>(this.reurl, 
+   return  this.http.post<ResponseObj[]>(this.reurl, 
         req
     ) .pipe(     
-        tap(heroes => this.log(`fetched heroes`)),
+        tap(l => this.log(`fetched l`)),
         catchError(this.handleError('post', []))
       ) ;  
     

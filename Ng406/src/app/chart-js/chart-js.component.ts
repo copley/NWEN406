@@ -13,24 +13,20 @@ import {
     Defobj
 } from './defobj';
 
+import {
+    RESTService
+} from '../REST.service';
 
 
 
 
-interface RequestJson {
+interface ResponseObj {
   MB: number;
   durationSeconds: number;
   loops: number;
   max : number;
 }
 
-
-
-
-interface ResponseObj { 
-  task : RequestJson[]
-  json : RequestJson[]
-}
 
 @Component({
     selector: 'app-chart-js',
@@ -59,8 +55,8 @@ export class ChartJsComponent implements OnInit {
     public lineChartType: string = 'line';
 
 
-    constructor(private http: HttpClient) {};
-    private reurl = 'http://35.163.140.165:5000/post';
+    constructor(private http: HttpClient, private restService :RESTService) {};
+    private reurl = 'http://35.163.140.165:1114/post';
 
     ngOnInit(): void {
 
@@ -90,7 +86,7 @@ export class ChartJsComponent implements OnInit {
         ];
         this.lineChartLabels = this.clables;
 
-        this.lineChartColors = [{ // grey
+        this.lineChartColors = [{ // grehhgghhy
                 backgroundColor: 'rgba(48,159,177,0.2)',
                 borderColor: 'rgba(48,159,177,1)',
                 pointBackgroundColor: 'rgba(48,159,177,1)',
@@ -158,18 +154,18 @@ export class ChartJsComponent implements OnInit {
     }
 
 
-
-    public post(): void {   this.chartjs();
-        this.http.post < ResponseObj > (this.reurl,
+/*
+    public post2(): void {   this.chartjs();
+        this.http.post < ResponseObj[] > (this.reurl,
             this.ReqO
         ).subscribe(
             res => {
                 debugger;
               
-                this.jsons = res.json;
+                this.jsons = res;
                 let t= parseInt(this.ReqO.times) ; 
                 let _lineChartData: Array < any > = new Array(t);
-             //   this.clables = [] ;  this.cdata  = [] ; this.costs = [] ;
+             //   this.clables = [] ;  this.cdata  = [] ; this.costs = [] ;ll
                 let  diff = this.clables.length -t ; 
                 this.clables.splice( t, diff)  ;
                 for (let j = 0; j < 2; j++) {
@@ -195,27 +191,37 @@ export class ChartJsComponent implements OnInit {
             }
         );;
         // this.initaxis() ;
-    }
-    /**
-  public post2() :void { 
+    } */
+    
+  public post() :void {   this.chartjs();
           this.restService.restPost(this.ReqO).subscribe(
         res => {
-             this.jsons = res.json ;     let _lineChartData:Array<any> = new Array(parseInt(this.ReqO.times));
-                  _lineChartData[0] = {data: new Array(parseInt(this.ReqO.times)), label: this.lineChartData[0].label};
-            for (let i = 0; i < parseInt(this.ReqO.times); i++) {
-              
-             _lineChartData[0].data[i] = this.jsons[i].durationSeconds  ;
-             this.clables[i] = i  ; 
-              
-            }
-                       this.lineChartData = _lineChartData;
-                     //   this.lineChartLabels
-          console.log(res);
+                    debugger 
+                this.jsons = res;
+                let t= parseInt(this.ReqO.times) ; 
+                let _lineChartData: Array < any > = new Array(t);
+                let  diff = this.clables.length -t ; 
+                this.clables.splice( t, diff)  ;
+                for (let j = 0; j < 2; j++) {
+                    _lineChartData[j] = {
+                        data: new Array(parseInt(this.ReqO.times)),
+                        label: this.lineChartData[j].label
+                    };
+                    for (let i = 0; i < parseInt(this.ReqO.times); i++) {
+
+                        _lineChartData[j].data[i] = this.jsons[i].durationSeconds;
+                        if (j == 1) _lineChartData[j].data[i] = this.getprice(this.jsons[i].MB, this.jsons[i].durationSeconds);
+                        this.clables[i] = i + '.';
+
+                    }
+                }
+                this.lineChartData = _lineChartData;
+
         },
         err => {
           alert("wrong apt key or other invalid input F ");
         }
-      );;
+      );
     
   } 
   
@@ -228,7 +234,7 @@ export class ChartJsComponent implements OnInit {
   
   
   
- 
+ /*
   public post1():void {
      this.http.get<ResponseObj>('http://35.163.140.165:5000/getSatisfactory').subscribe(data => {
            this.jsons =   data.task[0]     ;   console.log( "this.json" )  ;  console.log( this.jsons )   ;
@@ -247,9 +253,9 @@ export class ChartJsComponent implements OnInit {
             
     });
  
-  }
+  }  */
   
-  **/
+ 
 
     // events
     public chartClicked(e: any): void {
