@@ -23,6 +23,24 @@ lambda.service('RESTapi', function ($http, $q, $rootScope) {
       return defer.promise;
   }
   
+  RESTapi.GET = function (url) {
+    var defer = $q.defer();
+  
+    $http({
+    url: url,
+    method: "GET"
+  })
+  .success(function (res) {
+          defer.resolve(res);
+      })
+      .error(function (err, status) {
+          defer.reject(err);
+      })
+  
+      return defer.promise;
+  }
+  
+  
   return RESTapi;
 
   });
