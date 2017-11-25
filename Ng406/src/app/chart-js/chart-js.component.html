@@ -1,0 +1,70 @@
+ 
+ 
+ 
+ 
+ <div style = "width: 500px ; margin-top : -130px " >
+
+   
+
+  
+  
+
+</div>  
+  
+  
+  
+  
+<div class="container">
+  <div class="row">
+    <div class="col-md-2">
+                
+            
+          <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1">last4 apikey:</span>
+            <input class="form-control" [(ngModel)]="ReqO.l4" style="border : 5px solid #800080" type="text" id="l4" value="Vvuc">
+          </div>
+          <br>
+          <div class="input-group">
+            <span class="input-group-addon" id="basic-addon2">Max  : </span>
+            <input class="form-control" [(ngModel)]="ReqO.maxi" type="text" id="maxi" value="10"   min="10" max="1000">
+          </div>
+          <br>
+          <div class="input-group">
+            <span class="input-group-addon" id="basic-addon2">loops : </span>
+            <input class="form-control" [(ngModel)]="ReqO.loops"  type="text" id="loop" value="1"  min="1" max="5">
+          </div>
+          <br>
+          <div class="input-group">
+            <span class="input-group-addon" id="basic-addon2">times :</span>
+            <input class="form-control" [(ngModel)]="ReqO.times" type="text" id="t" value="4"  min="1" max="100">
+          </div>
+          <br>
+          <div class="input-group">
+            <span class="input-group-addon" id="basic-addon2">Conmode:</span>
+            <input class="form-control" [(ngModel)]="ReqO.conc" type="text"  max="100">
+          </div>
+          <br>
+          <div class="input-group">
+            <span class="input-group-addon" id="basic-addon2">mb:</span>
+            <input class="form-control" [(ngModel)]="ReqO.mb" type="text" id="t" value="4"  min="1" max="100">
+          </div>
+          <br>
+          <button  class="btn btn-primary"  (click)="post()" >request lambda data</button>
+    </div>
+    <div class="col-md-10 canvasc  light">
+        
+    <canvas  baseChart  
+                [datasets]="lineChartData"
+                [labels]="lineChartLabels"
+                [options]="lineChartOptions"
+                [colors]="lineChartColors"
+                [legend]="lineChartLegend"
+                [chartType]="lineChartType"
+                (chartHover)="chartHovered($event)"
+                (chartClick)="chartClicked($event)"></canvas>
+  
+    </div>
+    
+  </div>
+</div>
+ 
