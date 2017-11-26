@@ -4,10 +4,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { catchError, map, tap } from 'rxjs/operators';
-
-
-
 import { ReqObj } from './chart-js/ReqObj';
+import { ReqSqlObj } from './lab-sql/ReqSqlObj';
+
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
@@ -26,14 +25,18 @@ interface ResponseObj {
 }
 
 
+interface sqlResponObj {
+  row: string;
+}
+
 
 @Injectable()
 export class RESTService  {
 
   private reurl =   'http://35.163.140.165:1114/post';  //   URL to web api
-   results: string[];
-  constructor(
-    private http: HttpClient) { }
+  private sqlURL  = "http://35.163.140.165:8000/api/todo/PostToFlask" ;
+  results: string[];
+  constructor(private http: HttpClient) { }
     
  
 
@@ -48,6 +51,20 @@ export class RESTService  {
       ) ;  
     
   }
+  
+  restPost_sql (req : ReqSqlObj): Observable<sqlResponObj[]> { 
+  
+   return  this.http.post<sqlResponObj[]>(this.sqlURL, 
+        req
+    ) .pipe(     
+        tap(l => this.log(`fetched l`)),
+        catchError(this.handleError('post', []))
+      ) ;  
+    
+  }
+  
+  
+  
   private log(message: string) {
     console.log('Rest service: ' + message);
   }
