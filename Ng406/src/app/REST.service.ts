@@ -52,7 +52,7 @@ export class RESTService  {
     
   }
   
-  restPost_sql (req : ReqSqlObj): Observable<sqlResponObj[]> { 
+  restPost_sql (req : ReqSqlObj): Observable<sqlResponObj[]> { debugger ;
   
    return  this.http.post<sqlResponObj[]>(this.sqlURL, 
         req
