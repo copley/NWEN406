@@ -8,6 +8,7 @@ import { ChartJsComponent } from './chart-js/chart-js.component';
 import { RESTService } from './REST.service';
 import { AppRoutingModule }     from './app-routing.module';
 import { LabSqlComponent } from './lab-sql/lab-sql.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
   MatAutocompleteModule,
   MatButtonModule,
@@ -42,6 +43,7 @@ import {
   MatStepperModule,
 } from '@angular/material';
 import {CdkTableModule} from '@angular/cdk/table';
+import { CdkTableModule } from '@angular/cdk';
 
 @NgModule({
     exports: [
@@ -89,7 +91,11 @@ import {CdkTableModule} from '@angular/cdk/table';
      HttpClientModule,
       FormsModule,
       AppRoutingModule,
-    MatNativeDateModule
+         CdkTableModule,
+         MatTableModule,
+    MatNativeDateModule,
+    MatPaginatorModule,
+      BrowserAnimationsModule
   ],
   providers: [RESTService],
   bootstrap: [AppComponent]
