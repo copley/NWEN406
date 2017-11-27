@@ -6,6 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'ngChart.js data visualisation,  AKA your AWS lambda live performance measurement platform ';
-  subtitle = 'AKA your AWS lambda live performance measurement platform ';
+
 }

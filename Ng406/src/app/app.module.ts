@@ -6,18 +6,21 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { ChartJsComponent } from './chart-js/chart-js.component';
 import { RESTService } from './REST.service';
-
+import { AppRoutingModule }     from './app-routing.module';
+import { LabSqlComponent } from './lab-sql/lab-sql.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ChartJsComponent
+    ChartJsComponent,
+    LabSqlComponent
   ],
   imports: [
     BrowserModule,
      ChartsModule,
      HttpClientModule,
-      FormsModule
+      FormsModule,
+      AppRoutingModule
   ],
   providers: [RESTService],
   bootstrap: [AppComponent]

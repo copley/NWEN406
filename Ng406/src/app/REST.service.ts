@@ -4,10 +4,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { catchError, map, tap } from 'rxjs/operators';
-
-
-
 import { ReqObj } from './chart-js/ReqObj';
+import { ReqSqlObj } from './lab-sql/ReqSqlObj';
+
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
@@ -18,7 +17,7 @@ const httpOptions = {
 
 
 
-interface RequestJson {
+interface ResponseObj {
   MB: number;
   durationSeconds: number;
   loops: number;
@@ -26,34 +25,46 @@ interface RequestJson {
 }
 
 
-
-
-interface ResponseObj { 
-  task : RequestJson[]
-  json : RequestJson[]
+interface sqlResponObj {
+  row: string;
 }
+
 
 @Injectable()
 export class RESTService  {
 
-  private reurl =   'http://35.163.140.165:5000/post';  //   URL to web api
-   results: string[];
-  constructor(
-    private http: HttpClient) { }
+  private reurl =   'http://35.163.140.165:1114/post';  //   URL to web api
+  private sqlURL  = "http://35.163.140.165:8000/api/todo/PostToFlask" ;
+  results: string[];
+  constructor(private http: HttpClient) { }
     
  
 
 //  ** GET performance from the server 
-  restPost (req : ReqObj): Observable<ResponseObj> { 
+  restPost (req : ReqObj): Observable<ResponseObj[]> { 
   
-   return  this.http.post<ResponseObj>(this.reurl, 
+   return  this.http.post<ResponseObj[]>(this.reurl, 
         req
     ) .pipe(     
-        tap(heroes => this.log(`fetched heroes`)),
+        tap(l => this.log(`fetched l`)),
         catchError(this.handleError('post', []))
       ) ;  
     
   }
+  
+  restPost_sql (req : ReqSqlObj): Observable<sqlResponObj[]> { 
+  
+   return  this.http.post<sqlResponObj[]>(this.sqlURL, 
+        req
+    ) .pipe(     
+        tap(l => this.log(`fetched l`)),
+        catchError(this.handleError('post', []))
+      ) ;  
+    
+  }
+  
+  
+  
   private log(message: string) {
     console.log('Rest service: ' + message);
   }
