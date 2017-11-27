@@ -5,7 +5,12 @@
 <button  class="btn btn-primary"  (click)="postSqlScript()" >Issue SQL cmd</button>
 
 <h2 style="color: green;">SQL result: </h2>
-<span style="color:green">{{sqlOutput}}</span>
+<ul>
+  <li *ngFor="let s of sqlOutput">
+    <span style="color:green">{{s.row}}</span> 
+  </li>
+</ul>
+
 <a href="https://www.tutorialspoint.com/postgresql/" target="_blank">PostgreSQL reference</a>
 
 
@@ -13,4 +18,3 @@
 
 
 </div>
-

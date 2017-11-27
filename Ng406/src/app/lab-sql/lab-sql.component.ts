@@ -18,7 +18,7 @@ interface sqlResponObj {
 })
 export class LabSqlComponent implements OnInit {
   public Req = sqlobj;
-  public sqlOutput : string ="" ;
+  public sqlOutput :   Array < sqlResponObj >    ;   
   constructor(private restService :RESTService) {};
 
   ngOnInit() {  // none
@@ -42,9 +42,9 @@ export class LabSqlComponent implements OnInit {
       
       this.restService.restPost_sql(this.Req).subscribe(
           res => {
-            this.sqlOutput ="" ;
+            this.sqlOutput =[] ;
             for (let i= 0 ; i < res.length ; i++ )
-              this.sqlOutput += res[i].row.toString() ;debugger ;
+              this.sqlOutput.push(res[i]) ;debugger ;
          
           },
           err => {
