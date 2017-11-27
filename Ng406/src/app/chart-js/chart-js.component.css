@@ -9,6 +9,9 @@ li {
   color : white;
   
 }
+body {
+  background: black;
+}
 
 
 
@@ -24,9 +27,6 @@ display: block;
 
 
 
-body {
-  background: black;
-}
 
 .breath-light {
   margin: auto;
