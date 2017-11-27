@@ -1,10 +1,11 @@
+from __future__ import print_function
 import time
 from flask import Flask, render_template, flash, redirect, request, url_for,jsonify
 from flask_sqlalchemy import SQLAlchemy#,sessionmake
 from sqlalchemy import text
 import sys
 from flask_cors import CORS, cross_origin
-from __future__ import print_function
+
 import requests
 import os
 from requests_futures.sessions import FuturesSession
@@ -122,9 +123,9 @@ def home():
     
     
 @app.route ('/sql',methods=['POST'])
-def delete ():
-
+def sql_lab ():
     sqlstring =  request.json['sqlStatement']
+    print ("sqlstring",file=sys.stderr)
     print (sqlstring,file=sys.stderr)#sql = text('select * from students')
     sql = text (sqlstring )
     result = db.engine.execute(sql)
@@ -135,11 +136,13 @@ def delete ():
     for row in result:
         table_row = {} 
         i= i+1 
-        r = [] 
+        r = {} 
+        rstring = ""
         for column in row :
             print ("column", file=sys.stderr)
             print (column, file=sys.stderr)
-            r.append (column)
+            rstring = rstring + '|'+ str(column)
+            r['row']= rstring
         table_row[str(i)] = r 
         table.append(r)
     print (table,file=sys.stderr)
@@ -179,7 +182,7 @@ def getMB():  #Varying the Lambda memory settings: 128MB, 256MB, 512MB and 1024M
     print (" Concu", file = log)
     for i in  [128,256,512,1024] :
         on.append (prime_number_lambda(100, 1, 10 ,i ,"on"  , "Vvuc" ))
-    return   jsonify({'task':[off, on ]})   #calling_lamdba(100, 1 , 20)
+    return   jsonify([off, on ])   #calling_lamdba(100, 1 , 20)
 
 
 @app.route('/getXLoops',methods= ['GET'])
@@ -198,7 +201,7 @@ def getXLoops():   #Varying the time taken to do a computation while holding mem
             #off.append (prime_number_lambda(100, i, 10 ,j   ,"off"  , "Vvuc" ))  #(maxi, loops , times, mb   , isConcurrent , last4  )
             on.append (prime_number_lambda(100, i,10 ,j ,"on"  , "Vvuc" ))
 
-    return   jsonify({'task':[off, on ]})   #calling_lamdba(100, 1 , 20)
+    return   jsonify([off, on ])   #calling_lamdba(100, 1 , 20)
 
 
 @app.route('/getSatisfactory',methods= ['GET'])
@@ -208,7 +211,7 @@ def getSatisfactory():  # cost and performance scaled linearly with memory
     for i in  [1024 ,  256 , 512, 128] :
         off.append (prime_number_lambda(10, 1, 1 , i  ,"off"  , "Vvuc" ))
 
-    return   jsonify({'task':[off]})   #calling_lamdba(100, 1 , 20)
+    return   jsonify(off)   #calling_lamdba(100, 1 , 20)
     
     
     
@@ -225,9 +228,9 @@ def post():
     objects = prime_number_lambda(maxi, loops,int(times) ,mb , conc  , last4 )  # maxi, loops , times, mb , x , mbORx  , isConcurrent , last4
 
     if objects == 403  :
-        return jsonify( {'json' :objects}), 403
+        return jsonify( objects), 403
     else :
-        return jsonify( {'json' :objects}), 201
+        return jsonify( objects), 201
         
         
 

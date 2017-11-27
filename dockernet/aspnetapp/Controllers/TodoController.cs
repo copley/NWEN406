@@ -19,7 +19,7 @@ namespace aspnetapp.Controllers
     public class TodoController : Controller
     {
         private readonly TodoContext _context;
-        private readonly string _PostURL = "http://35.163.140.165:1114/sql";
+        private readonly string _SqlPOST = "http://35.163.140.165:1114/sql";
 
         public TodoController(TodoContext context)
         {
@@ -76,7 +76,7 @@ namespace aspnetapp.Controllers
         {
             HttpClient httpClient = new HttpClient(); 
             httpClient.DefaultRequestHeaders.Accept.Clear();
-            string resourceAddress = "http://35.163.140.165:1114/sql"; 
+            string resourceAddress = _SqlPOST; 
             var stringContent = new StringContent(JsonConvert.SerializeObject(new RequestObj {sqlStatement =sqlString} ), Encoding.UTF8, "application/json");
             var response = await httpClient.PostAsync(resourceAddress, stringContent);
             var contents = await response.Content.ReadAsStringAsync(); // https://stackoverflow.com/questions/26597665/how-to-get-content-body-from-a-httpclient-call
