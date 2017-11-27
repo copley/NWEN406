@@ -1,6 +1,21 @@
-sudo ng serve -p 8080 -H 0.0.0.0 --public-host ng5-adrianng.c9users.io
-http://35.163.140.165:1114/
-http://ng5-adrianng.c9users.io/NWEN406/angularjs/index.html#/rawsql
+# Architect overview:  Ng5 is running on Nodejs server hosted on C9.io  and it is marking REST API call to the .NET core and Python Flask API web servers which both are hosted on EC2 docker containers. 
+## This is a headless web application which means fully RESTful and no views are returning from C# or python codes, instead, views are rendered by the Ng5 SPA. The front end and back end communicate only through REST API endpoint JSON data traffic. 
+### Python is in docker-flask-postgres folder. start the NG app in C9 via sudo ng serve -p 8080 -H 0.0.0.0 --public-host headless-adrianng.c9users.io
+### .NET is in dockernet folder. 
+### Augular5 is in Ng406 folder. 
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

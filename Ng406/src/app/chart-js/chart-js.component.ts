@@ -48,7 +48,7 @@ export class ChartJsComponent implements OnInit {
     public lineChartLegend: boolean = true;
     public lineChartType: string = 'line';
     private reurl = 'http://35.163.140.165:1114/post';
-    public  title = 'ngChart.js data visualisation,  AKA your AWS lambda live performance measurement platform ';
+    public  title = 'ngChart.js data visualisation ';
     public subtitle = 'AKA your AWS lambda live performance measurement platform ';
     constructor(private http: HttpClient, private restService :RESTService) {};
    
@@ -137,7 +137,7 @@ export class ChartJsComponent implements OnInit {
     public post() :void {   
         this.chartjs();
         this.restService.restPost(this.ReqO).subscribe(
-            res => {
+            res => {  debugger ;
                 this.jsons = res;
                 let t= parseInt(this.ReqO.times) ; 
                 let _lineChartData: Array < any > = new Array(t);
