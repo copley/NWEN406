@@ -41,7 +41,12 @@ export class LabSqlComponent implements OnInit {
   public postSqlScript() :void {   
     this.restService.restPost_sql(this.Req).subscribe(
     res => {
-      this.sqlOutput =[] ;  let ngt =  document.getElementById("ngt");
+      this.sqlOutput =[] ;  let tableTag =  document.getElementById("ngt");
+      if (document.getElementsByTagName("tbody")[0]!=null){
+        document.getElementsByTagName("tbody")[0].remove();
+      }
+      let tbody = document.createElement("tbody");
+      tableTag.appendChild(tbody);
       for (let i= 0 ; i < res.length ; i++ )
       {  
         this.sqlOutput.push(res[i]) ;
@@ -55,7 +60,7 @@ export class LabSqlComponent implements OnInit {
           tr.appendChild(td);
         }
         if (i%2==0)  tr.style.backgroundColor = "#dac0c0"; else  tr.style.backgroundColor = "#11c0c0" ;  
-        ngt.appendChild(tr);
+        tbody.appendChild(tr);
       }
     },
     err => {
