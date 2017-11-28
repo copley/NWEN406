@@ -1,16 +1,21 @@
 <div style=" background-color: black;">
     <h2 style="color: green;">this SQL lab is to test the SQL statement via the browser. It makes call to the ASP.NET core middleware , then MVC controller uses HttpClient to forward the http request to Python Flask which makes call to PostgreSQL DB and return the query result all the way back to front end</h2>
-    <textarea [(ngModel)]="Req.sqlStatement"  style="width:100%; height :500px"  id="code">  SQL </textarea > 
+    <textarea [(ngModel)]="Req.sqlStatement"  style="width:100%; height :100px"  id="code">  SQL </textarea > 
 		
 <button  class="btn btn-primary"  (click)="postSqlScript()" >Issue SQL cmd</button>
 
 <h2 style="color: green;">SQL result: </h2>
-<span style="color:green">{{sqlOutput}}</span>
+
+
 <a href="https://www.tutorialspoint.com/postgresql/" target="_blank">PostgreSQL reference</a>
+
+
+<table id="ngt">
+
+</table>
 
 
 
 
 
 </div>
-
