@@ -43,7 +43,7 @@ import {
   MatStepperModule,
 } from '@angular/material';
 import {CdkTableModule} from '@angular/cdk/table';
-import { CdkTableModule } from '@angular/cdk';
+
 
 @NgModule({
     exports: [
