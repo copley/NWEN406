@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { selectReddit, fetchPostsIfNeeded, invalidateReddit } from '../actions'
+import { selectReddit, fetchPostsIfNeeded } from '../actions'
 import Picker from '../components/Picker'
 import Posts from '../components/Posts'
 
@@ -34,7 +34,6 @@ class App extends Component {
     e.preventDefault()
 
     const { dispatch, sqlText } = this.props
-    dispatch(invalidateReddit(sqlText))
     dispatch(fetchPostsIfNeeded(sqlText))
   }
 
@@ -45,7 +44,7 @@ class App extends Component {
       <div>
         <Picker value={sqlText}
                 onChange={this.handleChange}
-                options={[ 'reactjs', 'frontend' ]} />
+            />
         <p>
           {lastUpdated &&
             <span>
