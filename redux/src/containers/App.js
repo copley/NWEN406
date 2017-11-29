@@ -4,7 +4,8 @@ import { connect } from 'react-redux'
 import { sqlNowAction, fetchPostsIfNeeded } from '../actions'
 import SqlEditor from '../components/SqlEditor'
 import Table from '../components/Table'
-
+import logo from '../logo.svg';
+import '../app.css';
 class App extends Component {
   static propTypes = {
     sqlText: PropTypes.string.isRequired,
@@ -40,7 +41,9 @@ class App extends Component {
    
     return (
       <div>
-        <h1 style={{color: 'green'}}><a href="https://github.com/AdrianNg/NWEN406/tree/master/redux" target="_blank">Source code Repo</a></h1> 
+        <img src={logo} className="App-logo" alt="logo" />
+      
+        <h1 style={{color: 'blue'}}><a href="https://github.com/AdrianNg/NWEN406/tree/master/redux" target="_blank">React SQL lab Source code Repo</a></h1> 
         <SqlEditor value={sqlText}
                 onChange={this.handleChange}
             />

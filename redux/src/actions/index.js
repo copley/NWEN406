@@ -40,7 +40,7 @@ const fetchPosts = actionObj => dispatch => {
 
 
 export const fetchPostsIfNeeded = actionObj => (dispatch, getState) => {
-  //if (shouldFetchPosts(getState(), reddit)) {
+  
     return dispatch(fetchPosts(actionObj))
-  //}
+
 }

@@ -5,7 +5,7 @@ const SqlEditor = ({ value, onChange }) => (
 
 
 
-     <textarea style={{width:"1500px" , height: "400px"}} onChange={e => onChange(e.target.value)}
+     <textarea style={{width:"1500px" , height: "300px"}} onChange={e => onChange(e.target.value)}
         
          defaultValue={value} />
 

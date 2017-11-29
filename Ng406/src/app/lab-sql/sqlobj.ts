@@ -1,7 +1,7 @@
 
 import { ReqSqlObj } from './ReqSqlObj';
 export const sqlobj: ReqSqlObj = {
-   sqlStatement: 'drop table company3 ;CREATE TABLE COMPANY3('+
+   sqlStatement: 'drop table IF EXISTS company3 ;CREATE TABLE COMPANY3('+
    'ID INT PRIMARY KEY     NOT NULL,'+
    'NAME           TEXT    NOT NULL,'+
    'AGE            INT     NOT NULL,'+
