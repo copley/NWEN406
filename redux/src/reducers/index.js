@@ -36,7 +36,7 @@ const posts = (state = {
         ...state,
         isFetching: false,
         didInvalidate: false,
-        items: action.posts,
+        items: action.rows,
         lastUpdated: action.receivedAt
       }
     default:

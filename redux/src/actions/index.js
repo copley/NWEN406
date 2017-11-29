@@ -18,7 +18,7 @@ export const requestPosts = reddit => ({
 export const receivePosts = (reddit, json) => ({
   type: RECEIVE_POSTS,
   reddit,
-  posts: JSON.parse(json),
+  rows: JSON.parse(json),
   receivedAt: Date.now()
 })
 

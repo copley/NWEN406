@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { selectReddit, fetchPostsIfNeeded } from '../actions'
-import Picker from '../components/Picker'
-import Posts from '../components/Posts'
+import SqlEditor from '../components/SqlEditor'
+import Table from '../components/Table'
 
 class App extends Component {
   static propTypes = {
@@ -38,11 +38,11 @@ class App extends Component {
   }
 
   render() {
-    const { sqlText, posts, isFetching, lastUpdated } = this.props
-    const isEmpty = posts.length === 0
+    const { sqlText, rows, isFetching, lastUpdated } = this.props
+    const isEmpty = rows.length === 0
     return (
       <div>
-        <Picker value={sqlText}
+        <SqlEditor value={sqlText}
                 onChange={this.handleChange}
             />
         <p>
@@ -60,7 +60,7 @@ class App extends Component {
         </p>
       
             <div style={{ opacity: isFetching ? 0.5 : 1 }}>
-              <Posts posts={posts} />
+              <Table rows={rows} />
             </div>
       
       </div>
@@ -73,7 +73,7 @@ const mapStateToProps = state => {
   const {
     isFetching,
     lastUpdated,
-    items: posts
+    items: rows
   } = postsByReddit[sqlText] || {
     isFetching: true,
     items: []
@@ -81,7 +81,7 @@ const mapStateToProps = state => {
 
   return {
     sqlText,
-    posts,
+    rows,
     isFetching,
     lastUpdated
   }
