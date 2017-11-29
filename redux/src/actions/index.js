@@ -3,28 +3,28 @@ export const RECEIVE_POSTS = 'RECEIVE_POSTS'
 export const SELECT_REDDIT = 'SELECT_REDDIT'
 export const INVALIDATE_REDDIT = 'INVALIDATE_REDDIT'
 
-export const selectReddit = reddit => ({
+export const selectReddit = actionObj => ({
   type: SELECT_REDDIT,
-  reddit
+  actionObj
 })
 
 
 
-export const requestPosts = reddit => ({
+export const requestPosts = actionObj => ({
   type: REQUEST_POSTS,
-  reddit
+  actionObj
 })
 
-export const receivePosts = (reddit, json) => ({
+export const receivePosts = (actionObj, json) => ({
   type: RECEIVE_POSTS,
-  reddit,
+  actionObj,
   rows: JSON.parse(json),
   receivedAt: Date.now()
 })
 
-const fetchPosts = reddit => dispatch => {
-  dispatch(requestPosts(reddit)) ;   debugger ;
-  let requestObj = {} ; requestObj.sqlStatement = reddit ; 
+const fetchPosts = actionObj => dispatch => {
+  dispatch(requestPosts(actionObj)) ;   debugger ;
+  let requestObj = {} ; requestObj.sqlStatement = actionObj ; 
   return fetch("http://35.163.140.165:8000/api/todo/PostToFlask", {
     method: 'post',
     headers: { 
@@ -34,14 +34,14 @@ const fetchPosts = reddit => dispatch => {
     body: JSON.stringify(requestObj)
   })
   .then(response => response.json())
-  .then(json => dispatch(receivePosts(reddit, json)))
+  .then(json => dispatch(receivePosts(actionObj, json)))
     
     
 }
 
 
-export const fetchPostsIfNeeded = reddit => (dispatch, getState) => {
+export const fetchPostsIfNeeded = actionObj => (dispatch, getState) => {
   //if (shouldFetchPosts(getState(), reddit)) {
-    return dispatch(fetchPosts(reddit))
+    return dispatch(fetchPosts(actionObj))
   //}
 }

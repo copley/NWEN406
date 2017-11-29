@@ -8,13 +8,13 @@ const sqlText = (state = 'select * from students', action) => { debugger ;
   switch (action.type) {
    
     case SELECT_REDDIT:
-      return action.reddit
+      return action.actionObj
     default:
       return state
   }
 }
 
-const posts = (state = {
+const rows = (state = {
   isFetching: false,
   didInvalidate: false,
   items: []
@@ -51,7 +51,7 @@ const postsByReddit = (state = { }, action) => {
     case REQUEST_POSTS:
       return {
         ...state,
-        [action.reddit]: posts(state[action.reddit], action)
+        [action.actionObj]: rows(state[action.actionObj], action)
       }
     default:
       return state
