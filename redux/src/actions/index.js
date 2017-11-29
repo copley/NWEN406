@@ -1,10 +1,9 @@
 export const REQUEST_POSTS = 'REQUEST_POSTS'
 export const RECEIVE_POSTS = 'RECEIVE_POSTS'
-export const SELECT_REDDIT = 'SELECT_REDDIT'
-export const INVALIDATE_REDDIT = 'INVALIDATE_REDDIT'
+export const sqlNow = 'sqlNow'
 
-export const selectReddit = actionObj => ({
-  type: SELECT_REDDIT,
+export const sqlNowAction = actionObj => ({
+  type: sqlNow,
   actionObj
 })
 
