@@ -2,13 +2,13 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 const Picker = ({ value, onChange, options }) => (
-  <span>
-    <h1>{value}</h1>
 
-     <textarea onChange={e => onChange(e.target.value)}
+
+
+     <textarea style={{width:"1500px" , height: "400px"}} onChange={e => onChange(e.target.value)}
         
          defaultValue={value} />
-  </span>
+
 )
 
 Picker.propTypes = {

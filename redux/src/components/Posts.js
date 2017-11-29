@@ -2,11 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 const Posts = ({posts}) => (
-  <ul>
+  <table style={{color: "green"}}><tbody>
     {posts.map((post, i) =>
-      <li key={i}>{post.row}</li>
+      <tr key={i}><td>{post.row}</td></tr>
     )}
-  </ul>
+   </tbody></table>
 )
 
 Posts.propTypes = {
