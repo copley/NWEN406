@@ -7,7 +7,7 @@ import Posts from '../components/Posts'
 
 class App extends Component {
   static propTypes = {
-    selectedReddit: PropTypes.string.isRequired,
+    sqlText: PropTypes.string.isRequired,
     posts: PropTypes.array.isRequired,
     isFetching: PropTypes.bool.isRequired,
     lastUpdated: PropTypes.number,
@@ -15,14 +15,14 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const { dispatch, selectedReddit } = this.props
-   // dispatch(fetchPostsIfNeeded(selectedReddit))
+    const { dispatch, sqlText } = this.props
+   // dispatch(fetchPostsIfNeeded(sqlText))
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.selectedReddit !== this.props.selectedReddit) {
-      const { dispatch, selectedReddit } = nextProps
-     // dispatch(fetchPostsIfNeeded(selectedReddit))
+    if (nextProps.sqlText !== this.props.sqlText) {
+      const { dispatch, sqlText } = nextProps
+     // dispatch(fetchPostsIfNeeded(sqlText))
     }
   }
 
@@ -33,17 +33,17 @@ class App extends Component {
   handleRefreshClick = e => {
     e.preventDefault()
 
-    const { dispatch, selectedReddit } = this.props
-    dispatch(invalidateReddit(selectedReddit))
-    dispatch(fetchPostsIfNeeded(selectedReddit))
+    const { dispatch, sqlText } = this.props
+    dispatch(invalidateReddit(sqlText))
+    dispatch(fetchPostsIfNeeded(sqlText))
   }
 
   render() {
-    const { selectedReddit, posts, isFetching, lastUpdated } = this.props
+    const { sqlText, posts, isFetching, lastUpdated } = this.props
     const isEmpty = posts.length === 0
     return (
       <div>
-        <Picker value={selectedReddit}
+        <Picker value={sqlText}
                 onChange={this.handleChange}
                 options={[ 'reactjs', 'frontend' ]} />
         <p>
@@ -70,18 +70,18 @@ class App extends Component {
 }
 
 const mapStateToProps = state => {
-  const { selectedReddit, postsByReddit } = state
+  const { sqlText, postsByReddit } = state
   const {
     isFetching,
     lastUpdated,
     items: posts
-  } = postsByReddit[selectedReddit] || {
+  } = postsByReddit[sqlText] || {
     isFetching: true,
     items: []
   }
 
   return {
-    selectedReddit,
+    sqlText,
     posts,
     isFetching,
     lastUpdated

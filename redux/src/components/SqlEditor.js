@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const Picker = ({ value, onChange, options }) => (
+const SqlEditor = ({ value, onChange }) => (
 
 
 
@@ -11,9 +11,9 @@ const Picker = ({ value, onChange, options }) => (
 
 )
 
-Picker.propTypes = {
+SqlEditor.propTypes = {
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired
 }
 
-export default Picker
+export default SqlEditor

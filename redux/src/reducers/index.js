@@ -4,7 +4,7 @@ import {
   REQUEST_POSTS, RECEIVE_POSTS
 } from '../actions'
 
-const selectedReddit = (state = 'select * from students', action) => { debugger ;
+const sqlText = (state = 'select * from students', action) => { debugger ;
   switch (action.type) {
    
     case SELECT_REDDIT:
@@ -60,7 +60,7 @@ const postsByReddit = (state = { }, action) => {
 
 const rootReducer = combineReducers({
   postsByReddit,
-  selectedReddit
+  sqlText
 })
 
 export default rootReducer
