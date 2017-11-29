@@ -40,6 +40,7 @@ class App extends Component {
    
     return (
       <div>
+        <h1 style={{color: 'green'}}><a href="https://github.com/AdrianNg/NWEN406/tree/master/redux" target="_blank">Source code Repo</a></h1> 
         <SqlEditor value={sqlText}
                 onChange={this.handleChange}
             />
