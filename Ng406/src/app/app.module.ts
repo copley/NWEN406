@@ -9,6 +9,7 @@ import { RESTService } from './REST.service';
 import { AppRoutingModule }     from './app-routing.module';
 import { LabSqlComponent } from './lab-sql/lab-sql.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { CodemirrorModule } from 'ng2-codemirror';
 import {
   MatAutocompleteModule,
   MatButtonModule,
@@ -86,6 +87,7 @@ import {CdkTableModule} from '@angular/cdk/table';
     LabSqlComponent
   ],
   imports: [
+    CodemirrorModule,
     BrowserModule,
      ChartsModule,
      HttpClientModule,

@@ -4,7 +4,7 @@ import { ReqSqlObj} from './ReqSqlObj';
 import { sqlobj} from './sqlobj';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginator, MatTableDataSource} from '@angular/material';
-
+import 'codemirror/mode/sql/sql'
 interface sqlResponObj {
   row: string;
 }
@@ -18,7 +18,8 @@ interface sqlResponObj {
 })
 export class LabSqlComponent implements OnInit {
   public Req = sqlobj;
-  public sqlOutput :   Array < sqlResponObj >    ;   
+  public sqlOutput :   Array < sqlResponObj >    ;  
+  public config = { lineNumbers: true, mode: 'text/x-sql' };
   constructor(private restService :RESTService) {};
 
   ngOnInit() {  // none
