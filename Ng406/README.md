@@ -49,3 +49,4 @@ sudo chmod -R 777 angular-tour-of-heroes/
 
 sudo ng serve -p 8080 -H 0.0.0.0 --public-host ng5-adrianng.c9users.io  // live reload r
 
+https://www.npmjs.com/package/ng2-codemirror

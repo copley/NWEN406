@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Ng406</title>
+  <title>Angular SQL Lab</title>
   <base href="/">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/x-icon" href="favicon.ico"> 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/typescript/2.1.1/typescript.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.min.js"></script>
@@ -16,9 +16,52 @@
     <!-- Load the Angular Material stylesheet -->
   <link href="https://unpkg.com/@angular/material/prebuilt-themes/indigo-pink.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="http://esironal.github.io/cmtouch/lib/codemirror.css">
+	<link rel="stylesheet" href="http://esironal.github.io/cmtouch/addon/hint/show-hint.css">
+	<script src="http://esironal.github.io/cmtouch/lib/codemirror.js"></script>
+	<script src="http://esironal.github.io/cmtouch/addon/hint/show-hint.js"></script>
+	<script src="http://esironal.github.io/cmtouch/addon/hint/xml-hint.js"></script>
+	<script src="http://esironal.github.io/cmtouch/addon/hint/html-hint.js"></script>
+	<script src="http://esironal.github.io/cmtouch/mode/xml/xml.js"></script>
+	<script src="http://esironal.github.io/cmtouch/mode/javascript/javascript.js"></script>
+	<script src="http://esironal.github.io/cmtouch/mode/sql/sql.js"></script>
+	<script src="http://esironal.github.io/cmtouch/mode/css/css.js"></script>
+	<script src="http://esironal.github.io/cmtouch/mode/htmlmixed/htmlmixed.js"></script>
+	<script src="http://esironal.github.io/cmtouch/addon/selection/active-line.js"></script>
+	<script src="http://esironal.github.io/cmtouch/addon/edit/matchbrackets.js"></script>
+	<link rel="stylesheet" href="http://esironal.github.io/cmtouch/theme/neonsyntax.css">
   <style>body { font-family: Roboto, Arial, sans-serif; }</style>
+  <style type="text/css">
+	.st0{fill:#DD0031;}
+	.st1{fill:#C3002F;}
+	.st2{fill:#FFFFFF;}
+	
+
+</style>
 </head>
-<body>
+<body style="background-color:black">
+
+
+
   <app-root></app-root>
 </body>
+
+	<script type="text/javascript">
+		CodeMirror.commands.autocomplete = function(cm) {
+			CodeMirror.showHint(cm, CodeMirror.hint.html);
+		}
+		window.onload = function() {
+			editor = CodeMirror(document.getElementById("code"), {
+				mode: "text/x-sql",
+				theme: "neonsyntax",
+				lineWrapping: true,
+				lineNumbers: true,
+				styleActiveLine: true,
+				matchBrackets: true,
+				extraKeys: {
+					"Ctrl-Space": "autocomplete"
+				}
+			});
+		};
+	</script>
 </html>
