@@ -5,7 +5,8 @@ from flask_sqlalchemy import SQLAlchemy#,sessionmake
 from sqlalchemy import text
 import sys
 from flask_cors import CORS, cross_origin
-
+import psycopg2
+import traceback
 import requests
 import os
 from requests_futures.sessions import FuturesSession
@@ -125,10 +126,18 @@ def home():
 @app.route ('/sql',methods=['POST'])
 def sql_lab ():
     sqlstring =  request.json['sqlStatement']
-    print ("sqlstring",file=sys.stderr)
-    print (sqlstring,file=sys.stderr)#sql = text('select * from students')
+    #print ("sqlstring2",file=sys.stderr)
+    #print (sqlstring,file=sys.stderr)#sql = text('select * from students')
     sql = text (sqlstring )
-    result = db.engine.execute(sql)
+    try :
+        print ("try  block : ::::::::" ,file=sys.stderr)
+        result = db.engine.execute(sql)
+    except Exception as e:# psycopg2.ProgrammingError as e: 
+        #traceback.print_exc(file=sys.stdout)
+        print("e.pgerror  sss",file=sys.stderr)
+        print(e,file=sys.stderr)
+        print (str(e),file=sys.stderr)
+        return jsonify(str(e)) , 201
     table = []
     #print('This query  output:', file=sys.stderr) #   print ('result : ')
     print (result, file=sys.stderr)
