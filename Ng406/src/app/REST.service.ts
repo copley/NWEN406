@@ -34,7 +34,7 @@ interface sqlResponObj {
 export class RESTService  {
 
   private reurl =   'http://35.163.140.165:1114/post';  //   URL to web api
-  private sqlURL  = "http://35.163.140.165:8000/api/todo/PostToFlask" ;
+  private sqlURL  = "http://35.163.140.165:1114/sql" ;"http://35.163.140.165:8000/api/todo/PostToFlask" ;
   results: string[];
   constructor(private http: HttpClient) { }
     

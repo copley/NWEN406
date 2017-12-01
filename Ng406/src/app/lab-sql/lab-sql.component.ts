@@ -20,6 +20,7 @@ export class LabSqlComponent implements OnInit {
   public Req = sqlobj;
   public sqlOutput :   Array < sqlResponObj >    ;  
   public config = { lineNumbers: true, mode: 'text/x-sql' };
+  public sqlError = "" ;
   constructor(private restService :RESTService) {};
 
   ngOnInit() {  // none
@@ -42,6 +43,7 @@ export class LabSqlComponent implements OnInit {
   public postSqlScript() :void {   
     this.restService.restPost_sql(this.Req).subscribe(
     res => {
+      if (typeof res == typeof "string")  {this.sqlError = res ; return ; }
       this.sqlOutput =[] ;  let tableTag =  document.getElementById("ngt");
       if (document.getElementsByTagName("tbody")[0]!=null){
         document.getElementsByTagName("tbody")[0].remove();
