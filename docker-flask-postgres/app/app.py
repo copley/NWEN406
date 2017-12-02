@@ -9,6 +9,7 @@ import psycopg2
 import traceback
 import requests
 import os
+import re
 from requests_futures.sessions import FuturesSession
 DBUSER = 'marco'
 DBPASS = 'foobarbaz'
@@ -126,6 +127,7 @@ def home():
 @app.route ('/sql',methods=['POST'])
 def sql_lab ():
     sqlstring =  request.json['sqlStatement']
+    col_name =getColumns (sqlstring)
     #print ("sqlstring2",file=sys.stderr)
     #print (sqlstring,file=sys.stderr)#sql = text('select * from students')
     sql = text (sqlstring )
@@ -139,7 +141,8 @@ def sql_lab ():
         print (str(e),file=sys.stderr)
         return jsonify(str(e)) , 201
     table = []
-    #print('This query  output:', file=sys.stderr) #   print ('result : ')
+    table.append ({'row': col_name})
+    tNames = get_table_names()
     print (result, file=sys.stderr)
     i=0
     for row in result:
@@ -148,8 +151,8 @@ def sql_lab ():
         r = {} 
         rstring = ""
         for column in row :
-            print ("column", file=sys.stderr)
-            print (column, file=sys.stderr)
+            #print ("column", file=sys.stderr)
+            #print (column, file=sys.stderr)
             rstring = rstring + '|'+ str(column)
             r['row']= rstring
         table_row[str(i)] = r 
@@ -157,25 +160,50 @@ def sql_lab ():
     print (table,file=sys.stderr)
     return jsonify( table)
     
-@app.route ('/get',methods=['GET'])
-def get ():
 
-    sql = text('select * from students')
-    #sql = text (sqlstring )
+def getColumns (sqlstring) :  
+        sqlArray = sqlstring.split(";") ;
+        lastLine = sqlArray[len(sqlArray)-1]; 
+        print (lastLine, file=sys.stderr)
+        if "*" in lastLine:
+            array = lastLine.split(" ")  
+            returnStr = ""
+            for a in array :
+                if a in get_table_names () :
+                    print (a, file=sys.stderr)
+                    returnStr += getStarFrom (a)    
+                    print (returnStr, file=sys.stderr)
+            return returnStr 
+        else :  
+            print (lastLine.index("from"), file=sys.stderr)
+            end = lastLine.index("from")
+            new =lastLine[5: end].replace("select", '').replace(" ", '').split(",");
+            returnString = ""
+            for n in new :
+                returnString = returnString + '|' +  n 
+            print (returnString, file=sys.stderr)
+            return returnString 
+      
+
+def getStarFrom(a):
+    sqlstring = "select  column_name  from information_schema.columns where table_name = '" + a.lower()  +"'"
+    sql = text(sqlstring)
     result = db.engine.execute(sql)
-    table = []
-    #print('This query  output:', file=sys.stderr) #   print ('result : ')
-    print (result)
-    for row in result:
-        table_row = {} 
-        for column in row :
-            table_row['c1']=column
-        table.append(table_row)
-    #print (table,file=sys.stderr)
-    return jsonify( table)
+    column_name_string = "" 
+    for row in result :
+        column_name_string =  column_name_string + '|' +  str(row).replace("(","").replace(")","").replace("'","").replace(",","")  
+    return column_name_string
 
 
+def get_table_names ():
 
+    sql = text("select  TABLE_NAME  from information_schema.tables where table_schema = 'public'")
+    result = db.engine.execute(sql)
+    rows = [] 
+    for row in result :
+        r = str(row).replace("(","").replace(")","").replace("'","").replace(",","")
+        rows.append(r)
+    return rows
 
 
 

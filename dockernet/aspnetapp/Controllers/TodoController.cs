@@ -45,10 +45,10 @@ namespace aspnetapp.Controllers
             return new ObjectResult(item);
         }
     
-        [HttpGet("getter")]
-        public IActionResult GetB()
+        [HttpGet("getTABLE_NAME")]
+        public IActionResult getTABLE_NAME()
         {
-            return new ObjectResult(ProcessRepositories().Result);
+            return new ObjectResult(getTABLE_NAME().Result);
         }
         
         
@@ -61,13 +61,13 @@ namespace aspnetapp.Controllers
         }
         
         //https://github.com/dotnet/docs/blob/master/samples/csharp/getting-started/console-webapiclient/Program.cs
-        private static async Task<List<ResponseObj>> ProcessRepositories()
+        private static async Task<List<ResponseObj>> getTABLE_NAME()
         {
             var client = new HttpClient();
             var serializer = new DataContractJsonSerializer(typeof(List<ResponseObj>));
             client.DefaultRequestHeaders.Accept.Clear();
-            var stringTask = client.GetStringAsync("http://35.163.140.165:1114/get");
-            var streamTask = client.GetStreamAsync("http://35.163.140.165:1114/get");
+            var stringTask = client.GetStringAsync("http://35.163.140.165:1114/getTABLE_NAME");
+            var streamTask = client.GetStreamAsync("http://35.163.140.165:1114/getTABLE_NAME");
             var repositories = serializer.ReadObject(await streamTask) as List<ResponseObj>;
             return repositories;
         }

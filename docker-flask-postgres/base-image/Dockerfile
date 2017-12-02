@@ -1,12 +1,12 @@
 # Base image for flask REST api tutorial
 
-FROM alpine:3.62
+FROM alpine:3.70
 
 ADD requirements.txt /home/app/
 WORKDIR /home/app/
 
 
-RUN apk add --no-cache postgresql-dev gcc python3 python3-dev musl-dev && \
+RUN apk add --update --no-cache postgresql gcc python3 python3-dev musl-dev && \
     python3 -m ensurepip && \
     rm -r /usr/lib/python*/ensurepip && \
     pip3 install --upgrade pip setuptools && \
