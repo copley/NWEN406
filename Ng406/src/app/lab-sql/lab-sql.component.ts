@@ -54,7 +54,7 @@ export class LabSqlComponent implements OnInit {
       
       for (let k= 0 ; k < res.length ; k++){
         let table = document.createElement("table");
-        
+        table.setAttribute ("style", "border : 10px solid #123 ; margin:10px")
         for (let i= 0 ; i < res[k].length ; i++ )
         {  
           
