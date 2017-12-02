@@ -18,49 +18,6 @@ DBPORT = '5432'
 DBNAME = 'testdb'
 
 
-log = open("xmb.log", "w")
-def prime_number_lambda(maxi, loops , times, mb  , isConcurrent , last4  ) :
-    headers = {
-        'x-api-key': "rDGgZtlFRY7CaGQy7Qvb21R0VxICImme5FiJ"+last4,   #Vvuc
-    }
-    re_arr  = []
-    session = FuturesSession(max_workers=100)
-    rst =  'https://nx106w1z0e.execute-api.us-west-2.amazonaws.com/prod/'+ str(mb) +'mb' + '?max='+str(maxi)+'&loops='+ str(loops)
-    print('sending the lambda url  : {0}'.format(rst))
-    if  isConcurrent == "off":
-        #print (" nonConcurrentmode")
-        for i in range (times) :
-            #rt = requests.get(rst).json()
-            resp = requests.get(rst, headers = headers, verify=False)
-            rt = resp.json()
-            if resp.status_code != 200 :
-                print ("resp.status_code")
-                #print (rt)
-                return resp.status_code
-            else :
-                #print (rt)
-                re_arr.append (rt)
-        print (re_arr, file = log)
-        return re_arr
-    else :
-        print (" Concurrentmode")
-        sgl = []
-        for i in range (times) :
-            ##sgl.append(session.get(rst))
-            sgl.append(session.get(rst,headers = headers  ,verify=False))
-        for  i  in range  (times )  :
-            resp  = sgl[i].result()
-            print (resp.status_code)
-            #print('response one status: {0}'.format(resp.status_code))
-            if resp.status_code != 200 :
-                #re_arr.append (resp.status_code)
-                return resp.status_code
-            else :
-                #print(resp.content)
-                re_arr.append (resp.json())
-
-        print (re_arr, file = log)
-        return re_arr
 
 
 app = Flask(__name__)
@@ -127,6 +84,7 @@ def home():
 @app.route ('/sql',methods=['POST'])
 def sql_lab ():
     sqlstring =  request.json['sqlStatement']
+    
     col_name =getColumns (sqlstring)
     #print ("sqlstring2",file=sys.stderr)
     #print (sqlstring,file=sys.stderr)#sql = text('select * from students')
@@ -169,13 +127,14 @@ def getColumns (sqlstring) :
             array = lastLine.split(" ")  
             returnStr = ""
             for a in array :
+                a = str(a).lower() 
                 if a in get_table_names () :
                     print (a, file=sys.stderr)
                     returnStr += getStarFrom (a)    
                     print (returnStr, file=sys.stderr)
             return returnStr 
         else :  
-            print (lastLine.index("from"), file=sys.stderr)
+           
             end = lastLine.index("from")
             new =lastLine[5: end].replace("select", '').replace(" ", '').split(",");
             returnString = ""
@@ -186,7 +145,8 @@ def getColumns (sqlstring) :
       
 
 def getStarFrom(a):
-    sqlstring = "select  column_name  from information_schema.columns where table_name = '" + a.lower()  +"'"
+    sqlstring = "select  column_name  from information_schema.columns where table_name = '" + a  +"'"
+    print (sqlstring, file=sys.stderr)
     sql = text(sqlstring)
     result = db.engine.execute(sql)
     column_name_string = "" 
@@ -205,6 +165,74 @@ def get_table_names ():
         rows.append(r)
     return rows
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## NWEN 406 PROJECT 2 
+
+log = open("xmb.log", "w")
+def prime_number_lambda(maxi, loops , times, mb  , isConcurrent , last4  ) :
+    headers = {
+        'x-api-key': "rDGgZtlFRY7CaGQy7Qvb21R0VxICImme5FiJ"+last4,   #Vvuc
+    }
+    re_arr  = []
+    session = FuturesSession(max_workers=100)
+    rst =  'https://nx106w1z0e.execute-api.us-west-2.amazonaws.com/prod/'+ str(mb) +'mb' + '?max='+str(maxi)+'&loops='+ str(loops)
+    print('sending the lambda url  : {0}'.format(rst))
+    if  isConcurrent == "off":
+        #print (" nonConcurrentmode")
+        for i in range (times) :
+            #rt = requests.get(rst).json()
+            resp = requests.get(rst, headers = headers, verify=False)
+            rt = resp.json()
+            if resp.status_code != 200 :
+                print ("resp.status_code")
+                #print (rt)
+                return resp.status_code
+            else :
+                #print (rt)
+                re_arr.append (rt)
+        print (re_arr, file = log)
+        return re_arr
+    else :
+        print (" Concurrentmode")
+        sgl = []
+        for i in range (times) :
+            ##sgl.append(session.get(rst))
+            sgl.append(session.get(rst,headers = headers  ,verify=False))
+        for  i  in range  (times )  :
+            resp  = sgl[i].result()
+            print (resp.status_code)
+            #print('response one status: {0}'.format(resp.status_code))
+            if resp.status_code != 200 :
+                #re_arr.append (resp.status_code)
+                return resp.status_code
+            else :
+                #print(resp.content)
+                re_arr.append (resp.json())
+
+        print (re_arr, file = log)
+        return re_arr
 
 
 @app.route('/getMB',methods= ['GET'])
@@ -268,8 +296,28 @@ def post():
         return jsonify( objects), 403
     else :
         return jsonify( objects), 201
+    
+    
+    
+## NWEN 406 PROJECT 2     
+    
+    
+    
+    
+    
+    
+    
+@app.route('/nonHeadlessRoute/')
+
+def nonHeadlessRoute():
+    return render_template('nonHeadless.json')        
+
+
         
-        
+@app.route('/HeadlessRoute/')
+
+def HeadlessRoute():
+    return jsonify({"JSONrespone":"HeadlessRouteJson"})     
 
     
 if __name__ == '__main__':
