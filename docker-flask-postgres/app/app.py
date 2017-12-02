@@ -84,19 +84,46 @@ def home():
 @app.route ('/sql',methods=['POST'])
 def sql_lab ():
     sqlstring =  request.json['sqlStatement']
+    resu =  write_operation (sqlstring)
+    print ("resu")
+    print (resu)
+    if resu != "ok" :
+        return jsonify(resu) 
+        
+    sqlArray =  sqlstring.split(';')
+    table = [] 
+    for sa in sqlArray :
+        if "select" in sa :
+            print ("return_Select(sa)",file=sys.stderr) 
+            print (return_Select(sa))
+            table.append (return_Select(sa) )
     
-    col_name =getColumns (sqlstring)
-    #print ("sqlstring2",file=sys.stderr)
-    #print (sqlstring,file=sys.stderr)#sql = text('select * from students')
+    ##print ("table ")
+    #print (table)            
+    return jsonify (table) 
+    
+def write_operation (sqlstring):
     sql = text (sqlstring )
     try :
-        print ("try  block : ::::::::" ,file=sys.stderr)
+        #print ("try  block : ::::::::" ,file=sys.stderr)
+        db.engine.execute(sql)
+        return "ok"
+    except Exception as e:
+        #print("e.pgerror  sss",file=sys.stderr)
+        #print(e,file=sys.stderr)
+        #print (str(e),file=sys.stderr)
+        return str(e)
+
+def return_Select (sqlstring) :    
+    col_name =getColumns (sqlstring)
+    sql = text (sqlstring )
+    try :
+        #print ("try  block : ::::::::" ,file=sys.stderr)
         result = db.engine.execute(sql)
-    except Exception as e:# psycopg2.ProgrammingError as e: 
-        #traceback.print_exc(file=sys.stdout)
-        print("e.pgerror  sss",file=sys.stderr)
-        print(e,file=sys.stderr)
-        print (str(e),file=sys.stderr)
+    except Exception as e:
+        #print("e.pgerror  sss",file=sys.stderr)
+        #print(e,file=sys.stderr)
+        #print (str(e),file=sys.stderr)
         return jsonify(str(e)) , 201
     table = []
     table.append ({'row': col_name})
@@ -116,22 +143,22 @@ def sql_lab ():
         table_row[str(i)] = r 
         table.append(r)
     print (table,file=sys.stderr)
-    return jsonify( table)
+    return  table
     
 
 def getColumns (sqlstring) :  
-        sqlArray = sqlstring.split(";") ;
-        lastLine = sqlArray[len(sqlArray)-1]; 
-        print (lastLine, file=sys.stderr)
+    
+        lastLine = sqlstring 
+        #print (lastLine, file=sys.stderr)
         if "*" in lastLine:
             array = lastLine.split(" ")  
             returnStr = ""
             for a in array :
                 a = str(a).lower() 
                 if a in get_table_names () :
-                    print (a, file=sys.stderr)
+                    #print (a, file=sys.stderr)
                     returnStr += getStarFrom (a)    
-                    print (returnStr, file=sys.stderr)
+                    #print (returnStr, file=sys.stderr)
             return returnStr 
         else :  
            
@@ -140,7 +167,7 @@ def getColumns (sqlstring) :
             returnString = ""
             for n in new :
                 returnString = returnString + '|' +  n 
-            print (returnString, file=sys.stderr)
+            #print (returnString, file=sys.stderr)
             return returnString 
       
 
