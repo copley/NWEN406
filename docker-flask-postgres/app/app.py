@@ -10,7 +10,8 @@ import traceback
 import requests
 import os
 import re
-#from requests_futures.sessions import FuturesSession
+
+from requests_futures.sessions import FuturesSession
 DBUSER = 'marco'
 DBPASS = 'foobarbaz'
 DBHOST = 'database'
@@ -226,7 +227,7 @@ def get_table_names ():
 
 log = open("xmb.log", "w")
 
-'''
+
 def prime_number_lambda(maxi, loops , times, mb  , isConcurrent , last4  ) :
     headers = {
         'x-api-key': "rDGgZtlFRY7CaGQy7Qvb21R0VxICImme5FiJ"+last4,   #Vvuc
@@ -334,7 +335,7 @@ def post():
         return jsonify( objects), 201
     
     
-'''    
+
 ## NWEN 406 PROJECT 2     
     
     
