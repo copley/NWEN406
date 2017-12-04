@@ -40,31 +40,39 @@ export class LabSqlComponent implements OnInit {
    // this.dataSource.paginator = this.paginator;
   }
   
+  
   public postSqlScript() :void {   
     this.restService.restPost_sql(this.Req).subscribe(
     res => {
-      if (typeof res == typeof "string")  {this.sqlError = res ; return ; }
-      this.sqlOutput =[] ;  let tableTag =  document.getElementById("ngt");
-      if (document.getElementsByTagName("tbody")[0]!=null){
-        document.getElementsByTagName("tbody")[0].remove();
+      typeof res == typeof "string" ? this.sqlError = res.toString() : this.sqlError  ="" 
+      this.sqlOutput =[] ;  let sqlTables =  document.getElementById("sqlTables");
+      if (document.getElementsByTagName("secetion")[0]!=null){
+        document.getElementsByTagName("secetion")[0].remove();
       }
-      let tbody = document.createElement("tbody");
-      tableTag.appendChild(tbody);
-      for (let i= 0 ; i < res.length ; i++ )
-      {  
-        this.sqlOutput.push(res[i]) ;
-        let  row =    res[i].row.split('|') ;
-        let tr = document.createElement("TR");
-        for (let j= 0 ; j < row.length ; j++ ) {
-          let textnode = document.createTextNode(row[j]);
-          let td = document.createElement("TD"); 
-          td.setAttribute("style", "color: green; border: 4px solid #ddd ; margin :4px;");
-          td.appendChild(textnode);
-          tr.appendChild(td);
+      let secetion = document.createElement("secetion");
+      sqlTables.appendChild(secetion);
+      
+      for (let k= 0 ; k < res.length ; k++){
+        let table = document.createElement("table");
+        table.setAttribute ("style", "border : 10px solid #123 ; margin:10px")
+        for (let i= 0 ; i < res[k].length ; i++ )
+        {  
+          
+          let  row =    res[k][i].row.split('|') ;
+          let tr = document.createElement("TR");
+          for (let j= 1 ; j < row.length ; j++ ) {
+            let textnode = document.createTextNode(row[j]);
+            let td = document.createElement("TD"); 
+            td.setAttribute("style", "color: green; border: 4px solid #ddd ; margin :4px;");
+            td.appendChild(textnode);
+            tr.appendChild(td);
+          }
+          i%2==0?  tr.style.backgroundColor = "#dac0c0":tr.style.backgroundColor = "#11c0c0" ;  
+          table.appendChild(tr);
         }
-        if (i%2==0)  tr.style.backgroundColor = "#dac0c0"; else  tr.style.backgroundColor = "#11c0c0" ;  
-        tbody.appendChild(tr);
+        secetion.appendChild(table);
       }
+      
     },
     err => {
     alert("wrong apt key or other invalid input ");

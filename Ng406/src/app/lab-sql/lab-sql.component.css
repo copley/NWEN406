@@ -30,6 +30,9 @@ td {
     color : green;
 }
 
+table {
+  margin : 10px ;
+}
 	
 .App-logo {
   animation: App-logo-spin infinite 20s linear !important;
@@ -40,4 +43,9 @@ td {
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+button {
+  cursor: pointer;
+  
 }
