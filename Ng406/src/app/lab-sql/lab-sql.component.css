@@ -23,15 +23,19 @@ tr {
     display: table-row;
     vertical-align: inherit;
     border-color: inherit;
+     width : 100%; 
 }
 
 td {
     border-left: 1px solid #ddd;
     color : green;
+    
+  width : 100%; 
 }
 
 table {
-  margin : 10px ;
+  margin-top : 10px ;
+  width : 100%; 
 }
 	
 .App-logo {
@@ -47,5 +51,5 @@ table {
 
 button {
   cursor: pointer;
-  
+  margin: 10px;
 }

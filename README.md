@@ -1,32 +1,7 @@
-# Architect overview:  Ng5 is running on Nodejs server hosted on C9.io  and it is marking REST API call to the .NET core and Python Flask API web servers which both are hosted on EC2 docker containers. 
-## This is a headless web application which means fully RESTful and no views are returning from C# or python codes, instead, views are rendered by the Ng5 SPA. The front end and back end communicate only through REST API endpoint JSON data traffic. 
-### Python is in docker-flask-postgres folder. start the NG app in C9 via sudo ng serve -p 8080 -H 0.0.0.0 --public-host headless-adrianng.c9users.io
-### .NET is in dockernet folder. 
-### Augular5 is in Ng406 folder. 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#  AWS  Lamda project
-demo url :  http://52.10.250.199:5000/project2/  
-author :  Adrian Ng  (beaconwarden@gmail.com)  
 setup env:  
 1.  launch Amazon Linux AMI 2017.09.0 (HVM) in EC2  
 2.  chmod 400 pem.pem  
-3.  sudo ssh -i nwen406.pem ec2-user@ec2-35-163-140-165.us-west-2.compute.amazonaws.com  
+3.  sudo ssh -i nwen406.pem ec2-user@ec2-52-64-15-213.ap-southeast-2.compute.amazonaws.com
 4.  sudo pip install flask  
 5.  sudo pip install requests-futures   pip install -U flask-cors  
 6.  sudo yum install git   
@@ -44,7 +19,6 @@ http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AccessingInstancesLinux.html
 https://github.com/jconning/lambda-cpu-cost  
 https://gist.github.com/Daniel-Hug/7273430  
 
-ssh -i nwen406.pem ec2-user@ec2-34-236-109-188.compute-1.amazonaws.com
 
 
 pip install awscli --upgrade --user

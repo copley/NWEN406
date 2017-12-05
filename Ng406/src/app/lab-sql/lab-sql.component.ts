@@ -21,6 +21,7 @@ export class LabSqlComponent implements OnInit {
   public sqlOutput :   Array < sqlResponObj >    ;  
   public config = { lineNumbers: true, mode: 'text/x-sql' };
   public sqlError = "" ;
+  public sqlVersion = "" ;
   constructor(private restService :RESTService) {};
 
   ngOnInit() {  // none
@@ -44,7 +45,8 @@ export class LabSqlComponent implements OnInit {
   public postSqlScript() :void {   
     this.restService.restPost_sql(this.Req).subscribe(
     res => {
-      typeof res == typeof "string" ? this.sqlError = res.toString() : this.sqlError  ="" 
+      typeof res == typeof "string" ? this.sqlError = res.toString() : this.sqlError  ="" ;
+       typeof res.row == typeof "string" ? this.sqlVersion = res.row.toString() : this.sqlVersion  ="" ;
       this.sqlOutput =[] ;  let sqlTables =  document.getElementById("sqlTables");
       if (document.getElementsByTagName("secetion")[0]!=null){
         document.getElementsByTagName("secetion")[0].remove();
@@ -54,16 +56,17 @@ export class LabSqlComponent implements OnInit {
       
       for (let k= 0 ; k < res.length ; k++){
         let table = document.createElement("table");
-        table.setAttribute ("style", "border : 10px solid #123 ; margin:10px")
-        for (let i= 0 ; i < res[k].length ; i++ )
+        table.setAttribute ("style", "border : 10px solid #123 ; margin:10px ;width :100%;")
+        for (let i= 0 ; i < res[k].length ; i++ ) //s
         {  
           
           let  row =    res[k][i].row.split('|') ;
           let tr = document.createElement("TR");
+           tr.setAttribute("style", "width:100%;");
           for (let j= 1 ; j < row.length ; j++ ) {
             let textnode = document.createTextNode(row[j]);
             let td = document.createElement("TD"); 
-            td.setAttribute("style", "color: green; border: 4px solid #ddd ; margin :4px;");
+            td.setAttribute("style", "color: green; border: 4px solid #ddd ; margin :4px");
             td.appendChild(textnode);
             tr.appendChild(td);
           }
