@@ -10,6 +10,7 @@ import traceback
 import requests
 import os
 import re
+
 from requests_futures.sessions import FuturesSession
 DBUSER = 'marco'
 DBPASS = 'foobarbaz'
@@ -91,12 +92,19 @@ def sql_lab ():
         return jsonify(resu) 
         
     sqlArray =  sqlstring.split(';')
-    table = [] 
+    table = {}
     for sa in sqlArray :
+        if "version()" in sa : 
+                ver= db.engine.execute(text(sa))
+                for v in ver : 
+                    print("version",file=sys.stderr)
+                    print(v,file=sys.stderr)
+                    table['row']= v 
+                    return jsonify (table)
         if "select" in sa :
             print ("return_Select(sa)",file=sys.stderr) 
             print (return_Select(sa))
-            table.append (return_Select(sa) )
+            table.append (return_Select(sa)) 
     
     ##print ("table ")
     #print (table)            
@@ -218,6 +226,8 @@ def get_table_names ():
 ## NWEN 406 PROJECT 2 
 
 log = open("xmb.log", "w")
+
+
 def prime_number_lambda(maxi, loops , times, mb  , isConcurrent , last4  ) :
     headers = {
         'x-api-key': "rDGgZtlFRY7CaGQy7Qvb21R0VxICImme5FiJ"+last4,   #Vvuc
@@ -325,7 +335,7 @@ def post():
         return jsonify( objects), 201
     
     
-    
+
 ## NWEN 406 PROJECT 2     
     
     
