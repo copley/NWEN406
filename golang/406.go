@@ -8,14 +8,14 @@
 package main
 
 import (
-	"fmt"
 	"encoding/json"
+	"flag"
+	"fmt"
 	"github.com/gorilla/mux"
 	"html/template"
 	"io/ioutil"
 	"log"
 	"net/http"
-	"flag"
 	"sort"
 	"sync"
 )
@@ -24,11 +24,6 @@ type Page struct {
 	Title string
 	Body  []byte
 }
-
-
-
-
-
 
 func (p *Page) save() error {
 	filename := p.Title + ".txt"
@@ -66,12 +61,12 @@ func editHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 // The person Type (more like an object)
-type Person struct {    //  people = append(people, Person{mem: mem, avg: totalDurations[mem]/float64(executionCounts[mem]), cost: cost, executionCounts : executionCounts[mem] ,  maxPrime: maxPrime})
-	Mem        string   `json:"mem,omitempty"`
-	Avg string   `json:"avg,omitempty"`
-	Cost  string   `json:"cost,omitempty"`
-	ExecutionCounts   string `json:"executionCounts,omitempty"`
-	MaxPrime   string `json:"maxPrime,omitempty"`
+type Person struct { //  people = append(people, Person{mem: mem, avg: totalDurations[mem]/float64(executionCounts[mem]), cost: cost, executionCounts : executionCounts[mem] ,  maxPrime: maxPrime})
+	Mem             string `json:"mem,omitempty"`
+	Avg             string `json:"avg,omitempty"`
+	Cost            string `json:"cost,omitempty"`
+	ExecutionCounts string `json:"executionCounts,omitempty"`
+	MaxPrime        string `json:"maxPrime,omitempty"`
 }
 type Address struct {
 	City  string `json:"city,omitempty"`
@@ -80,6 +75,7 @@ type Address struct {
 
 var people []Person
 var people2 []Person2
+
 // Display all from the people var
 func GetPeople(w http.ResponseWriter, r *http.Request) {
 	//fmt.Printf("json.NewEncoder(w).Encode(people)")
@@ -87,7 +83,7 @@ func GetPeople(w http.ResponseWriter, r *http.Request) {
 	invokeLambda(executions)
 	displayResults(executions)
 	fmt.Printf(fmt.Sprint(people))
-		fmt.Printf("---------------")
+	fmt.Printf("---------------")
 	fmt.Printf(fmt.Sprint(people2))
 	json.NewEncoder(w).Encode(people)
 }
@@ -133,10 +129,6 @@ func hello(w http.ResponseWriter, r *http.Request) {
 func world(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "world")
 }
-
-
-
-
 
 var lambdaFunctions map[int]string
 var lambdaErrors int
@@ -268,12 +260,11 @@ func invokeLambda(executions chan execution) {
 }
 
 type Person2 struct {
-    ID        string   `json:"id,omitempty"`
-    Firstname string   `json:"firstname,omitempty"`
-    Lastname  string   `json:"lastname,omitempty"`
-    Address   *Address `json:"address,omitempty"`
+	ID        string   `json:"id,omitempty"`
+	Firstname string   `json:"firstname,omitempty"`
+	Lastname  string   `json:"lastname,omitempty"`
+	Address   *Address `json:"address,omitempty"`
 }
-
 
 func displayResults(executions chan execution) {
 	var totalDurations map[int]float64 = make(map[int]float64)
@@ -293,7 +284,7 @@ func displayResults(executions chan execution) {
 		memories = append(memories, mem)
 	}
 	sort.Ints(memories)
-	people  = []Person(nil)
+	people = []Person(nil)
 	// Display results
 	fmt.Printf("Number of lambda executions returning errors: %d\n", lambdaErrors)
 	fmt.Println("Stats for each Lambda function by Lambda memory allocation:")
@@ -305,45 +296,35 @@ func displayResults(executions chan execution) {
 		fmt.Printf("  %dmb %fsec(avg) $%f(total) to calculate %d times all prime numbers <=%d\n",
 			mem, totalDurations[mem]/float64(executionCounts[mem]), cost, executionCounts[mem], maxPrime)
 
-		people = append(people, Person{Mem: fmt.Sprint(mem), Avg: fmt.Sprint(totalDurations[mem]/float64(executionCounts[mem])), Cost: fmt.Sprint(cost), ExecutionCounts : fmt.Sprint(executionCounts[mem]) ,  MaxPrime: fmt.Sprint(maxPrime)})
+		people = append(people, Person{Mem: fmt.Sprint(mem), Avg: fmt.Sprint(totalDurations[mem] / float64(executionCounts[mem])), Cost: fmt.Sprint(cost), ExecutionCounts: fmt.Sprint(executionCounts[mem]), MaxPrime: fmt.Sprint(maxPrime)})
 		people2 = append(people2, Person2{ID: "2", Firstname: "Koko", Lastname: "Doe", Address: &Address{City: "City Z", State: "State Y"}})
-	  //	fmt.Printf(fmt.Sprint(people2))
+		//	fmt.Printf(fmt.Sprint(people2))
 	}
 	fmt.Printf("Total cost of this test run: $%f\n", totalCost)
 }
 
-
-
-
-
-
-
 func SendJ(w http.ResponseWriter, r *http.Request) {
-    http.ServeFile(w, r, "echarts.min.js")
+	http.ServeFile(w, r, "echarts.min.js")
 }
 
 func SendJqueryJs(w http.ResponseWriter, r *http.Request) {
-    data, err := ioutil.ReadFile("echarts.min.js")
-    if err != nil {
-        http.Error(w, "Couldn't read file", http.StatusInternalServerError)
-        return
-    }
-    w.Header().Set("Content-Type", "application/javascript; charset=utf-8")
-    w.Write(data)
+	data, err := ioutil.ReadFile("echarts.min.js")
+	if err != nil {
+		http.Error(w, "Couldn't read file", http.StatusInternalServerError)
+		return
+	}
+	w.Header().Set("Content-Type", "application/javascript; charset=utf-8")
+	w.Write(data)
 }
-
 
 func main() {
 
+	router := mux.NewRouter()
 
+	router.HandleFunc("/people", GetPeople).Methods("GET")
+	router.HandleFunc("/edit/", editHandler)
+	router.HandleFunc("/echarts.min.js", SendJqueryJs)
 
-				router := mux.NewRouter()
-
-        router.HandleFunc("/people", GetPeople).Methods("GET")
-        router.HandleFunc("/edit/", editHandler)
-	 router.HandleFunc("/echarts.min.js", SendJqueryJs)
-
-        log.Fatal(http.ListenAndServe(":8000", router))
-
+	log.Fatal(http.ListenAndServe(":8000", router))
 
 }
