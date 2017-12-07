@@ -33,8 +33,9 @@ interface sqlResponObj {
 @Injectable()
 export class RESTService  {
 
-  private reurl =   'http://35.163.140.165:1114/post';  //   URL to web api
-  private sqlURL  = "http://35.163.140.165:1114/sql" ;"http://35.163.140.165:8000/api/todo/PostToFlask" ;
+  private mongo = 'http://52.64.15.213:3000/api/message';
+  private reurl =   'http://52.64.15.213:1114/post';  //   URL to web api
+  private sqlURL  = "http://52.64.15.213:1114/sql" ;"http://52.64.15.213:8000/api/todo/PostToFlask" ;
   results: string[];
   constructor(private http: HttpClient) { }
     
