@@ -32,7 +32,7 @@ var router = express.Router();              // get an instance of the express Ro
 
 // test route to make sure everything is working (accessed at GET http://localhost:8080/api)
 router.get('/g', function(req, res) {
-    http.get('http://35.163.140.165:8000/api/todo/getter', (r) => {
+    http.get('http://52.64.15.213:8000/api/todo/getter', (r) => {
          var str = '';
 
   //another chunk of data has been recieved, so append it to `str`
@@ -44,7 +44,7 @@ router.get('/g', function(req, res) {
   r.on('end', function () {
       let j =  JSON.parse(str) ;
        console.log (j) ;
-   res.json(  ad(j) );   
+      res.json({a:1})// res.json(  ad(j) );   
   });
         
         

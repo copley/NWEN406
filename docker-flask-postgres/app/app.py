@@ -92,15 +92,16 @@ def sql_lab ():
         return jsonify(resu) 
         
     sqlArray =  sqlstring.split(';')
-    table = {}
+    table = []
     for sa in sqlArray :
         if "version()" in sa : 
+                t ={} 
                 ver= db.engine.execute(text(sa))
                 for v in ver : 
                     print("version",file=sys.stderr)
                     print(v,file=sys.stderr)
-                    table['row']= v 
-                    return jsonify (table)
+                    t['row']=  str(v).replace("(","").replace(")","").replace("'","").replace(",","")  
+                    return jsonify (t)
         if "select" in sa :
             print ("return_Select(sa)",file=sys.stderr) 
             print (return_Select(sa))
