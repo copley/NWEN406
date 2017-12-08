@@ -1,13 +1,25 @@
 <div class="container">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12" style="color: green;">
             <img src="../../assets/postgresql-logo_Clipart_svg_File.svg" class="App-logo" alt="logo" />
+            <img src="../../assets/mongologo.svg" class="App-logo" alt="logo" />
             <img src="../../assets/angular.svg" class="App-logo" alt="logo" />
             <h4 style="color: green;">this SQL lab is to test the SQL statement via the browser. It makes call to the ASP.NET core middleware , then MVC controller uses HttpClient to forward the http request to Python Flask which makes call to PostgreSQL DB and return the query result all the way back to front end</h4>
-            
+            <div >
+            <mat-form-field >
+              <mat-select [(value)]="selected" style="background-color: green;" (change)="triggerUpdate($event)">
+                <mat-option value="PostgreSQL" style="background-color: green;">PostgreSQL</mat-option>
+                <mat-option value="MongoDB" style="background-color: green;">MongoDB</mat-option>
+              </mat-select>
+            </mat-form-field>
+            </div>
+          
+
+<p>You selected: {{selected}}</p>
             <codemirror [(ngModel)]="Req.sqlStatement" style="width:100%; height :100px" [config]="config"></codemirror>
-            <button  class="btn btn-primary"  (click)="postSqlScript()" >Issue SQL cmd</button>
+            <button  class="btn btn-primary"  (click)="post()" >Issue SQL cmd</button>
             <h2 style="color: green;">SQL result: </h2>
+            {{nosqlOut}}
             <div class="alert alert-danger" role="alert">
               {{sqlError}} {{sqlVersion}}
             </div>

@@ -33,9 +33,10 @@ interface sqlResponObj {
 @Injectable()
 export class RESTService  {
 
-  private mongo = 'http://52.64.15.213:3000/api/message';
+  private mongooseAPI = 'http://52.64.15.213:3000/mongoose';
+  private mongodbAPI =  'http://52.64.15.213:3000/api/mongodb';
   private reurl =   'http://52.64.15.213:1114/post';  //   URL to web api
-  private sqlURL  = "http://52.64.15.213:1114/sql" ;"http://52.64.15.213:8000/api/todo/PostToFlask" ;
+  private sqlURL  = "http://52.64.15.213:8000/api/todo/PostToFlask" ;
   results: string[];
   constructor(private http: HttpClient) { }
     
@@ -54,6 +55,19 @@ export class RESTService  {
   }
   
   restPost_sql (req : ReqSqlObj): Observable<sqlResponObj[]> { debugger ;
+  
+   return  this.http.post<sqlResponObj[]>(this.mongooseAPI, 
+        req
+    ) .pipe(     
+        tap(l => this.log(`fetched l`)),
+        catchError(this.handleError('post', []))
+      ) ;  
+    
+  }
+  
+  
+  
+  restPostToDotNet (req : ReqSqlObj): Observable<sqlResponObj[]> { debugger ;
   
    return  this.http.post<sqlResponObj[]>(this.sqlURL, 
         req

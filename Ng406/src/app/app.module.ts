@@ -44,6 +44,7 @@ import {
   MatStepperModule,
 } from '@angular/material';
 import {CdkTableModule} from '@angular/cdk/table';
+import { AuthenticationComponent } from './authentication/authentication.component';
 
 
 @NgModule({
@@ -84,7 +85,8 @@ import {CdkTableModule} from '@angular/cdk/table';
   declarations: [
     AppComponent,
     ChartJsComponent,
-    LabSqlComponent
+    LabSqlComponent,
+    AuthenticationComponent
   ],
   imports: [
     CodemirrorModule,
@@ -97,7 +99,10 @@ import {CdkTableModule} from '@angular/cdk/table';
          MatTableModule,
     MatNativeDateModule,
     MatPaginatorModule,
-      BrowserAnimationsModule
+      BrowserAnimationsModule,
+      MatButtonModule,
+      MatCardModule,
+      MatSelectModule
   ],
   providers: [RESTService],
   bootstrap: [AppComponent]
