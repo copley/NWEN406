@@ -19,7 +19,7 @@ namespace aspnetapp.Controllers
     public class TodoController : Controller
     {
         private readonly TodoContext _context;
-        private readonly string _SqlPOST = "http://35.163.140.165:1114/sql";
+        private readonly static string  _SqlPOST = "http://52.64.15.213:1114/sql";
 
         public TodoController(TodoContext context)
         {
@@ -44,13 +44,6 @@ namespace aspnetapp.Controllers
             }
             return new ObjectResult(item);
         }
-    
-        [HttpGet("getTABLE_NAME")]
-        public IActionResult getTABLE_NAME()
-        {
-            return new ObjectResult(getTABLE_NAME().Result);
-        }
-        
         
         [HttpPost("PostToFlask")]
         [EnableCors("AllowSpecificOrigin")]

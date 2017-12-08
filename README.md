@@ -34,6 +34,11 @@ docker push beaconwarden/ecs1
 docker ps   
 docker images   
 
+docker rm $(docker ps -a -q)
+docker rmi $(docker images | grep "^<none>" | awk "{print $3}")
+
+
+
 ## C9 container
 https://hub.docker.com/r/kdelfour/cloud9-docker/      
 docker pull kdelfour/cloud9-docker      

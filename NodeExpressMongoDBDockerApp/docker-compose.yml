@@ -3,11 +3,12 @@ version: '2'
 services:
 
   node:
-    build:
-      context: .
-      dockerfile: node.dockerfile
+    build: .
+    command: npm start
     ports:
       - "3000:3000"
+    volumes:
+      - .:/opt/app
     networks:
       - nodeapp-network
     depends_on: 
