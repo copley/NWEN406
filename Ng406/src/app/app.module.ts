@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ChartsModule } from 'ng2-charts';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule ,FormBuilder , ReactiveFormsModule} from '@angular/forms';
 import { AppComponent } from './app.component';
 import { ChartJsComponent } from './chart-js/chart-js.component';
 import { RESTService } from './REST.service';
@@ -41,10 +41,12 @@ import {
   MatTabsModule,
   MatToolbarModule,
   MatTooltipModule,
-  MatStepperModule,
+  MatStepperModule
 } from '@angular/material';
 import {CdkTableModule} from '@angular/cdk/table';
 import { AuthenticationComponent } from './authentication/authentication.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { HomeComponent } from './home/home.component';
 
 
 @NgModule({
@@ -86,7 +88,9 @@ import { AuthenticationComponent } from './authentication/authentication.compone
     AppComponent,
     ChartJsComponent,
     LabSqlComponent,
-    AuthenticationComponent
+    AuthenticationComponent,
+    NavbarComponent,
+    HomeComponent
   ],
   imports: [
     CodemirrorModule,
@@ -102,9 +106,12 @@ import { AuthenticationComponent } from './authentication/authentication.compone
       BrowserAnimationsModule,
       MatButtonModule,
       MatCardModule,
-      MatSelectModule
+      MatSelectModule,
+      MatSnackBarModule,
+      MatToolbarModule,
+      ReactiveFormsModule,MatInputModule
   ],
-  providers: [RESTService],
+  providers: [RESTService,FormBuilder],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

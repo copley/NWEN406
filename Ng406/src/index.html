@@ -39,29 +39,12 @@
 
 </style>
 </head>
-<body style="background-color:black">
+<body>
 
 
 
   <app-root></app-root>
 </body>
 
-	<script type="text/javascript">
-		CodeMirror.commands.autocomplete = function(cm) {
-			CodeMirror.showHint(cm, CodeMirror.hint.html);
-		}
-		window.onload = function() {
-			editor = CodeMirror(document.getElementById("code"), {
-				mode: "text/x-sql",
-				theme: "neonsyntax",
-				lineWrapping: true,
-				lineNumbers: true,
-				styleActiveLine: true,
-				matchBrackets: true,
-				extraKeys: {
-					"Ctrl-Space": "autocomplete"
-				}
-			});
-		};
-	</script>
+
 </html>

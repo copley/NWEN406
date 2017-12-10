@@ -6,6 +6,8 @@ import { nosqlObj} from './nosqlObj';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginator, MatTableDataSource} from '@angular/material';
 import 'codemirror/mode/sql/sql'
+import {MatSnackBar} from '@angular/material';
+
 interface sqlResponObj {
   row: string;
 }
@@ -21,12 +23,11 @@ export class LabSqlComponent implements OnInit {
   public Req = sqlobj;
   public sqlOutput :   Array < sqlResponObj >    ;  
   public config = { lineNumbers: true, mode: 'text/x-sql' };
-  public sqlError = "" ;
   public sqlVersion = "" ;
   public resJSON = null ; 
   public selected = 'PostgreSQL';
   public nosqlOut = "" ;
-  constructor(private restService :RESTService) {};
+  constructor(private restService :RESTService, public snackBar: MatSnackBar) {};
   
 
   ngOnInit() {  // none
@@ -76,12 +77,19 @@ export class LabSqlComponent implements OnInit {
   }
   
   
+  public openSnackBar(msg) :void  {
+    this.snackBar.open(msg, 'close', {
+      duration: 60000,
+    });
+  }
+  
   public postToPostgreSQL() :void {   
     this.restService.restPostToDotNet(this.Req).subscribe(
     res => {
       this.resJSON = res ; 
-      typeof this.resJSON == typeof "string" ? this.sqlError = this.resJSON.toString() : this.sqlError  ="" ;
-       typeof this.resJSON.row == typeof "string" ? this.sqlVersion = this.resJSON.row.toString() : this.sqlVersion  ="" ;
+      if (typeof this.resJSON == typeof "string" ) this.openSnackBar (this.resJSON.toString())  ;
+      typeof this.resJSON.row == typeof "string" ? this.sqlVersion = this.resJSON.row.toString() : this.sqlVersion  ="" ;
+       
       this.sqlOutput =[] ;  let sqlTables =  document.getElementById("sqlTables");
       if (document.getElementsByTagName("secetion")[0]!=null){
         document.getElementsByTagName("secetion")[0].remove();
@@ -133,8 +141,6 @@ export class LabSqlComponent implements OnInit {
   }
 
 }
-
-
 
 
 
