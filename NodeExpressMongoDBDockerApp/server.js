@@ -4,8 +4,9 @@ var bodyParser = require('body-parser');
 var mongo = require('mongodb').MongoClient;
 var mongoose = require('mongoose');
 
-var Message = mongoose.model('Message',{
-    sqlStatement: String
+var User = mongoose.model('User',{
+    email: String,
+    password : String 
 });
 
 //middleware 
@@ -17,24 +18,24 @@ app.use((req,res,next)=>{
 })
 
 
-// routing 
+// routing block
 var api = express.Router();
 
 app.get('/mongoose',  (req,res)=>{
-    Message.find({}).exec(function(err, result){
+    User.find({}).exec(function(err, result){
        res.json(result);
     })
     
 }) ; 
 
 
-app.post('/mongoose', (req,res)=>{
-    console.log(req.body.sqlStatement);
+app.post('/register', (req,res)=>{
+    console.log(req.body);
     
-    var message = new Message(req.body);
-    message.save();
+    var user = new User(req.body);
+    user.save();
     
-    Message.find({}).exec(function(err, result){
+    User.find({}).exec(function(err, result){
        console.log (result)
        res.json(result);
     })
@@ -46,7 +47,7 @@ api.use('/api',api) ;
 
 mongoose.connect("mongodb://mongodb/dev", function(err,db){
     if(!err){
-        console.log("we are connected to mongoose");
+        console.log("we are connected to mongoose api");
      
     }
 })
