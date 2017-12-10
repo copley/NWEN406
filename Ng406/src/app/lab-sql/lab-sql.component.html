@@ -1,8 +1,8 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12" style="color: green;">
-            <img src="../../assets/postgresql-logo_Clipart_svg_File.svg" class="App-logo" alt="logo" />
-            <img src="../../assets/mongologo.svg" class="App-logo" alt="logo" />
+            <a href="https://www.tutorialspoint.com/postgresql/" target="_blank"><img src="../../assets/postgresql-logo_Clipart_svg_File.svg" class="App-logo" alt="logo" /></a> 
+            <a href="https://www.tutorialspoint.com/mongodb/index.htm" target="_blank"><img src="../../assets/mongologo.svg" class="App-logo" alt="logo" /></a>  
             <img src="../../assets/angular.svg" class="App-logo" alt="logo" />
             <h4 style="color: green;">this SQL lab is to test the SQL statement via the browser. It makes call to the ASP.NET core middleware , then MVC controller uses HttpClient to forward the http request to Python Flask which makes call to PostgreSQL DB and return the query result all the way back to front end</h4>
             <div >
@@ -13,18 +13,14 @@
               </mat-select>
             </mat-form-field>
             </div>
-          
-
-<p>You selected: {{selected}}</p>
+            <p>You selected: {{selected}}</p>
             <codemirror [(ngModel)]="Req.sqlStatement" style="width:100%; height :100px" [config]="config"></codemirror>
             <button  class="btn btn-primary"  (click)="post()" >Issue SQL cmd</button>
             <h2 style="color: green;">SQL result: </h2>
             {{nosqlOut}}
-            <div class="alert alert-danger" role="alert">
-              {{sqlError}} {{sqlVersion}}
-            </div>
+            {{sqlVersion}}
             <a style="color:red" href="http://ng1-adrianng.c9users.io/NWEN406/angularjs/index.html#/rawsql" target="_blank">AngularJS one version SQL lab</a>
-            <a href="https://www.tutorialspoint.com/postgresql/" target="_blank">PostgreSQL reference</a>
+            
             <div id="sqlTables">
             </div>
         </div>
