@@ -6,6 +6,7 @@ import { of } from 'rxjs/observable/of';
 import { catchError, map, tap } from 'rxjs/operators';
 import { ReqObj } from './chart-js/ReqObj';
 import { ReqSqlObj } from './lab-sql/ReqSqlObj';
+import {registerReqObj} from './authentication/registerReqObj';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -13,7 +14,10 @@ const httpOptions = {
 
 
 
-
+interface RegisterObj {
+  email: string;
+  password : string ; 
+}
 
 
 
@@ -37,10 +41,19 @@ export class RESTService  {
   private mongodbAPI =  'http://52.64.15.213:3000/api/mongodb';
   private reurl =   'http://52.64.15.213:1114/post';  //   URL to web api
   private sqlURL  = "http://52.64.15.213:8000/api/todo/PostToFlask" ;
+  private registerAPI = 'http://52.64.15.213:3000/register';
   results: string[];
   constructor(private http: HttpClient) { }
     
  
+  register (req : registerReqObj)  {
+    return  this.http.post<RegisterObj[]>(this.registerAPI, 
+        req
+    ) .pipe(     
+        tap(l => this.log(`register api call success`)),
+        catchError(this.handleError('post', []))
+      ) ; 
+  }
 
 //  ** GET performance from the server 
   restPost (req : ReqObj): Observable<ResponseObj[]> { debugger ;

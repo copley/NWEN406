@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import {MatButtonModule, MatCheckboxModule} from '@angular/material';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { RESTService} from '../REST.service';
 @Component({
   selector: 'app-authentication',
   templateUrl: './authentication.component.html',
@@ -10,7 +11,7 @@ export class AuthenticationComponent implements OnInit {
 
     public  form: FormGroup;
   
-  constructor(@Inject(FormBuilder) fb: FormBuilder) {
+  constructor(@Inject(FormBuilder) fb: FormBuilder , private restService :RESTService) {
     this.form =fb.group(
       {
         email : ['',[Validators.required ,checkEmail()]],
@@ -25,12 +26,21 @@ export class AuthenticationComponent implements OnInit {
     }
     
     onSubmit (){
-       console.log (this.form.value)
+       delete this.form.value.confirmPassword;
+       console.log (this.form.value) ;
+       this.restService.register(this.form.value).subscribe(
+    res => { debugger ;
+      this.resJSON = res ; 
+      console.log(JSON.stringify(this.resJSON)) ;
       
+    },
+    err => {
+    alert("wrong apt key or other invalid input ");
+    }
+    );
     }
     
     isValid (control){
-      console.log (this.form.controls[control].invalid && this.form.controls[control].touched )
       return this.form.controls[control].invalid && this.form.controls[control].touched ; 
     }
     
