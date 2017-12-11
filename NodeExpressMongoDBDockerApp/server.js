@@ -3,7 +3,7 @@ var app = express();
 var bodyParser = require('body-parser');
 var mongo = require('mongodb').MongoClient;
 var mongoose = require('mongoose');
-
+var jwt = require("jsonwebtoken");
 var User = mongoose.model('User',{
     email: String,
     password : String 
@@ -30,24 +30,44 @@ app.get('/mongoose',  (req,res)=>{
 
 
 app.post('/register', (req,res)=>{
-    console.log(req.body);
-    
     var user = new User(req.body);
-    user.save();
-    
-    User.find({}).exec(function(err, result){
-       console.log (result)
-       res.json(result);
-    })
+    user.save(function (err, updatedTank) {
+        if (err) console.log("we are not saving to mongoose api");
+        console.log("updatedTank",updatedTank);
+        User.findOne({email:req.body.email.toString()}).exec(function(err, result){
+            console.log ("result",result) ; 
+            sendToken (result ,res);
+        })
+    });
+})
+
+app.post('/login', (req,res)=>{
+    console.log(req.body) ;
+        User.findOne({email:req.body.email.toString()}).exec(function(err, result){
+            if (result==null) return res.json({message:"user name is not registered"});
+            console.log(result.password) ;  console.log(req.body.password)  ;
+            if (result.password==req.body.password)
+            sendToken (result ,res);
+            else 
+            res.json({message:"password does not match"});
+        })
    
 })
 
 api.use('/api',api) ;
 
 
+function sendToken (result, res){
+var token = jwt.sign(parseInt(result._id), "configsecrete");
+            var returnObj = {token:token, user:result.email};
+             console.log("returnObj",returnObj);
+            res.json(returnObj);    
+}
+
+
 mongoose.connect("mongodb://mongodb/dev", function(err,db){
     if(!err){
-        console.log("we are connected to mongoose api");
+        console.log("we are connected to mongoose aps");
      
     }
 })
@@ -68,7 +88,7 @@ app.post('/mongodbAPI/message', function(req,res){
 
 mongo.connect("mongodb://mongodb/dev", function(err,db){
     if(!err){
-        console.log("we are connected to mongo");
+        console.log("we are connected to mongos");
         database = db;
     }
 })
