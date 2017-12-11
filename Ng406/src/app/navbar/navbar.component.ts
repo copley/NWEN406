@@ -12,4 +12,16 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
   }
 
+  get UserName (){
+    return localStorage.getItem('user') ; 
+  }  
+  
+  get isAuth (){
+    return !!localStorage.getItem('token');
+  }
+  
+  logOut (){
+    localStorage.removeItem('user');
+    localStorage.removeItem('token');
+  }
 }

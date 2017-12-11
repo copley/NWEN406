@@ -47,6 +47,7 @@ import {CdkTableModule} from '@angular/cdk/table';
 import { AuthenticationComponent } from './authentication/authentication.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
@@ -90,7 +91,8 @@ import { HomeComponent } from './home/home.component';
     LabSqlComponent,
     AuthenticationComponent,
     NavbarComponent,
-    HomeComponent
+    HomeComponent,
+    LoginComponent
   ],
   imports: [
     CodemirrorModule,
