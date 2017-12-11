@@ -7,6 +7,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { ReqObj } from './chart-js/ReqObj';
 import { ReqSqlObj } from './lab-sql/ReqSqlObj';
 import {registerReqObj} from './authentication/registerReqObj';
+import {Router} from '@angular/router' ;
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -33,6 +34,10 @@ interface sqlResponObj {
   row: string;
 }
 
+interface loginResponObj {
+  message : string ; 
+}
+
 
 @Injectable()
 export class RESTService  {
@@ -42,12 +47,22 @@ export class RESTService  {
   private reurl =   'http://52.64.15.213:1114/post';  //   URL to web api
   private sqlURL  = "http://52.64.15.213:8000/api/todo/PostToFlask" ;
   private registerAPI = 'http://52.64.15.213:3000/register';
+  private loginAPI = 'http://52.64.15.213:3000/login';
   results: string[];
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient ,private router :Router) { }
     
  
   register (req : registerReqObj)  {
     return  this.http.post<RegisterObj[]>(this.registerAPI, 
+        req
+    ) .pipe(     
+        tap(l => this.log(`register api call success`)),
+        catchError(this.handleError('post', []))
+      ) ; 
+  }
+  
+  login (req : registerReqObj)  {
+    return  this.http.post<loginResponObj>(this.loginAPI, 
         req
     ) .pipe(     
         tap(l => this.log(`register api call success`)),
@@ -92,6 +107,16 @@ export class RESTService  {
   }
   
   
+   authenticate(res) {
+        var authResponse = res;
+
+        if (!authResponse.token)
+            return;
+
+        localStorage.setItem(this.TOKEN_KEY, authResponse.token)
+        localStorage.setItem(this.NAME_KEY, authResponse.firstName)
+        this.router.navigate(['/']);
+    }
   
   private log(message: string) {
     console.log('Rest service: ' + message);

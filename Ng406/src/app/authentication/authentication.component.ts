@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import {MatButtonModule, MatCheckboxModule} from '@angular/material';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { RESTService} from '../REST.service';
+import {Router} from '@angular/router' ;
 @Component({
   selector: 'app-authentication',
   templateUrl: './authentication.component.html',
@@ -9,9 +10,9 @@ import { RESTService} from '../REST.service';
 })
 export class AuthenticationComponent implements OnInit {
 
-    public  form: FormGroup;
+  public  form: FormGroup;
   
-  constructor(@Inject(FormBuilder) fb: FormBuilder , private restService :RESTService) {
+  constructor(@Inject(FormBuilder) fb: FormBuilder , private restService :RESTService ,private router :Router) {
     this.form =fb.group(
       {
         email : ['',[Validators.required ,checkEmail()]],
@@ -25,28 +26,33 @@ export class AuthenticationComponent implements OnInit {
     ngOnInit() {
     }
     
-    onSubmit (){
-       delete this.form.value.confirmPassword;
-       console.log (this.form.value) ;
-       this.restService.register(this.form.value).subscribe(
+  onSubmit (){
+    delete this.form.value.confirmPassword;
+    console.log (this.form.value) ;
+    this.restService.register(this.form.value).subscribe(
     res => { debugger ;
-      this.resJSON = res ; 
-      console.log(JSON.stringify(this.resJSON)) ;
+      if(!res.token) return ;
       
+      localStorage.setItem('token',res.token) ; 
+      localStorage.setItem('user',res.user) ;  
+      this.router.navigate(['/']) ;
     },
     err => {
     alert("wrong apt key or other invalid input ");
     }
     );
-    }
-    
-    isValid (control){
-      return this.form.controls[control].invalid && this.form.controls[control].touched ; 
-    }
-    
-    isValidForm (){ 
-      return this.isValid('email')||this.isValid('password')||this.isValid('confirmPassword')//confirmPassword('password','confirmPassword')//||!checkEmail();
-    }
+  }
+  
+ 
+  
+   
+  isValid (control){
+    return this.form.controls[control].invalid && this.form.controls[control].touched ; 
+  }
+  
+  isValidForm (){ 
+    return this.isValid('email')||this.isValid('password')||this.isValid('confirmPassword')//confirmPassword('password','confirmPassword')//||!checkEmail();
+  }
 
 }
 
