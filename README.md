@@ -16,7 +16,9 @@ git checkout master
 git merge adrian  
 git push  
 sudo git config credential.helper store    
-sudo git push https://github.com/repo.git    
+sudo git push https://github.com/repo.git  
+git reset --hard <commit-id of the commit before mine>  
+git push origin master --force
 
 # Docker on EC2 AMI :
 sudo yum update -y  
