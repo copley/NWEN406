@@ -4,7 +4,7 @@
             <a href="https://www.tutorialspoint.com/postgresql/" target="_blank"><img src="../../assets/postgresql-logo_Clipart_svg_File.svg" class="App-logo" alt="logo" /></a> 
             <a href="https://www.tutorialspoint.com/mongodb/index.htm" target="_blank"><img src="../../assets/mongologo.svg" class="App-logo" alt="logo" /></a>  
             <img src="../../assets/angular.svg" class="App-logo" alt="logo" />
-            <h4 style="color: green;">this SQL lab is to test the SQL statement via the browser. It makes call to the ASP.NET core middleware , then MVC controller uses HttpClient to forward the http request to Python Flask which makes call to PostgreSQL DB and return the query result all the way back to front end</h4>
+            <h4 style="color: green;">this SQL lab is to utilise sql injection to test the SQL statement via the browser. After click the button, the Angular http service will call to the Python Flask RESTful endpoint which makes call the PostgreSQL DB and return the query result all the way back to front end</h4>
             <div >
             <mat-form-field >
               <mat-select [(value)]="selected" style="background-color: green;" (change)="triggerUpdate($event)">
@@ -16,10 +16,10 @@
             <p>You selected: {{selected}}</p>
             <codemirror [(ngModel)]="Req.sqlStatement" style="width:100%; height :100px" [config]="config"></codemirror>
             <button  class="btn btn-primary"  (click)="post()" >Issue SQL cmd</button>
-            <h2 style="color: green;">SQL result: </h2>
+            <h2 style="color: green;">SQL result data visualisation: </h2>
             {{nosqlOut}}
             {{sqlVersion}}
-            <a style="color:red" href="http://ng1-adrianng.c9users.io/NWEN406/angularjs/index.html#/rawsql" target="_blank">AngularJS one version SQL lab</a>
+         
             
             <div id="sqlTables">
             </div>

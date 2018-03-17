@@ -84,7 +84,7 @@ export class LabSqlComponent implements OnInit {
   }
   
   public postToPostgreSQL() :void {   
-    this.restService.restPostToDotNet(this.Req).subscribe(
+    this.restService.restPost_postgresql(this.Req).subscribe(
     res => {
       this.resJSON = res ; 
       if (typeof this.resJSON == typeof "string" ) this.openSnackBar (this.resJSON.toString())  ;
@@ -128,7 +128,7 @@ export class LabSqlComponent implements OnInit {
   
   
   public postToMongoDB() :void {   
-    this.restService.restPost_sql(this.Req).subscribe(
+    this.restService.restPost_mongo(this.Req).subscribe(
     res => {
       this.resJSON = res ; 
       this.nosqlOut = JSON.stringify(this.resJSON) ;

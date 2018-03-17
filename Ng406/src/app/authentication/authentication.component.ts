@@ -31,10 +31,10 @@ export class AuthenticationComponent implements OnInit {
     console.log (this.form.value) ;
     this.restService.register(this.form.value).subscribe(
     res => { debugger ;
-      if(!res.token) return ;
+      if(!res) return ;
       
-      localStorage.setItem('token',res.token) ; 
-      localStorage.setItem('user',res.user) ;  
+      localStorage.setItem('token',"res") ; 
+      localStorage.setItem('user',"res") ;  
       this.router.navigate(['/']) ;
     },
     err => {

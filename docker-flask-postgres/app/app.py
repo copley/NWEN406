@@ -63,6 +63,10 @@ def database_initialization_sequence():
     db.session.commit()
 
 
+@app.route('/test', methods=['GET'])
+def getTest(): 
+    return jsonify({"pass" : "Access ok"}), 200
+
 @app.route('/', methods=['GET', 'POST'])
 def home():
     if request.method == 'POST':

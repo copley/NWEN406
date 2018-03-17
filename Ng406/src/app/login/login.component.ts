@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
     res => { debugger ;
     this.restService.authenticate(res);
     console.log(res);
-      if(!res.token) return ;
+      if(!res) return ;
 
     },
     err => {

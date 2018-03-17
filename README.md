@@ -1,7 +1,7 @@
 # AWS EC2 setup env:  
 1.  launch Amazon Linux AMI 2017.09.0 (HVM) in EC2    
 2.  chmod 400 pem.pem    
-3.  sudo ssh -i nwen406.pem ec2-user@ec2-52-64-15-213.ap-southeast-2.compute.amazonaws.com  
+3.  sudo ssh -i pem.pem ec2-user@ec2-52-65-236-177.ap-southeast-2.compute.amazonaws.com  
 4.  sudo yum install git   
 
 # git  
@@ -44,7 +44,7 @@ docker rmi $(docker images | grep "^<none>" | awk "{print $3}")
 ## C9 container
 https://hub.docker.com/r/kdelfour/cloud9-docker/      
 docker pull kdelfour/cloud9-docker      
-docker run -it -d -p 80:80 -v /home/ec2-user/:/c9workspace/ kdelfour/cloud9-docker     
+docker run -it -d -p 80:80 -v /home/ec2-user/:/workspace/ kdelfour/cloud9-docker     
 
 ## reference : 
 https://blog.miguelgrinberg.com/post/designing-a-restful-api-with-python-and-flask    

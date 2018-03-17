@@ -44,8 +44,8 @@ export class RESTService  {
 
   private mongooseAPI = 'http://52.64.15.213:3000/mongoose';
   private mongodbAPI =  'http://52.64.15.213:3000/api/mongodb';
-  private reurl =   'http://52.64.15.213:1114/post';  //   URL to web api
-  private sqlURL  = "http://52.64.15.213:8000/api/todo/PostToFlask" ;
+  private lambda =   'http://52.65.236.177:1114/post';  //   URL to web api
+  private postgresql  = "http://52.65.236.177:1114/sql" ;
   private registerAPI = 'http://52.64.15.213:3000/register';
   private loginAPI = 'http://52.64.15.213:3000/login';
   results: string[];
@@ -71,9 +71,9 @@ export class RESTService  {
   }
 
 //  ** GET performance from the server 
-  restPost (req : ReqObj): Observable<ResponseObj[]> { debugger ;
+  restPost_lambda (req : ReqObj): Observable<ResponseObj[]> {  
   
-   return  this.http.post<ResponseObj[]>(this.reurl, 
+   return  this.http.post<ResponseObj[]>(this.lambda, 
         req
     ) .pipe(     
         tap(l => this.log(`fetched l`)),
@@ -82,9 +82,9 @@ export class RESTService  {
     
   }
   
-  restPost_sql (req : ReqSqlObj): Observable<sqlResponObj[]> { debugger ;
+  restPost_postgresql (req : ReqSqlObj): Observable<sqlResponObj[]> { 
   
-   return  this.http.post<sqlResponObj[]>(this.mongooseAPI, 
+   return  this.http.post<sqlResponObj[]>(this.postgresql, 
         req
     ) .pipe(     
         tap(l => this.log(`fetched l`)),
@@ -95,9 +95,9 @@ export class RESTService  {
   
   
   
-  restPostToDotNet (req : ReqSqlObj): Observable<sqlResponObj[]> { debugger ;
+  restPost_mongo (req : ReqSqlObj): Observable<sqlResponObj[]> { debugger ;
   
-   return  this.http.post<sqlResponObj[]>(this.sqlURL, 
+   return  this.http.post<sqlResponObj[]>(this.loginAPI, 
         req
     ) .pipe(     
         tap(l => this.log(`fetched l`)),
@@ -113,8 +113,8 @@ export class RESTService  {
         if (!authResponse.token)
             return;
 
-        localStorage.setItem(this.TOKEN_KEY, authResponse.token)
-        localStorage.setItem(this.NAME_KEY, authResponse.firstName)
+        localStorage.setItem("TOKEN_KEY", authResponse.token)
+        localStorage.setItem("NAME_KEY", authResponse.firstName)
         this.router.navigate(['/']);
     }
   
