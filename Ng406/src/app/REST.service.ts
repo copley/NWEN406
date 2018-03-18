@@ -44,7 +44,7 @@ export class RESTService  {
 
   private mongooseAPI = 'http://52.64.15.213:3000/mongoose';
   private mongodbAPI =  'http://52.64.15.213:3000/api/mongodb';
-  private lambda =   'http://52.65.236.177:1114/post';  //   URL to web api
+  private lambda =   'http://52.65.236.177:1114/lambda';  //   URL to web api
   private postgresql  = "http://52.65.236.177:1114/sql" ;
   private registerAPI = 'http://52.64.15.213:3000/register';
   private loginAPI = 'http://52.64.15.213:3000/login';

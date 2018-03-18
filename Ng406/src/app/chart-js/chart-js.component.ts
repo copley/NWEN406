@@ -134,7 +134,7 @@ export class ChartJsComponent implements OnInit {
         }
     }
     
-    public post() :void {   
+    public postToLambda() :void {   
         this.chartjs();
         this.restService.restPost_lambda(this.ReqO).subscribe(
             res => {  debugger ;
