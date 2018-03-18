@@ -9,7 +9,7 @@ import { LoginComponent }      from './login/login.component';
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component:  HomeComponent },
-  { path: 'chartjs', component: ChartJsComponent },
+  { path: 'lambda', component: ChartJsComponent },
   { path: 'labsql', component: LabSqlComponent },
   { path: 'auth', component: AuthenticationComponent },
   { path: 'login', component: LoginComponent }
