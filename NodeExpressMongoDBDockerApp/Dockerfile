@@ -24,10 +24,8 @@ ENV PORT=3000
 
 
 
-RUN mkdir -p /opt/app
-WORKDIR /opt/app
-
-COPY . /opt/app
+COPY      . /var/www
+WORKDIR   /var/www
 
 RUN npm install
 

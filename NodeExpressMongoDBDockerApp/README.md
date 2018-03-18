@@ -23,6 +23,17 @@ docker exec -it some-mongo mongo admin
 
 7. Run `node dbSeeder.js` to seed the MongoDB database
 
+docker exec -it $mongoContainerID  sh   # ssh into mongo 
+mongo
+show dbs
+use $db
+show collections
+db.createCollection("User", { capped : "true", size : 5242880, max : 5000 } )
+db.User.insert( { email: "Amanda", password: "Updated" } )
+db.User.find({})
+
+
+
 8. Type `exit` to leave the sh session
 
 9. Navigate to http://localhost:3000 (http://192.168.99.100:3000 if using Docker Toolbox) in your browser to view the site. This assumes that's the IP assigned to VirtualBox - change if needed.

@@ -29,8 +29,8 @@ app.get('/mongoose',  (req,res)=>{
 }) ; 
 
 
-app.post('/register', (req,res)=>{
-    var user = new User(req.body);
+app.get('/register', (req,res)=>{
+    var user = new User({email: "e" , password: "ps"}); //req.body);
     user.save(function (err, updatedTank) {
         if (err) console.log("we are not saving to mongoose api");
         console.log("updatedTank",updatedTank);

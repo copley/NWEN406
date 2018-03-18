@@ -128,7 +128,7 @@ export class LabSqlComponent implements OnInit {
   
   
   public postToMongoDB() :void {   
-    this.restService.restPost_mongo(this.Req).subscribe(
+    this.restService.register(this.Req).subscribe(
     res => {
       this.resJSON = res ; 
       this.nosqlOut = JSON.stringify(this.resJSON) ;
