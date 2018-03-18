@@ -27,6 +27,7 @@ export class LabSqlComponent implements OnInit {
   public resJSON = null ; 
   public selected = 'PostgreSQL';
   public nosqlOut = "" ;
+  isPrcocessing : boolean  = false ;
   constructor(private restService :RESTService, public snackBar: MatSnackBar) {};
   
 
@@ -84,6 +85,7 @@ export class LabSqlComponent implements OnInit {
   }
   
   public postToPostgreSQL() :void {   
+      this.isPrcocessing = true ;
     this.restService.restPost_postgresql(this.Req).subscribe(
     res => {
       this.resJSON = res ; 
@@ -118,6 +120,7 @@ export class LabSqlComponent implements OnInit {
         }
         secetion.appendChild(table);
       }
+          this.isPrcocessing = false ;
       
     },
     err => {

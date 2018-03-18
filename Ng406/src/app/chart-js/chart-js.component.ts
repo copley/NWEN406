@@ -50,6 +50,7 @@ export class ChartJsComponent implements OnInit {
     private reurl = 'http://52.65.236.177/:1114/post';
     public  title = 'ngChart.js data visualisation ';
     public subtitle = 'AKA your AWS lambda live performance measurement platform ';
+
     constructor(private http: HttpClient, private restService :RESTService) {};
    
     //You may need an appropriate loader to handle this file type  >>>>> extra '*/'
@@ -155,6 +156,7 @@ export class ChartJsComponent implements OnInit {
                     }
                 }
                 this.lineChartData = _lineChartData;
+            
             },
             err => {
             alert("wrong apt key or other invalid input ");

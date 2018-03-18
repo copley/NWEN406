@@ -17,9 +17,11 @@
             <codemirror [(ngModel)]="Req.sqlStatement" style="width:100%; height :100px" [config]="config"></codemirror>
             <button  class="btn btn-primary"  (click)="post()" >Issue SQL cmd</button>
             <h2 style="color: green;">SQL result data visualisation: </h2>
+            <div *ngIf ="isPrcocessing"><mat-spinner></mat-spinner> </div>
+           <div *ngIf ="!isPrcocessing">
             {{nosqlOut}}
             {{sqlVersion}}
-         
+         </div>
             
             <div id="sqlTables">
             </div>

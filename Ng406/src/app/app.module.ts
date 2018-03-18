@@ -10,6 +10,7 @@ import { AppRoutingModule }     from './app-routing.module';
 import { LabSqlComponent } from './lab-sql/lab-sql.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { CodemirrorModule } from 'ng2-codemirror';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {
   MatAutocompleteModule,
   MatButtonModule,
@@ -28,7 +29,6 @@ import {
   MatNativeDateModule,
   MatPaginatorModule,
   MatProgressBarModule,
-  MatProgressSpinnerModule,
   MatRadioModule,
   MatRippleModule,
   MatSelectModule,
@@ -111,6 +111,7 @@ import { LoginComponent } from './login/login.component';
       MatSelectModule,
       MatSnackBarModule,
       MatToolbarModule,
+      MatProgressSpinnerModule,
       ReactiveFormsModule,MatInputModule
   ],
   providers: [RESTService,FormBuilder],
