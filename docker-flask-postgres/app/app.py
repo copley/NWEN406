@@ -323,8 +323,8 @@ def getSatisfactory():  # cost and performance scaled linearly with memory
     
     
 from flask import request
-@app.route('/post', methods=['POST'])
-def post():
+@app.route('/lambda', methods=['POST'])
+def postToLambda():
     
     maxi =request.json['maxi']
     loops = request.json['loops']
